@@ -358,7 +358,6 @@
 @endsection
 
 @section('scripts')
-
 <script src="{{ asset('lib/jquery/jquery.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/main.js') }}" type="text/javascript"></script>
@@ -375,12 +374,12 @@
 <script src="{{ asset('lib/jqvmap/maps/jquery.vmap.world.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/app-dashboard.js') }}" type="text/javascript"></script>
 
-<script type="text/javascript">
-$(document).ready(function(){
-    //initialize the javascript
-    App.init();
-    App.dashboard();
+    <script type="text/javascript">
+    $(document).ready(function(){
+        //initialize the javascript
+        App.init();
+        App.dashboard();
 
-});
+    });
 </script>
 @endsection

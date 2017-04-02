@@ -22,7 +22,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('lib/jquery.vectormap/jquery-jvectormap-1.2.2.css') }}"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('lib/jqvmap/jqvmap.min.css') }}"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('lib/datetimepicker/css/bootstrap-datetimepicker.min.css') }}"/>
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
         @yield('styles')
 
         <!-- Scripts -->
@@ -33,7 +33,7 @@
         </script>
     </head>
     <body>
-        <div class="be-wrapper be-fixed-sidebar">
+        <div class="be-wrapper">
             @include('includes.topNav')
 
             @include('includes.leftNav')

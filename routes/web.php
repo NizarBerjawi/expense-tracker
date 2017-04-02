@@ -17,4 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+
+Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+
+Route::group(['prefix' => 'expenses'], function () {
+    Route::get('/', 'ExpensesController@index')->name('expenses.index');
+});
+
+Route::group(['prefix' => 'income'], function () {
+    Route::get('/', 'IncomeController@index')->name('income.index');
+});
