@@ -48,22 +48,14 @@ class CategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCategory $request) {
-        // Get the input related to the tag
-        $tag = $request->input('tag');
-        // Check that the input is not an ID, if not then it is a new tag
-        if (!is_int($tag) && !Tag::find($tag)) {
-            // Create the new tag
-            $tag = Tag::create([
-                'name' => $request->input('tag'),
-            ]);
-            $tag_id = $tag->id;
-        }
         // Create the category model
         $category = Category::create([
             'name'          => $request->input('name'),
             'description'   => $request->input('description'),
-            'tag_id'        => isset($tag_id) ? $tag_id : $tag,
         ]);
+
+        // Attach the tag to the category
+        $category->attachTag($request->input('tagData'));
 
         return redirect()->route('categories.index');
     }
@@ -87,7 +79,8 @@ class CategoriesController extends Controller
      */
     public function edit(Category $category) {
         return view('categories.edit')
-                    ->with(compact('category'));
+                    ->with('category', $category)
+                    ->with('tags', Tag::all());
     }
 
     /**
@@ -95,7 +88,14 @@ class CategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCategory $request, Category $category) {
-        $category->name = $request->name;
-        $category->description = $request->description;
+        // Update the category and save
+        $category->name = $request->input('name');
+        $category->description = $request->input('description');
+        $category->attachTag($request->input('tagData'));
+
+        /// Save the new category details
+        $category->save();
+
+        return redirect()->route('categories.show', $category->id);
     }
 }

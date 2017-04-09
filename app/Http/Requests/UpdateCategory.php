@@ -27,8 +27,8 @@ class UpdateCategory extends FormRequest
      *
      * @param
      */
-    public function __construct(Request $request, Category $category) {
-        $this->category = $category;
+    public function __construct(Request $request) {
+        $this->category = Category::find($request->category);
         $this->updatedName = $request->name;
     }
 
@@ -81,7 +81,7 @@ class UpdateCategory extends FormRequest
     {
         $validator->after(function ($validator) {
             if ($this->nameIsTaken()) {
-                $validator->errors()->add('name', 'This category name is already taken');
+                $validator->errors()->add('name', 'This category name is already taken' . $this->category->name);
             }
         });
     }
@@ -103,5 +103,6 @@ class UpdateCategory extends FormRequest
         } else if (Category::where('name', $this->updatedName)->first()){
             return true;
         }
+        return false;
     }
 }

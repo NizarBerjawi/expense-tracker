@@ -31,10 +31,10 @@
                     <div class="form-group">
                         <label class="col-md-3 col-lg-3 control-label">Tag</label>
                         <div class="col-md-9 col-lg-6">
-                            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="tags" name="tag">
+                            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="tags" name="tagData">
                                 @if (isset($tags))
                                     @foreach($tags as $tag)
-                                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                        <option {{ $category->tag_id == $tag->id ? "selected" : "" }} value="{{ $tag->id }}">{{ $tag->name }}</option>
                                     @endforeach
                                 @else
                                     <option value="{{ $category->tag->id }}" selected>{{ $category->tag->name }}</option>

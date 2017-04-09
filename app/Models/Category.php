@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Tag;
 
 class Category extends Model
 {
@@ -45,5 +46,28 @@ class Category extends Model
      */
     public function tag() {
         return $this->belongsTo('App\Models\Tag');
+    }
+
+    /**
+     * Attach a tag to this category if it exists. Otherwise,
+     * create a new tag and attach it.
+     *
+     * @param  mixed
+     * @return void
+     */
+    public function attachTag($tagData) {
+        // Attempt to find the tag
+        $tag = Tag::find($tagData);
+
+        // If there is no tag available, create it
+        if (!$tag) {
+            $tag = Tag::create([
+                'name' => $tagData,
+            ]);
+        }
+
+        // Attach the tag to the category
+        $this->tag_id = $tag->id;
+        $this->save();
     }
 }
