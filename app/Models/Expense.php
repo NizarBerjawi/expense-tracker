@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +12,13 @@ class Expense extends Model
      * @var string
      */
     protected $table = 'expenses';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'description', 'category_id', 'date', 'amount'];
 
     /**
      * Get the category that owns the expense.

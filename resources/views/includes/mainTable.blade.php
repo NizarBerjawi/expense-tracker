@@ -1,50 +1,86 @@
-<div class="panel panel-default panel-table">
-    <div class="panel-heading">{{ $panelHeading }}
-        <div class="tools"><span class="icon mdi mdi-download"></span></div>
-    </div>
-    <div class="panel-body">
-        <table class="table table-striped table-hover">
-            <thead>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th style="width:5%;">
+                <div class="be-checkbox be-checkbox-sm">
+                    <input id="check1" type="checkbox">
+                    <label for="check1"></label>
+                </div>
+            </th>
+            @if($type == 'expense' || $type == 'income')
+                <th style="width:20%;">Name</th>
+                <th style="width:17%;">Amount</th>
+                <th style="width:15%;">Date</th>
+                <th style="width:10%;">Category</th>
+                <th style="width:10%;"></th>
+            @elseif ($type == 'category')
+                <th style="width:20%;">Name</th>
+                <th class="text-center" style="width:20%;">Tag</th>
+                <th style="width:10%;"></th>
+            @endif
+        </tr>
+    </thead>
+    <tbody>
+        @if($type == 'expense' || $type == 'income')
+            @if ($items->isEmpty())
                 <tr>
-                    <th style="width:5%;">
-                        <div class="be-checkbox be-checkbox-sm">
-                            <input id="check1" type="checkbox">
-                            <label for="check1"></label>
-                        </div>
-                    </th>
-                    <th style="width:20%;">Expense</th>
-                    <th style="width:17%;">Amount</th>
-                    <th style="width:15%;">Date</th>
-                    <th style="width:10%;">Category</th>
-                    <th style="width:10%;"></th>
+                    <td colspan="6">{{ $empty_message }}</td>
                 </tr>
-            </thead>
-            <tbody>
+            @else
+                @foreach($items as $item)
+                    <tr>
+                        <td>
+                            <div class="be-checkbox be-checkbox-sm">
+                                <input id="check2" type="checkbox">
+                                <label for="check2"></label>
+                            </div>
+                        </td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->amount }}</td>
+                        <td>{{ $item->date }}</td>
+                        <td>{{ $item->category }}</td>
+                        <td class="text-right">
+                            <div class="btn-group btn-hspace">
+                                <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Open <span class="icon-dropdown mdi mdi-chevron-down"></span></button>
+                                <ul role="menu" class="dropdown-menu pull-right">
+                                    <li><a href="{{ route($route_show, $item->id) }}">View</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{{ route($route_edit, $item->id) }}">Edit</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
+        @elseif ($type == 'category')
+            @if ($items->isEmpty())
                 <tr>
-                    <td>
-                        <div class="be-checkbox be-checkbox-sm">
-                            <input id="check2" type="checkbox">
-                            <label for="check2"></label>
-                        </div>
-                    </td>
-                    <td class="cell-detail"><span>Penelope Thornton</span><span class="cell-detail-description">Developer</span></td>
-                    <td>$100</td>
-                    <td>02/04/2017</td>
-                    <td>Food</td>
-                    <td class="text-right">
-                        <div class="btn-group btn-hspace">
-                            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Open <span class="icon-dropdown mdi mdi-chevron-down"></span></button>
-                            <ul role="menu" class="dropdown-menu pull-right">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
-                        </div>
-                    </td>
+                    <td colspan="4">{{ $empty_message }}</td>
                 </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+            @else
+                @foreach($items as $category)
+                    <tr>
+                        <td>
+                            <div class="be-checkbox be-checkbox-sm">
+                                <input id="check2" type="checkbox">
+                                <label for="check2"></label>
+                            </div>
+                        </td>
+                        <td><a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a></td>
+                        <td class="text-center"><span class="label label-default">{{ $category->tag->name }}</span></td>
+                        <td class="text-right">
+                            <div class="btn-group btn-hspace">
+                                <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Open <span class="icon-dropdown mdi mdi-chevron-down"></span></button>
+                                <ul role="menu" class="dropdown-menu pull-right">
+                                    <li><a href="{{ route('categories.show', $category->id) }}">View</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{{ route('categories.edit', $category->id) }}">Edit</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
+        @endif
+    </tbody>
+</table>

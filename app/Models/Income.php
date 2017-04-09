@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +13,13 @@ class Income extends Model
      */
     protected $table = 'income';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'description', 'category_id', 'date', 'amount'];
+    
     /**
      * Get the category that owns the income.
      *

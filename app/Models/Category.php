@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +12,13 @@ class Category extends Model
      * @var string
      */
     protected $table = 'categories';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'description', 'tag_id'];
 
     /**
      * Get the expenses belonging to the category
@@ -31,5 +38,12 @@ class Category extends Model
         return $this->hasMany('App\Models\Income');
     }
 
-
+    /**
+     * Get the tag that this category belongs to
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tag() {
+        return $this->belongsTo('App\Models\Tag');
+    }
 }

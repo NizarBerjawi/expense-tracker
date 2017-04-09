@@ -1,30 +1,41 @@
 var App = (function () {
-  'use strict';
+    'use strict';
 
-  App.formElements = function( ){
+    App.formElements = function( ){
 
-    //Js Code
-    $(".datetimepicker").datetimepicker({
-    	autoclose: true,
-    	componentIcon: '.mdi.mdi-calendar',
-    	navIcons:{
-    		rightIcon: 'mdi mdi-chevron-right',
-    		leftIcon: 'mdi mdi-chevron-left'
-    	}
-    });
-    
-    //Select2
-    $(".select2").select2({
-      width: '100%'
-    });
-    
-    //Select2 tags
-    $(".tags").select2({tags: true, width: '100%'});
+        //Js Code
+        if ($('.datetimepicker').length) {
+            $(".datetimepicker").datetimepicker({
+                autoclose: true,
+                componentIcon: '.mdi.mdi-calendar',
+                navIcons:{
+                    rightIcon: 'mdi mdi-chevron-right',
+                    leftIcon: 'mdi mdi-chevron-left'
+                }
+            });
+        }
 
-    //Bootstrap Slider
-    $('.bslider').bootstrapSlider();
-    
-  };
+        //Select2
+        if ($('.select2').length) {
+            $(".select2").select2({
+                width: '100%'
+            });
+        }
 
-  return App;
+        //Select2 tags
+        if ($('.tags').length) {
+            $(".tags").select2({
+                tags: true,
+                width: '100%',
+                maximumSelectionLength: 1
+            });
+        };
+
+        //Bootstrap Slider
+        if ($('.bslider').length) {
+            $('.bslider').bootstrapSlider();
+        }
+    };
+
+    return App;
 })(App || {});

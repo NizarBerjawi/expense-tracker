@@ -6,12 +6,29 @@ use Illuminate\Http\Request;
 
 class ExpensesController extends Controller
 {
+    /**
+     *
+     *
+     */
     public function _construct() {
 
     }
 
+    /*
+     *
+     *
+     */
     public function index()
     {
         return view('expenses.index');
+    }
+
+    /*
+     *
+     *
+     */
+    public function create()
+    {
+        return view('expenses.new');
     }
 }

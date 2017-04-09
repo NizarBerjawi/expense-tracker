@@ -3,12 +3,28 @@
 @section('content')
 <div class="be-content">
     <div class="main-content container-fluid">
-        <!--Responsive table-->
+        <!-- Main table-->
         <div class="row">
             <div class="col-sm-12">
-                @include('includes.mainTable', [
-                    'panelHeading'  => 'Expenses',
-                ])
+                <div class="panel panel-default panel-table">
+                    <div class="panel-heading">Expenses
+                        <div class="tools">
+                            <span class="icon mdi mdi-download"></span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-sm-12 btn-group btn-space">
+                            <a href="{{ route('expenses.create') }}" class="btn btn-space btn-primary pull-right">New</a>
+                            <button class="btn btn-space btn-default pull-right">Delete</button>
+                        </div>
+
+                        @include('includes.mainTable', [
+                            'type'          => 'expense',
+                            'empty_message' => 'You have not created any expenses yet'
+                        ])
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>

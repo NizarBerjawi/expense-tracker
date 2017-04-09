@@ -180,25 +180,25 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="user-avatar"> <img src="assets/img/avatar6.png" alt="Avatar">Penelope Thornton</td>
+                                    <td class="user-avatar"> <img src="{{ asset('img/avatar6.png') }}" alt="Avatar">Penelope Thornton</td>
                                     <td>Topbar dropdown style</td>
                                     <td>Aug 16, 2016</td>
                                     <td class="actions"><a href="#" class="icon"><i class="mdi mdi-github-alt"></i></a></td>
                                 </tr>
                                 <tr>
-                                    <td class="user-avatar"> <img src="assets/img/avatar4.png" alt="Avatar">Benji Harper</td>
+                                    <td class="user-avatar"> <img src="{{ asset('img/avatar4.png') }}" alt="Avatar">Benji Harper</td>
                                     <td>Left sidebar adjusments</td>
                                     <td>Jul 15, 2016</td>
                                     <td class="actions"><a href="#" class="icon"><i class="mdi mdi-github-alt"></i></a></td>
                                 </tr>
                                 <tr>
-                                    <td class="user-avatar"> <img src="assets/img/avatar5.png" alt="Avatar">Justine Myranda</td>
+                                    <td class="user-avatar"> <img src="{{ asset('img/avatar5.png') }}" alt="Avatar">Justine Myranda</td>
                                     <td>Main structure markup</td>
                                     <td>Jul 28, 2016</td>
                                     <td class="actions"><a href="#" class="icon"><i class="mdi mdi-github-alt"></i></a></td>
                                 </tr>
                                 <tr>
-                                    <td class="user-avatar"> <img src="assets/img/avatar3.png" alt="Avatar">Sherwood Clifford</td>
+                                    <td class="user-avatar"> <img src="{{ asset('img/avatar3.png') }}" alt="Avatar">Sherwood Clifford</td>
                                     <td>Initial commit</td>
                                     <td>Jun 30, 2016</td>
                                     <td class="actions"><a href="#" class="icon"><i class="mdi mdi-github-alt"></i></a></td>
