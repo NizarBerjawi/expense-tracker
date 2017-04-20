@@ -17,7 +17,7 @@
                     'panelSubtitle' => 'Edit this category\'s details',
                     'formAction'    => route('categories.update', $category->id),
                     'methodField'   => method_field('PUT'),
-                    'type'          => 'category',
+                    'page'          => 'categories',
                     'disabled'      => false,
                 ])
             </div>

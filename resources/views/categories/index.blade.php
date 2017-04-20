@@ -18,7 +18,7 @@
                         </div>
 
                         @include('includes.mainTable', [
-                            'type' => 'category',
+                            'page' => 'categories',
                             'empty_message' => 'You have not created any categories yet'
                         ])
 

@@ -25,9 +25,9 @@ Route::group(['prefix' => 'categories'], function () {
     Route::get('/', 'CategoriesController@index')->name('categories.index');
     Route::get('/create', 'CategoriesController@create')->name('categories.create');
     Route::post('/', 'CategoriesController@store')->name('categories.store');
-    Route::get('/{category}', 'CategoriesController@show')->name('categories.show');
-    Route::get('/{category}/edit', 'CategoriesController@edit')->name('categories.edit');
-    Route::put('/{category}', 'CategoriesController@update')->name('categories.update');
+    Route::get('/{categoryId}', 'CategoriesController@show')->name('categories.show');
+    Route::get('/{categoryId}/edit', 'CategoriesController@edit')->name('categories.edit');
+    Route::put('/{categoryId}', 'CategoriesController@update')->name('categories.update');
     Route::delete('/{category}', 'CategoriesController@destroy')->name('categories.destroy');
 });
 

@@ -18,19 +18,16 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->integer('tag_id')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
-        });
-
-        Schema::table('expenses', function(Blueprint $table) {
-            $table->foreign('category_id')->references('id')->on('tags');
-        });
-
-        Schema::table('income', function(Blueprint $table) {
-            $table->foreign('category_id')->references('id')->on('tags');
         });
 
         Schema::table('categories', function(Blueprint $table) {
             $table->foreign('tag_id')->references('id')->on('tags');
+        });
+
+        Schema::table('categories', function(Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

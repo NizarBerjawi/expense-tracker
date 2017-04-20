@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Tag;
+use Auth;
 
 class Category extends Model
 {
@@ -19,7 +20,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'description', 'tag_id'];
+    protected $fillable = ['name', 'description', 'tag_id', 'user_id'];
 
     /**
      * Get the expenses belonging to the category
@@ -62,7 +63,8 @@ class Category extends Model
         // If there is no tag available, create it
         if (!$tag) {
             $tag = Tag::create([
-                'name' => $tagData,
+                'name'    => $tagData,
+                'user_id' => Auth::id(),
             ]);
         }
 

@@ -18,7 +18,7 @@ class Tag extends Model
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'user_id'];
 
     /**
      * Get the categories that belong to this tag.

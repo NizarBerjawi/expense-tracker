@@ -7,13 +7,13 @@
                     <label for="check1"></label>
                 </div>
             </th>
-            @if($type == 'expense' || $type == 'income')
+            @if($page == 'expenses' || $page == 'income')
                 <th style="width:20%;">Name</th>
                 <th style="width:17%;">Amount</th>
                 <th style="width:15%;">Date</th>
                 <th style="width:10%;">Category</th>
                 <th style="width:10%;"></th>
-            @elseif ($type == 'category')
+            @elseif ($page == 'categories')
                 <th style="width:20%;">Name</th>
                 <th class="text-center" style="width:20%;">Tag</th>
                 <th style="width:10%;"></th>
@@ -21,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        @if($type == 'expense' || $type == 'income')
+        @if($page == 'expense' || $page == 'income')
             @if ($items->isEmpty())
                 <tr>
                     <td colspan="6">{{ $empty_message }}</td>
@@ -52,7 +52,7 @@
                     </tr>
                 @endforeach
             @endif
-        @elseif ($type == 'category')
+        @elseif ($page == 'categories')
             @if ($items->isEmpty())
                 <tr>
                     <td colspan="4">{{ $empty_message }}</td>

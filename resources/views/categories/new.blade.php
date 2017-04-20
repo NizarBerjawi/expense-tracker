@@ -17,7 +17,7 @@
                     'panelSubtitle' => 'Create a new category to group your income and expenses',
                     'formAction'    => route('categories.store'),
                     'methodField'   => method_field('POST'),
-                    'type'          => 'category',
+                    'page'          => 'categories',
                     'disabled'      => false,
                 ])
             </div>

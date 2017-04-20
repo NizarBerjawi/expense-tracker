@@ -18,6 +18,11 @@ class ComposersServiceProvider extends ServiceProvider
             ['categories.index', 'expenses.index', 'income.index'],
             'App\Http\ViewComposers\MainTableComposer'
         );
+
+        View::composer(
+            ['categories.new', 'categories.view', 'categories.edit'],
+            'App\Http\ViewComposers\CategoriesFormComposer'
+        );
     }
 
     /**
