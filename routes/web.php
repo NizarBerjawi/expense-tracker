@@ -28,7 +28,7 @@ Route::group(['prefix' => 'categories'], function () {
     Route::get('/{categoryId}', 'CategoriesController@show')->name('categories.show');
     Route::get('/{categoryId}/edit', 'CategoriesController@edit')->name('categories.edit');
     Route::put('/{categoryId}', 'CategoriesController@update')->name('categories.update');
-    Route::delete('/{category}', 'CategoriesController@destroy')->name('categories.destroy');
+    Route::delete('/', 'CategoriesController@destroy')->name('categories.destroy');
 });
 
 /** Expense Routes **/
@@ -36,12 +36,19 @@ Route::group(['prefix' => 'expenses'], function () {
     Route::get('/', 'ExpensesController@index')->name('expenses.index');
     Route::get('/create', 'ExpensesController@create')->name('expenses.create');
     Route::post('/', 'ExpensesController@store')->name('expenses.store');
-    Route::get('/{expense}', 'ExpensesController@show')->name('expenses.show');
-    Route::get('/{expense}/edit', 'ExpensesController@edit')->name('expenses.edit');
-    Route::put('/{expense}', 'ExpensesController@update')->name('expenses.update');
+    Route::get('/{expenseId}', 'ExpensesController@show')->name('expenses.show');
+    Route::get('/{expenseId}/edit', 'ExpensesController@edit')->name('expenses.edit');
+    Route::put('/{expenseId}', 'ExpensesController@update')->name('expenses.update');
     Route::delete('/{expense}', 'ExpensesController@destroy')->name('expenses.destroy');
 });
 
+/** Income Routes **/
 Route::group(['prefix' => 'income'], function () {
     Route::get('/', 'IncomeController@index')->name('income.index');
+    Route::get('/create', 'IncomeController@create')->name('income.create');
+    Route::post('/', 'IncomeController@store')->name('income.store');
+    Route::get('/{incomeId}', 'IncomeController@show')->name('income.show');
+    Route::get('/{incomeId}/edit', 'IncomeController@edit')->name('income.edit');
+    Route::put('/{incomeId}', 'IncomeController@update')->name('income.update');
+    Route::delete('/{income}', 'IncomeController@destroy')->name('income.destroy');
 });

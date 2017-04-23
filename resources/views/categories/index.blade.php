@@ -3,6 +3,7 @@
 @section('content')
 <div class="be-content">
     <div class="main-content container-fluid">
+        @include('includes.errorMessages')
         <!-- Main table-->
         <div class="row">
             <div class="col-sm-12">
@@ -13,8 +14,9 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <div class="col-sm-12 btn-group btn-space">
-                            <a href="{{ route('categories.create') }}" class="btn btn-space btn-primary pull-right">New</a>
+                        <div class="col-sm-12 btn-group">
+                          <label for="delete" type="button" class="btn btn-space btn-danger">Delete</label>
+                          <a href="{{ route('categories.create') }}" class="btn btn-space btn-primary">New</a>
                         </div>
 
                         @include('includes.mainTable', [

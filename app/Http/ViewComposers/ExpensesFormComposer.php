@@ -6,17 +6,17 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Route;
-use App\Models\Tag;
+use App\Models\Expense;
 use App\Models\Category;
 
-class CategoriesFormComposer
+class ExpensesFormComposer
 {
   /**
-   * The Category ID
+   * The expense ID
    *
    * @var int
    */
-  private $categoryId;
+  private $expenseId;
 
   /**
   * Create a new view composer instance.
@@ -24,7 +24,7 @@ class CategoriesFormComposer
   * @param  Illuminate\Http\Request $request
   */
   public function __construct(Request $request) {
-    $this->categoryId = $request->categoryId;
+    $this->expenseId = $request->expenseId;
   }
 
   /**
@@ -52,22 +52,22 @@ class CategoriesFormComposer
   private function getViewData($routeName) {
     // Prepare the data to be sent to the views
     switch($routeName) {
-      case 'categories.create':
-        $tags = Tag::where('user_id', Auth::id())->get();
-        return compact('tags');
-      case 'categories.show':
-        $category = Category::where('id', $this->categoryId)
+      case 'expenses.create':
+        $categories = Category::where('user_id', Auth::id())->get();
+        return compact('categories');
+      case 'expenses.show':
+        $expense = Expense::where('id', $this->expenseId)
+                          ->where('user_id', Auth::id())
+                          ->with('category')
+                          ->first();
+        return compact('expense');
+      case 'expenses.edit':
+        $expense = Expense::where('id', $this->expenseId)
                             ->where('user_id', Auth::id())
-                            ->with('tag')
+                            ->with('category')
                             ->first();
-        return compact('category');
-      case 'categories.edit':
-        $category = Category::where('id', $this->categoryId)
-                            ->where('user_id', Auth::id())
-                            ->with('tag')
-                            ->first();
-        $tags = Tag::where('user_id', Auth::id())->get();
-        return compact('category', 'tags');
+        $categories = Category::where('user_id', Auth::id())->get();
+        return compact('expense', 'categories');
     }
   }
 }

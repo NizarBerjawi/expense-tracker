@@ -10,7 +10,7 @@ class PaginationService
    *
    * @var int
    */
-  const PER_PAGE = 2;
+  const PER_PAGE = 3;
 
   /**
    * Pagiante data

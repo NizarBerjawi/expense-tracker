@@ -17,15 +17,17 @@ class CreateExpensesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->integer('category_id')->unsigned();
+            $table->integer('category_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned();
             $table->date('date');
-            $table->decimal('amount', 6, 2);
+            $table->decimal('amount', 10, 2);
             $table->timestamps();
         });
 
         Schema::table('expenses', function(Blueprint $table) {
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')
+                  ->references('id')->on('categories')
+                  ->onDelete('set null');
         });
 
         Schema::table('expenses', function(Blueprint $table) {

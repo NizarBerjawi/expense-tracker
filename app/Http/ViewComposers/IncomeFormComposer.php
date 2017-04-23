@@ -6,17 +6,17 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Route;
-use App\Models\Tag;
+use App\Models\Income;
 use App\Models\Category;
 
-class CategoriesFormComposer
+class IncomeFormComposer
 {
   /**
-   * The Category ID
+   * The expense ID
    *
    * @var int
    */
-  private $categoryId;
+  private $incomeId;
 
   /**
   * Create a new view composer instance.
@@ -24,7 +24,7 @@ class CategoriesFormComposer
   * @param  Illuminate\Http\Request $request
   */
   public function __construct(Request $request) {
-    $this->categoryId = $request->categoryId;
+    $this->incomeId = $request->incomeId;
   }
 
   /**
@@ -52,22 +52,22 @@ class CategoriesFormComposer
   private function getViewData($routeName) {
     // Prepare the data to be sent to the views
     switch($routeName) {
-      case 'categories.create':
-        $tags = Tag::where('user_id', Auth::id())->get();
-        return compact('tags');
-      case 'categories.show':
-        $category = Category::where('id', $this->categoryId)
+      case 'income.create':
+        $categories = Category::where('user_id', Auth::id())->get();
+        return compact('categories');
+      case 'income.show':
+        $income = Income::where('id', $this->incomeId)
+                          ->where('user_id', Auth::id())
+                          ->with('category')
+                          ->first();
+        return compact('income');
+      case 'income.edit':
+        $income = Income::where('id', $this->incomeId)
                             ->where('user_id', Auth::id())
-                            ->with('tag')
+                            ->with('category')
                             ->first();
-        return compact('category');
-      case 'categories.edit':
-        $category = Category::where('id', $this->categoryId)
-                            ->where('user_id', Auth::id())
-                            ->with('tag')
-                            ->first();
-        $tags = Tag::where('user_id', Auth::id())->get();
-        return compact('category', 'tags');
+        $categories = Category::where('user_id', Auth::id())->get();
+        return compact('income', 'categories');
     }
   }
 }

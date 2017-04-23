@@ -18,14 +18,43 @@ class Income extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'description', 'category_id', 'date', 'amount'];
-    
+    protected $fillable = [
+      'name',
+      'description',
+      'category_id',
+      'user_id',
+      'date',
+      'amount',
+    ];
+
     /**
      * Get the category that owns the income.
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function category() {
-        return $this->belongsTo('App\Models\Category');
+    public function category()
+    {
+      return $this->belongsTo('App\Models\Category');
+    }
+
+    /**
+     * Get the user that owns the income.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+      return $this->belongsTo('App\Models\User');
+    }
+
+    /**
+     * Delete one or mor specified income.
+     *
+     * @param array
+     * @return void
+     */
+    public static function discard(Array $incomeIds)
+    {
+      return Income::whereIn('id', $incomeIds)->delete();
     }
 }

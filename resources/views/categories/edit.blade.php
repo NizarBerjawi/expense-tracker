@@ -8,8 +8,7 @@
 <div class="be-content">
     <div class="main-content container-fluid">
         @include('includes.errorMessages')
-
-        <!-- Main table-->
+        <!-- Main table -->
         <div class="row">
             <div class="col-sm-12">
                 @include('includes.mainForm', [
@@ -28,13 +27,13 @@
 
 
 @section('scripts')
-    <script src="{{ asset('lib/select2/js/select2.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/app-form-elements.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('lib/select2/js/select2.min.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('js/app-form-elements.js') }}" type="text/javascript"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
-            //initialize the form
-            App.formElements();
-        });
-    </script>
+  <script type="text/javascript">
+      $(document).ready(function(){
+          //initialize the form
+          App.formElements();
+      });
+  </script>
 @endsection

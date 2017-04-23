@@ -31,6 +31,15 @@ var App = (function () {
             });
         };
 
+        //Select2 tags
+        if ($('.categories').length) {
+            $(".categories").select2({
+                tags: true,
+                width: '100%',
+                maximumSelectionLength: 1
+            });
+        };
+
         //Bootstrap Slider
         if ($('.bslider').length) {
             $('.bslider').bootstrapSlider();

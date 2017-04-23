@@ -72,11 +72,11 @@ class UpdateCategory extends FormRequest
   }
 
   /**
-  * Configure the validator instance.
-  *
-  * @param  \Illuminate\Validation\Validator  $validator
-  * @return void
-  */
+   * Configure the validator instance.
+   *
+   * @param  \Illuminate\Validation\Validator  $validator
+   * @return void
+   */
   public function withValidator($validator)
   {
     $validator->after(function ($validator) {
@@ -87,10 +87,10 @@ class UpdateCategory extends FormRequest
   }
 
   /**
-  * Check if the updated category name is already taken
-  *
-  * @return boolean
-  */
+   * Check if the updated category name is already taken
+   *
+   * @return boolean
+   */
   private function nameIsTaken($updatedName = null)
   {
     // Get the current name of the category being updated
