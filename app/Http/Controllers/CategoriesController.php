@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCategory;
 use App\Http\Requests\UpdateCategory;
+use App\Http\Requests\DeleteCategory;
 use App\Models\Category;
 use App\Models\Tag;
 use Auth;
@@ -53,10 +54,10 @@ class CategoriesController extends Controller
     $category = Category::create([
       'name'          => $request->input('name'),
       'description'   => $request->input('description'),
-      'user_id'       => Auth::id(),
+      'tag_id'        => $request->input('tagId'),
+      'user_id'       => $request->user()->id,
     ]);
     // Attach the tag to the category
-    $category->attachTag($request->input('tagData'));
     $request->session()->flash('success', 'Category created successfully!');
     return redirect()->route('categories.index');
   }
@@ -90,12 +91,14 @@ class CategoriesController extends Controller
    */
   public function update(UpdateCategory $request, $categoryId)
   {
-    // Update the category and save
-    $category = Category::find($categoryId);
-    $category->name = $request->input('name');
-    $category->description = $request->input('description');
-    $category->attachTag($request->input('tagData'));
-    $category->save();
+    // Update the category
+    Category::where('id', $categoryId)
+            ->where('user_id', $request->user()->id)
+            ->update([
+              'name'        => $request->input('name'),
+              'description' => $request->input('description'),
+              'tag_id'      => $request->input('tagId'),
+            ]);
     $request->session()->flash('success', 'Category updated successfully!');
     return redirect()->route('categories.edit', $categoryId);
   }
@@ -106,7 +109,7 @@ class CategoriesController extends Controller
    * @param App\Models\Category
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Request $request)
+  public function destroy(DeleteCategory $request)
   {
     // Delete the selected categories
     Category::discard($request->input('categoryIds'));

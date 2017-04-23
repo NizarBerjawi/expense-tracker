@@ -53,7 +53,7 @@ class CategoriesFormComposer
     // Prepare the data to be sent to the views
     switch($routeName) {
       case 'categories.create':
-        $tags = Tag::where('user_id', Auth::id())->get();
+        $tags = Tag::all();
         return compact('tags');
       case 'categories.show':
         $category = Category::where('id', $this->categoryId)
@@ -66,7 +66,7 @@ class CategoriesFormComposer
                             ->where('user_id', Auth::id())
                             ->with('tag')
                             ->first();
-        $tags = Tag::where('user_id', Auth::id())->get();
+        $tags = Tag::all();
         return compact('category', 'tags');
     }
   }

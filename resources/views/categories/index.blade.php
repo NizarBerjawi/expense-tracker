@@ -14,9 +14,11 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <div class="col-sm-12 btn-group">
-                          <label for="delete" type="button" class="btn btn-space btn-danger">Delete</label>
-                          <a href="{{ route('categories.create') }}" class="btn btn-space btn-primary">New</a>
+                        <div class="col-sm-12 pull-right">
+                          <div class="btn-group">
+                            <label for="delete" type="button" class="btn btn-space btn-danger">Delete</label>
+                            <a href="{{ route('categories.create') }}" class="btn btn-space btn-primary">New</a>
+                          </div>
                         </div>
 
                         @include('includes.mainTable', [

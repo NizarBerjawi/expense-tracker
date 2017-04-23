@@ -55,30 +55,6 @@ class Category extends Model
   }
 
   /**
-   * Attach a tag to this category if it exists. Otherwise,
-   * create a new tag and attach it.
-   *
-   * @param  mixed
-   * @return void
-   */
-  public function attachTag($tagData) {
-    // Attempt to find the tag
-    $tag = Tag::find($tagData);
-
-    // If there is no tag available, create it
-    if (!$tag) {
-      $tag = Tag::create([
-        'name'    => $tagData,
-        'user_id' => Auth::id(),
-      ]);
-    }
-
-    // Attach the tag to the category
-    $this->tag_id = $tag->id;
-    $this->save();
-  }
-
-  /**
    * Delete one or mor specified categories.
    *
    * @param array

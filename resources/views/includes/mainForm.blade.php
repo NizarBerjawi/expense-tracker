@@ -119,7 +119,7 @@
           <div class="form-group">
             <label class="col-md-3 col-lg-3 control-label">Tag</label>
             <div class="col-md-9 col-lg-6">
-              <select {{ $disabled ? 'disabled' : '' }} multiple="" class="tags" name="tagData">
+              <select {{ $disabled ? 'disabled' : '' }} multiple="" class="tags" name="tagId">
                 @if (isset($tags) and !isset($category))
                   <!-- NEW CATEGORY -->
                   @foreach($tags as $tag)
