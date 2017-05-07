@@ -25,7 +25,7 @@ class StoreCategory extends FormRequest
     {
         return [
             'name'          => 'required|unique:categories,name|max:255',
-            'tagId'         => 'required|integer',
+            'tag_id'        => 'required|integer',
             'description'   => 'nullable|max:255',
         ];
     }
@@ -41,8 +41,8 @@ class StoreCategory extends FormRequest
             'name.required'     => 'A name is required for your category',
             'name.unique'       => 'This category name has already been created',
             'name.max'          => 'The category name should not be more than 255 characters',
+            'tag_id.required'   => 'A tag is required for this category',
             'description.max'   => 'The category description should not be more than 255 characters',
-            'tag.max'           => 'The category tag should not be more than 255 characters',
         ];
     }
 }

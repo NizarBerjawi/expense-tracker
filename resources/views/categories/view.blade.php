@@ -7,22 +7,25 @@
 @section('content')
 <div class="be-content">
     <div class="main-content container-fluid">
+        @include('includes.errorMessages')
         <!-- Main table -->
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-md-8 col-md-offset-2">
                 @include('includes.mainForm', [
-                  'panelHeading'  => 'View Category',
-                  'panelSubtitle' => 'View this category\'s details',
-                  'formAction'    => '',
-                  'methodField'   => '',
-                  'page'          => 'categories',
-                  'disabled'      => true,
+                    'page'          => 'categories',
+                    'panelHeading'  => 'View Category',
+                    'panelSubtitle' => 'View this category\'s details',
+                    'formAction'    => '',
+                    'methodField'   => '',
+                    'disabled'      => true,
                 ])
             </div>
         </div>
-        @include('includes.deleteItem', [
-          'deleteRoute' => route('categories.destroy', $category->id)
-        ])
+        <div class="col-md-8 col-md-offset-2">
+            @include('includes.deleteItem', [
+                'deleteRoute' => route('categories.destroy', $category->id)
+            ])
+        </div>
     </div>
 </div>
 @endsection

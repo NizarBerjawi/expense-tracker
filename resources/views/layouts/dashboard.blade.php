@@ -59,5 +59,7 @@
                 });
             </script>
         </div>
+
+        @yield('modals')
     </body>
 </html>

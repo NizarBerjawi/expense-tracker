@@ -7,7 +7,7 @@
                     <label for="check1"></label>
                 </div>
             </th>
-            @if($page == 'expenses' || $page == 'income')
+            @if($page == 'expenses' or $page == 'income')
                 <th style="width:20%;">Name</th>
                 <th style="width:17%;">Amount</th>
                 <th style="width:15%;">Date</th>
@@ -21,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        @if($page == 'expenses' || $page == 'income')
+        @if($page == 'expenses' or $page == 'income')
             @if ($items->isEmpty())
                 <tr>
                   <td colspan="6">{{ $empty_message }}</td>
@@ -75,7 +75,7 @@
                     <tr>
                         <td>
                             <div class="be-checkbox be-checkbox-sm">
-                                <input id="category-{{ $category->id }}" type="checkbox" name="categoryIds[]" value="{{ $category->id }}">
+                                <input id="category-{{ $category->id }}" type="checkbox" name="category_ids[]" value="{{ $category->id }}">
                                 <label for="category-{{ $category->id }}"></label>
                             </div>
                         </td>

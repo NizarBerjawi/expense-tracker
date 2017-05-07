@@ -24,7 +24,7 @@ class DeleteCategory extends FormRequest
     public function rules()
     {
       return [
-        'categoryIds'    => 'required|array',
+        'category_ids'    => 'array',
       ];
     }
 
@@ -36,8 +36,8 @@ class DeleteCategory extends FormRequest
     public function messages()
     {
       return [
-        'categoryIds.required' => 'Please Select one or more categories to delete',
-        'categoryIds.array'    => 'Oops, something went wrong. Please try again',
+        'category_ids.required' => 'Please Select one or more categories to delete',
+        'category_ids.array'    => 'Oops, something went wrong. Please try again',
       ];
     }
 }

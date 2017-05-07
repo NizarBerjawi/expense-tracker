@@ -10,13 +10,14 @@
         @include('includes.errorMessages')
         <!-- Main table -->
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-md-8 col-md-offset-2">
                 @include('includes.mainForm', [
+                    'page'          => 'categories',
                     'panelHeading'  => 'New Category',
                     'panelSubtitle' => 'Create a new category to group your income and expenses',
                     'formAction'    => route('categories.store'),
+                    'cancelRoute'   => route('categories.index'),
                     'methodField'   => method_field('POST'),
-                    'page'          => 'categories',
                     'disabled'      => false,
                 ])
             </div>

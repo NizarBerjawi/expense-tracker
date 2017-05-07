@@ -1,4 +1,3 @@
-<div class="col-md-12">
   <div class="panel panel-border-color panel-border-color-danger">
     <div class="panel-heading panel-heading-divider">Danger Zone</div>
     <div class="panel-body text-center">
@@ -9,4 +8,3 @@
       </form>
     </div>
   </div>
-</div>

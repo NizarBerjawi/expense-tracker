@@ -14,12 +14,9 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <div class="col-sm-12 pull-right">
-                          <div class="btn-group">
-                            <label for="delete" type="button" class="btn btn-space btn-danger">Delete</label>
-                            <a href="{{ route('categories.create') }}" class="btn btn-space btn-primary">New</a>
-                          </div>
-                        </div>
+                        @include('includes.partials.actions', [
+                            'newItemRoute' => route('categories.create')
+                        ])
 
                         @include('includes.mainTable', [
                             'page' => 'categories',
@@ -35,4 +32,10 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('modals')
+    @include('includes.partials.confirmDeleteModal', [
+        'confirmation_text' => 'Are you sure you want to delete the selected categories?'
+    ])
 @endsection

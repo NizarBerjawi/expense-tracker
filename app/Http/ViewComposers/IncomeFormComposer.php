@@ -57,15 +57,15 @@ class IncomeFormComposer
         return compact('categories');
       case 'income.show':
         $income = Income::where('id', $this->incomeId)
-                          ->where('user_id', Auth::id())
-                          ->with('category')
-                          ->first();
+                        ->where('user_id', Auth::id())
+                        ->with('category')
+                        ->first();
         return compact('income');
       case 'income.edit':
         $income = Income::where('id', $this->incomeId)
-                            ->where('user_id', Auth::id())
-                            ->with('category')
-                            ->first();
+                        ->where('user_id', Auth::id())
+                        ->with('category')
+                        ->first();
         $categories = Category::where('user_id', Auth::id())->get();
         return compact('income', 'categories');
     }

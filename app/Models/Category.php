@@ -32,7 +32,8 @@ class Category extends Model
    *
    * @return Illuminate\Database\Eloquent\Relations\HasMany
    */
-  public function expenses() {
+  public function expenses()
+  {
     return $this->hasMany('App\Models\Expense');
   }
 
@@ -41,7 +42,8 @@ class Category extends Model
    *
    * @return Illuminate\Database\Eloquent\Relations\HasMany
    */
-  public function income() {
+  public function income()
+  {
     return $this->hasMany('App\Models\Income');
   }
 
@@ -50,7 +52,8 @@ class Category extends Model
    *
    * @return Illuminate\Database\Eloquent\Relations\BelongsTo
    */
-  public function tag() {
+  public function tag()
+  {
     return $this->belongsTo('App\Models\Tag');
   }
 

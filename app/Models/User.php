@@ -29,4 +29,34 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * Get the categories belonging to this user
+     *
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function categories()
+    {
+        return $this->hasMany('App\Models\Category');
+    }
+
+    /**
+     * Get the expenses belonging to this user
+     *
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function expenses()
+    {
+        return $this->hasMany('App\Models\Expense');
+    }
+
+    /**
+     * Get the income belonging to this user
+     *
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function income()
+    {
+        return $this->hasMany('App\Models\Income');
+    }
 }

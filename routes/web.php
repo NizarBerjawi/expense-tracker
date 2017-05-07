@@ -28,7 +28,7 @@ Route::group(['prefix' => 'categories'], function () {
     Route::get('/{categoryId}', 'CategoriesController@show')->name('categories.show');
     Route::get('/{categoryId}/edit', 'CategoriesController@edit')->name('categories.edit');
     Route::put('/{categoryId}', 'CategoriesController@update')->name('categories.update');
-    Route::delete('/', 'CategoriesController@destroy')->name('categories.destroy');
+    Route::delete('/{categoryId?}', 'CategoriesController@destroy')->name('categories.destroy');
 });
 
 /** Expense Routes **/

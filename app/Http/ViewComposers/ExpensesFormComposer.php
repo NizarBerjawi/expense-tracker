@@ -63,9 +63,9 @@ class ExpensesFormComposer
         return compact('expense');
       case 'expenses.edit':
         $expense = Expense::where('id', $this->expenseId)
-                            ->where('user_id', Auth::id())
-                            ->with('category')
-                            ->first();
+                          ->where('user_id', Auth::id())
+                          ->with('category')
+                          ->first();
         $categories = Category::where('user_id', Auth::id())->get();
         return compact('expense', 'categories');
     }

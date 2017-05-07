@@ -12,11 +12,12 @@
         <div class="row">
             <div class="col-sm-12">
                 @include('includes.mainForm', [
+                    'page'          => 'categories',
                     'panelHeading'  => 'Edit Category',
                     'panelSubtitle' => 'Edit this category\'s details',
                     'formAction'    => route('categories.update', $category->id),
+                    'cancelRoute'   => route('categories.index'),
                     'methodField'   => method_field('PUT'),
-                    'page'          => 'categories',
                     'disabled'      => false,
                 ])
             </div>
