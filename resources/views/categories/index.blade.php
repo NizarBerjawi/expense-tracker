@@ -18,15 +18,16 @@
                             'newItemRoute' => route('categories.create')
                         ])
 
-                        @include('includes.mainTable', [
-                            'page' => 'categories',
-                            'empty_message' => 'You have not created any categories yet'
+                        @include('includes.tables.categoriesTable', [
+                            'deleteCategoryRoute'   => route('categories.destroy'),
+                            'showCategoryRouteName' => 'categories.show',
+                            'editCategoryRouteName' => 'categories.edit',
+                            'emptyTableMessage'     => 'You have not created any categories yet'
                         ])
-
                     </div>
                 </div>
                 <div class="col-sm-12 text-center">
-                    {{ $items->links() }}
+                    {{ $categories->links() }}
                 </div>
             </div>
         </div>
@@ -35,7 +36,7 @@
 @endsection
 
 @section('modals')
-    @include('includes.partials.confirmDeleteModal', [
+    @include('includes.modals.confirmDelete', [
         'confirmation_text' => 'Are you sure you want to delete the selected categories?'
     ])
 @endsection

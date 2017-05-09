@@ -19,6 +19,7 @@
                     'cancelRoute'   => route('categories.index'),
                     'methodField'   => method_field('PUT'),
                     'disabled'      => false,
+                    'button'        => 'Update'
                 ])
             </div>
         </div>

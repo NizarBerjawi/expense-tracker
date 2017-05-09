@@ -13,12 +13,14 @@
         <div class="row">
             <div class="col-sm-12">
                 @include('includes.mainForm', [
+                    'page'          => 'income',
                     'panelHeading'  => 'New Income',
                     'panelSubtitle' => 'Create a new income to add to your budget',
                     'formAction'    => route('income.store'),
+                    'cancelRoute'   => route('income.index'),
                     'methodField'   => method_field('POST'),
-                    'page'          => 'income',
                     'disabled'      => false,
+                    'button'        => 'Add'
                 ])
             </div>
         </div>

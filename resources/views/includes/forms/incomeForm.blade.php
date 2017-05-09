@@ -27,7 +27,7 @@
     <div class="form-group">
         <label class="col-md-3 col-lg-3 control-label">Category</label>
         <div class="col-md-9 col-lg-6">
-            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="categories" name="categoryId">
+            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="categories" name="category_id">
                 @if (isset($categories) and !isset($income))
                 <!-- NEW INCOME -->
                 @foreach($categories as $category)
@@ -58,7 +58,7 @@
         <div class="col-md-12 col-lg-9">
             <p class="text-right">
                 <a href="{{ $cancelRoute}}" class="btn btn-space btn-default">Cancel</a>
-                <button type="submit" class="btn btn-space btn-primary">Add</button>
+                <button type="submit" class="btn btn-space btn-primary">{{ $button }}</button>
             </p>
         </div>
     </div>

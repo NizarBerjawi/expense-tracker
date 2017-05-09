@@ -22,7 +22,7 @@ class BudgetRequests extends FormRequest
    */
   public function __construct(Request $request)
   {
-    $this->categoryId = $request->input('categoryId');
+    $this->categoryId = $request->input('category_id');
   }
 
   /**
@@ -94,7 +94,7 @@ class BudgetRequests extends FormRequest
   {
     $validator->after(function ($validator) {
       if (!$this->categoryIsAvailable()) {
-        $validator->errors()->add('categoryId', 'Please select a valid category from the list');
+        $validator->errors()->add('category_id', 'Please select a valid category from the list');
       }
     });
   }

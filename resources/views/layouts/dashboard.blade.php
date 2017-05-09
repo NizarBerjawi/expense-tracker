@@ -36,13 +36,13 @@
     </head>
     <body>
         <div class="be-wrapper">
-            @include('includes.topNav')
+            @include('includes.navigation.topNav')
 
-            @include('includes.leftNav')
+            @include('includes.navigation.leftNav')
 
             @yield('content')
 
-            @include('includes.rightNav')
+            @include('includes.navigation.rightNav')
 
             <!-- Common Scripts -->
             <script src="{{ asset('lib/jquery/jquery.min.js') }}" type="text/javascript"></script>

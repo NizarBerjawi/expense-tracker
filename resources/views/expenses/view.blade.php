@@ -10,20 +10,22 @@
     <div class="main-content container-fluid">
         <!-- Main table -->
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-md-8 col-md-offset-2">
                 @include('includes.mainForm', [
-                  'panelHeading'  => 'View Expense',
-                  'panelSubtitle' => 'View this expenses\' details',
-                  'formAction'    => '',
-                  'methodField'   => '',
-                  'page'          => 'expenses',
-                  'disabled'      => true,
+                    'panelHeading'  => 'View Expense',
+                    'panelSubtitle' => 'View this expenses\' details',
+                    'formAction'    => '',
+                    'methodField'   => '',
+                    'page'          => 'expenses',
+                    'disabled'      => true,
                 ])
             </div>
         </div>
-        @include('includes.deleteItem', [
-          'deleteRoute' => route('expenses.destroy', $expense->id)
-        ])
+        <div class="col-md-8 col-md-offset-2">
+            @include('includes.deleteItem', [
+                'deleteRoute' => route('expenses.destroy', $expense->id)
+            ])
+        </div>
     </div>
 </div>
 @endsection

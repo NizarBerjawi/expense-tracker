@@ -20,7 +20,7 @@ class CreateIncomeTable extends Migration
             $table->integer('category_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned();
             $table->date('date');
-            $table->decimal('amount', 6, 2);
+            $table->decimal('amount', 12, 2);
             $table->timestamps();
         });
 

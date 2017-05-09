@@ -43,7 +43,7 @@
         <div class="col-md-12 col-lg-9">
             <p class="text-right">
                 <a href="{{ $cancelRoute}}" class="btn btn-space btn-default">Cancel</a>
-                <button type="submit" class="btn btn-space btn-primary">Add</button>
+                <button type="submit" class="btn btn-space btn-primary">{{ $button }}</button>
             </p>
         </div>
     </div>

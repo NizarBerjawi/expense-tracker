@@ -13,12 +13,14 @@
         <div class="row">
             <div class="col-sm-12">
                 @include('includes.mainForm', [
+                    'page'          => 'expenses',
                     'panelHeading'  => 'Edit Expense',
                     'panelSubtitle' => 'Edit this expense\'s details',
                     'formAction'    => route('expenses.update', $expense->id),
+                    'cancelRoute'   => route('expenses.index'),
                     'methodField'   => method_field('PUT'),
-                    'page'          => 'expenses',
                     'disabled'      => false,
+                    'button'        => 'Update'
                 ])
             </div>
         </div>

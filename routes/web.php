@@ -39,7 +39,7 @@ Route::group(['prefix' => 'expenses'], function () {
     Route::get('/{expenseId}', 'ExpensesController@show')->name('expenses.show');
     Route::get('/{expenseId}/edit', 'ExpensesController@edit')->name('expenses.edit');
     Route::put('/{expenseId}', 'ExpensesController@update')->name('expenses.update');
-    Route::delete('/{expense}', 'ExpensesController@destroy')->name('expenses.destroy');
+    Route::delete('/{expenseId?}', 'ExpensesController@destroy')->name('expenses.destroy');
 });
 
 /** Income Routes **/
@@ -50,5 +50,5 @@ Route::group(['prefix' => 'income'], function () {
     Route::get('/{incomeId}', 'IncomeController@show')->name('income.show');
     Route::get('/{incomeId}/edit', 'IncomeController@edit')->name('income.edit');
     Route::put('/{incomeId}', 'IncomeController@update')->name('income.update');
-    Route::delete('/{income}', 'IncomeController@destroy')->name('income.destroy');
+    Route::delete('/{incomeId?}', 'IncomeController@destroy')->name('income.destroy');
 });
