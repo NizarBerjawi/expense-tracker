@@ -27,7 +27,11 @@ var App = (function () {
             $(".tags").select2({
                 tags: true,
                 width: '100%',
-                maximumSelectionLength: 1
+                maximumSelectionLength: 1,
+                createTag: function () {
+                    // Disable tagging
+                    return null;
+                }
             });
         };
 
@@ -36,7 +40,11 @@ var App = (function () {
             $(".categories").select2({
                 tags: true,
                 width: '100%',
-                maximumSelectionLength: 1
+                maximumSelectionLength: 1,
+                createTag: function () {
+                    // Disable tagging
+                    return null;
+                }
             });
         };
 

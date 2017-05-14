@@ -18,7 +18,7 @@ class CreateExpensesTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->integer('category_id')->unsigned()->nullable();
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->date('date');
             $table->decimal('amount', 12, 2);
             $table->timestamps();
@@ -26,12 +26,16 @@ class CreateExpensesTable extends Migration
 
         Schema::table('expenses', function(Blueprint $table) {
             $table->foreign('category_id')
-                  ->references('id')->on('categories')
+                  ->references('id')
+                  ->on('categories')
                   ->onDelete('set null');
         });
 
         Schema::table('expenses', function(Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
         });
     }
 

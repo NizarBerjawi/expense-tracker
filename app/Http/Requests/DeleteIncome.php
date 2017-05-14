@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeleteCategory extends FormRequest
+class DeleteIncome extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class DeleteCategory extends FormRequest
     public function rules()
     {
       return [
-        'category_ids' => 'array|required_without:id',
-        'id'           => 'integer'
+        'income_ids'    => 'array|required_without:id',
+        'id'            => 'integer'
       ];
     }
 
@@ -37,9 +37,9 @@ class DeleteCategory extends FormRequest
     public function messages()
     {
       return [
-        'category_ids.required_without' => 'Please Select one or more categories to delete.',
-        'category_ids.array'            => 'Oops, something went wrong. Please try again.',
-        'id.integer'                    => 'Oops, something went wrong. Please try again.',
+        'income_ids.required_without' => 'Please Select one or more income to delete.',
+        'income_ids.array'            => 'Oops, something went wrong. Please try again.',
+        'id.integer'                  => 'Oops, something went wrong. Please try again.',
       ];
     }
 }

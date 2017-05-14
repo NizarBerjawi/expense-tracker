@@ -59,14 +59,14 @@ class CategoriesFormComposer
                 $tags = Tag::all();
                 return compact('tags');
             case 'categories.show':
-                $category = Category::where('id', $this->categoryId)
-                                    ->where('user_id', Auth::id())
+                $category = Category::byId($this->categoryId)
+                                    ->byUser(Auth::id())
                                     ->with('tag')
                                     ->first();
                 return compact('category');
             case 'categories.edit':
-                $category = Category::where('id', $this->categoryId)
-                                    ->where('user_id', Auth::id())
+                $category = Category::byId($this->categoryId)
+                                    ->byUser(Auth::id())
                                     ->with('tag')
                                     ->first();
                 $tags = Tag::all();

@@ -23,7 +23,10 @@ class CreateCategoriesTable extends Migration
         });
 
         Schema::table('categories', function(Blueprint $table) {
-            $table->foreign('tag_id')->references('id')->on('tags');
+            $table->foreign('tag_id')
+                  ->references('id')
+                  ->on('tags')
+                  ->onDelete('set null');
         });
 
         Schema::table('categories', function(Blueprint $table) {

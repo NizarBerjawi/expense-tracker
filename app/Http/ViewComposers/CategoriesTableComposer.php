@@ -5,9 +5,7 @@ namespace App\Http\ViewComposers;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Route;
 use App\Models\Category;
-use App\Services\PaginationService;
 
 class CategoriesTableComposer
 {
@@ -19,21 +17,13 @@ class CategoriesTableComposer
     private $currentPage;
 
     /**
-     * An instance of the pagination service
-     *
-     * @var App\Services\PaginationService
-     */
-    private $pagination;
-
-    /**
      * Create a new view composer instance.
      *
      * @param  Illuminate\Http\Request $request
      */
-    public function __construct(Request $request, PaginationService $pagination)
+    public function __construct(Request $request)
     {
         $this->currentPage = $request->page;
-        $this->pagination = $pagination;
     }
 
     /**
@@ -44,10 +34,9 @@ class CategoriesTableComposer
      */
     public function compose(View $view) {
         // Get the data to be sent to the views
-        $builder = Category::where('user_id', Auth::id())->with('tag');
-        // Get the paginated items to be displayed
-        $categories = $this->pagination
-                           ->getPaginatedData($builder, $this->currentPage);
+        $categories = Category::byUser(Auth::id())
+                              ->with('tag')
+                              ->paginate(10);
         // Send the data to the view
         $view->with(compact('categories'));
     }

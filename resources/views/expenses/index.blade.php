@@ -3,8 +3,8 @@
 @section('content')
 <div class="be-content">
     <div class="main-content container-fluid">
-        <!-- Error Messages -->
-        @include('includes.errorMessages')
+        <!-- Messages -->
+        @include('includes.partials.messages')
 
         <!-- Main table-->
         <div class="row">
@@ -16,9 +16,12 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        @include('includes.partials.actions', [
-                            'newItemRoute' => route('expenses.create')
-                        ])
+                        <div class="container-fluid xs-mt-20 xs-mb-30">
+                            @if (!$expenses->isEmpty())
+                                @include('includes.partials.actions')
+                            @endif
+                            <a href="{{ route('expenses.create') }}" class="btn btn-space btn-primary pull-right">New</a>
+                        </div>
 
                         @include('includes.tables.expensesTable', [
                             'deleteExpensesRoute'   => route('expenses.destroy'),
@@ -40,7 +43,9 @@
 @endsection
 
 @section('modals')
-    @include('includes.modals.confirmDelete', [
-        'confirmation_text' => 'Are you sure you want to delete the selected expenses?'
-    ])
+    @if (!$expenses->isEmpty())
+        @include('includes.modals.confirmDelete', [
+            'confirmation_text' => 'Are you sure you want to delete the selected expenses?'
+        ])
+    @endif
 @endsection

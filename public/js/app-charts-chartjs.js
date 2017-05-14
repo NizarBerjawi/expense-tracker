@@ -14,7 +14,7 @@ var App = (function () {
 
       //Get the canvas element
 			var ctx = document.getElementById("line-chart");
-			
+
 			var lineChartData = {
 	      labels: ["January", "February", "March", "April", "May", "June", "July"],
 	      datasets: [{
@@ -43,7 +43,7 @@ var App = (function () {
 
       //Get the canvas element
 			var ctx = document.getElementById("bar-chart");
-			
+
 			var data = {
 	      labels: ["January", "February", "March", "April", "May", "June", "July"],
 	      datasets: [{
@@ -81,7 +81,7 @@ var App = (function () {
 
       //Get the canvas element
 			var ctx = document.getElementById("radar-chart");
-			
+
 			var data = {
 			  labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
 			  datasets: [
@@ -124,7 +124,7 @@ var App = (function () {
 
       //Get the canvas element
 			var ctx = document.getElementById("polar-chart");
-			
+
 			var data = {
 		    datasets: [{
 	        data: [11,16,7,3,14],
@@ -160,7 +160,7 @@ var App = (function () {
 
       //Get the canvas element
 			var ctx = document.getElementById("pie-chart");
-			
+
 			var data = {
 			  labels: [
 			    "Red",
@@ -197,7 +197,7 @@ var App = (function () {
 
       //Get the canvas element
 			var ctx = document.getElementById("donut-chart");
-			
+
 			var data = {
 			  labels: [
 			    "Red",

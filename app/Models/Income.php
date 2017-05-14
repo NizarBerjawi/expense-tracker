@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Income extends Model
 {
@@ -27,6 +28,10 @@ class Income extends Model
       'amount',
     ];
 
+    /***********************************************************************/
+    /*************************ELOQUENT RELATIONSHIPS************************/
+    /***********************************************************************/
+
     /**
      * Get the category that owns the income.
      *
@@ -47,6 +52,50 @@ class Income extends Model
       return $this->belongsTo('App\Models\User');
     }
 
+    /***********************************************************************/
+    /*****************************LOCAL SCOPES******************************/
+    /***********************************************************************/
+
+    /**
+     * Scope a query to only include a specific income by ID.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  int $incomeId
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeById($query, int $incomeId)
+    {
+        $query->where('income.id', $incomeId);
+    }
+
+    /**
+     * Scope a query to only include a specific user's income.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  int $userID
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeByUser($query, int $userId)
+    {
+        return $query->where('user_id', $userId);
+    }
+
+    /**
+     * Scope a query to order the income by the date field.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  string $direction
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOrderByDate($query, string $direction)
+    {
+        return $query->orderBy('date', $direction);
+    }
+
+    /***********************************************************************/
+    /****************************STATIC METHODS*****************************/
+    /***********************************************************************/
+
     /**
      * Delete one or mor specified income.
      *
@@ -55,6 +104,6 @@ class Income extends Model
      */
     public static function discard(Array $incomeIds)
     {
-      return Income::whereIn('id', $incomeIds)->delete();
+        return Income::whereIn('id', $incomeIds)->delete();
     }
 }

@@ -51,32 +51,28 @@ class IncomeFormComposer
      * @param  string $routeName
      * @return Illuminate\Database\Eloquent\Builder
      */
-    private function getViewData($routeName)
+    private function getViewData(string $routeName)
     {
         // Prepare the data to be sent to the views
         switch($routeName) {
             case 'income.create':
-                $categories = Category::where('user_id', Auth::id())
-                                      ->whereHas('tag', function($query) {
-                                          $query->where('name', 'Income');
-                                      })
+                $categories = Category::byUser(Auth::id())
+                                      ->byTagName(['income'])
                                       ->get();
                 return compact('categories');
             case 'income.show':
-                $income = Income::where('id', $this->incomeId)
-                                ->where('user_id', Auth::id())
+                $income = Income::byId($this->incomeId)
+                                ->byUser(Auth::id())
                                 ->with('category')
                                 ->first();
                 return compact('income');
             case 'income.edit':
-                $income = Income::where('id', $this->incomeId)
-                                ->where('user_id', Auth::id())
+                $income = Income::byId($this->incomeId)
+                                ->byUser(Auth::id())
                                 ->with('category')
                                 ->first();
-                $categories = Category::where('user_id', Auth::id())
-                                      ->whereHas('tag', function($query) {
-                                          $query->where('name', 'Income');
-                                      })
+                $categories = Category::byUser(Auth::id())
+                                      ->byTagName(['income'])
                                       ->get();
                 return compact('income', 'categories');
         }

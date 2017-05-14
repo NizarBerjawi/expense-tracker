@@ -2,8 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\BaseClasses\BudgetRequests;
+
 class StoreExpense extends BudgetRequests
 {
+
   /**
    * Get the error messages for the defined validation rules.
    *
@@ -11,6 +14,6 @@ class StoreExpense extends BudgetRequests
    */
   public function messages()
   {
-    return parent::expenseMessages();
+      return parent::expenseMessages();
   }
 }

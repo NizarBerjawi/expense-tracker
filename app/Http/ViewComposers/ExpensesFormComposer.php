@@ -51,32 +51,28 @@ class ExpensesFormComposer
      * @param  string $routeName
      * @return Illuminate\Database\Eloquent\Builder
      */
-    private function getViewData($routeName)
+    private function getViewData(string $routeName)
     {
         // Prepare the data to be sent to the views
         switch($routeName) {
             case 'expenses.create':
-                $categories = Category::where('user_id', Auth::id())
-                                      ->whereHas('tag', function($query) {
-                                          $query->where('name', 'Expense');
-                                      })
+                $categories = Category::byUser(Auth::id())
+                                      ->byTagName(['expense'])
                                       ->get();
                 return compact('categories');
             case 'expenses.show':
-                $expense = Expense::where('id', $this->expenseId)
-                                  ->where('user_id', Auth::id())
+                $expense = Expense::byId($this->expenseId)
+                                  ->byUser(Auth::id())
                                   ->with('category')
                                   ->first();
                 return compact('expense');
             case 'expenses.edit':
-                $expense = Expense::where('id', $this->expenseId)
-                                  ->where('user_id', Auth::id())
+                $expense = Expense::byId($this->expenseId)
+                                  ->byUser(Auth::id())
                                   ->with('category')
                                   ->first();
-                $categories = Category::where('user_id', Auth::id())
-                                      ->whereHas('tag', function($query) {
-                                          $query->where('name', 'Expense');
-                                      })
+                $categories = Category::byUser(Auth::id())
+                                      ->byTagName(['expense'])
                                       ->get();
                 return compact('expense', 'categories');
         }

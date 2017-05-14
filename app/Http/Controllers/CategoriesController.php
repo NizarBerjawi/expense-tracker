@@ -107,7 +107,6 @@ class CategoriesController extends Controller
      */
     public function destroy(DeleteCategory $request, $categoryId = null)
     {
-        if (!$request->exists('category_ids') && !$categoryId) { return back(); }
         // Get the category ids to be deleted
         $categoryIds = $request->input('category_ids', $categoryId);
         // Delete the selected categories

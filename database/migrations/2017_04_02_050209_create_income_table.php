@@ -26,12 +26,16 @@ class CreateIncomeTable extends Migration
 
         Schema::table('income', function(Blueprint $table) {
             $table->foreign('category_id')
-                  ->references('id')->on('categories')
+                  ->references('id')
+                  ->on('categories')
                   ->onDelete('set null');
         });
 
         Schema::table('income', function(Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
         });
     }
 

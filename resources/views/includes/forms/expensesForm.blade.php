@@ -38,7 +38,7 @@
                     @foreach($categories as $category)
                         <option {{ $expense->category_id == $category->id ? "selected" : "" }} value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
-                @elseif (isset($expense))
+                @elseif (isset($expense) and isset($expense->category))
                     <!-- VIEW EXPENSE -->
                     <option value="{{ $expense->category->id }}" selected>{{ $expense->category->name }}</option>
                 @endif

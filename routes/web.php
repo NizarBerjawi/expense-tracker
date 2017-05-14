@@ -17,8 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::group(['prefix' => 'dashboard'], function () {
+    Route::get('/', 'HomeController@index')->name('dashboard');
+    Route::post('/monthly-expenses', 'ChartsAjaxController@monthlyExpenseData')->name('dashboard.charts.monthly.expenses');
+});
 
 /** Category Routes **/
 Route::group(['prefix' => 'categories'], function () {

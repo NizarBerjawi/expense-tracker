@@ -38,7 +38,7 @@
                 @foreach($categories as $category)
                 <option {{ $income->category_id == $category->id ? "selected" : "" }} value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
-                @elseif (isset($income))
+                @elseif (isset($income) and isset($income->category))
                 <!-- VIEW INCOME -->
                 <option value="{{ $income->category->id }}" selected>{{ $income->category->name }}</option>
                 @endif

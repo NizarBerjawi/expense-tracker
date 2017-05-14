@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\BaseClasses;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
@@ -46,15 +46,16 @@ class BudgetRequests extends FormRequest
       'name'          => 'required|max:255',
       'date'          => 'required|date',
       'amount'        => 'required|numeric',
+      'category_id'   => 'integer',
       'description'   => 'nullable|max:255',
     ];
   }
 
   /**
-  * Get the error messages for the defined validation rules.
-  *
-  * @return array
-  */
+   * Get the error messages for the defined validation rules.
+   *
+   * @return array
+   */
   protected function expenseMessages()
   {
     return [
@@ -68,10 +69,10 @@ class BudgetRequests extends FormRequest
   }
 
   /**
-  * Get the error messages for the defined validation rules.
-  *
-  * @return array
-  */
+   * Get the error messages for the defined validation rules.
+   *
+   * @return array
+   */
   protected function incomeMessages()
   {
     return [
@@ -94,7 +95,8 @@ class BudgetRequests extends FormRequest
   {
     $validator->after(function ($validator) {
       if (!$this->categoryIsAvailable()) {
-        $validator->errors()->add('category_id', 'Please select a valid category from the list');
+        $validator->errors()
+                  ->add('category_id', 'Please select a valid category from the list');
       }
     });
   }
@@ -107,8 +109,8 @@ class BudgetRequests extends FormRequest
   protected function categoryIsAvailable()
   {
     // Check if the category exists
-    $category = Category::where('id', $this->categoryId)
-                        ->where('user_id', Auth::id())
+    $category = Category::byId($this->categoryId)
+                        ->byUser(Auth::id())
                         ->first();
     return $category or false;
   }

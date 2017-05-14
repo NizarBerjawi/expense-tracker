@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreExpense;
 use App\Http\Requests\UpdateExpense;
+use App\Http\Requests\DeleteExpense;
 use App\Models\Expense;
 
 class ExpensesController extends Controller
@@ -102,9 +103,8 @@ class ExpensesController extends Controller
      * @param App\Models\Expense
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $expenseId = null)
+    public function destroy(DeleteExpense $request, $expenseId = null)
     {
-        if (!$request->exists('expense_ids') && !$expenseId) { return back(); }
         // Get the expense ids to be deleted
         $expenseIds = $request->input('expense_ids', $expenseId);
         // Delete the selected expenses

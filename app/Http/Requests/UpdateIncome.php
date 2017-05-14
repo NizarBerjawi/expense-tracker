@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\BaseClasses\BudgetRequests;
+
 class UpdateIncome extends BudgetRequests
 {
   /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreIncome;
 use App\Http\Requests\UpdateIncome;
+use App\Http\Requests\DeleteIncome;
 use App\Models\Income;
 
 class IncomeController extends Controller
@@ -102,9 +103,8 @@ class IncomeController extends Controller
      * @param App\Models\Income
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $incomeId = null)
+    public function destroy(DeleteIncome $request, $incomeId = null)
     {
-        if (!$request->exists('income_ids') && !$incomeId) { return back(); }
         // Get the income ids to be deleted
         $incomeIds = $request->input('income_ids', $incomeId);
         // Delete the selected income
