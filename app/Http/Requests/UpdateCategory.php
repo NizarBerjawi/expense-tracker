@@ -91,10 +91,12 @@ class UpdateCategory extends FormRequest
    *
    * @return boolean
    */
-  private function nameIsTaken($updatedName = null)
+  private function nameIsTaken($request)
   {
     // Get the current name of the category being updated
-    $currentName = Category::find($this->categoryId)->name;
+    $currentName = Category::find($request->categoryId)->name;
+    // Get the updated name
+    $updatedName = $request->input('name');
     // Check if the name was updated and if it is already taken
     if (!strcmp($updatedName, $currentName)) {
       $category = Category::where('name', $updatedName)->first();

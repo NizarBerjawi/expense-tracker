@@ -36,56 +36,6 @@ class BudgetRequests extends FormRequest
   }
 
   /**
-   * Get the validation rules that apply to the request.
-   *
-   * @return array
-   */
-  public function rules()
-  {
-    return [
-      'name'          => 'required|max:255',
-      'date'          => 'required|date',
-      'amount'        => 'required|numeric',
-      'category_id'   => 'integer',
-      'description'   => 'nullable|max:255',
-    ];
-  }
-
-  /**
-   * Get the error messages for the defined validation rules.
-   *
-   * @return array
-   */
-  protected function expenseMessages()
-  {
-    return [
-      'name.required'      => 'A name is required for your expense',
-      'name.max'           => 'The expense name should not be more than 255 characters',
-      'date.required'      => 'A date is required for your expense',
-      'date.date'          => 'The date provided should be a valid date',
-      'amount.required'    => 'The expense should have a valid amount',
-      'description.max'    => 'The expense description should not be more than 255 characters'
-    ];
-  }
-
-  /**
-   * Get the error messages for the defined validation rules.
-   *
-   * @return array
-   */
-  protected function incomeMessages()
-  {
-    return [
-      'name.required'      => 'A name is required for your income',
-      'name.max'           => 'The income name should not be more than 255 characters',
-      'date.required'      => 'A date is required for your income',
-      'date.date'          => 'The date provided should be a valid date',
-      'amount.required'    => 'The income should have a valid amount',
-      'description.max'    => 'The income description should not be more than 255 characters'
-    ];
-  }
-
-  /**
    * Configure the validator instance.
    *
    * @param  \Illuminate\Validation\Validator  $validator

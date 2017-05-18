@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\BaseControllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Expense;
 use Carbon\Carbon;

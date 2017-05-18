@@ -30,7 +30,7 @@
                     <tr>
                         <td>
                             <div class="be-checkbox be-checkbox-sm">
-                                <input id="expense-{{ $expense->id }}" type="checkbox" name="expense_ids[]" value="{{ $expense->id }}">
+                                <input id="expense-{{ $expense->id }}" type="checkbox" name="ids[]" value="{{ $expense->id }}">
                                 <label for="expense-{{ $expense->id }}"></label>
                             </div>
                         </td>

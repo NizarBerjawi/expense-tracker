@@ -13,6 +13,6 @@ class StoreIncome extends BudgetRequests
      */
     public function messages()
     {
-        return parent::incomeMessages()
+        return parent::incomeMessages();
     }
 }

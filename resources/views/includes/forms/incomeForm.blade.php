@@ -29,18 +29,18 @@
         <div class="col-md-9 col-lg-6">
             <select {{ $disabled ? 'disabled' : '' }} multiple="" class="categories" name="category_id">
                 @if (isset($categories) and !isset($income))
-                <!-- NEW INCOME -->
-                @foreach($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
+                    <!-- NEW INCOME -->
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
                 @elseif (isset($categories) and isset($income))
-                <!-- EDIT INCOME -->
-                @foreach($categories as $category)
-                <option {{ $income->category_id == $category->id ? "selected" : "" }} value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
+                    <!-- EDIT INCOME -->
+                    @foreach($categories as $category)
+                        <option {{ $income->category_id == $category->id ? "selected" : "" }} value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
                 @elseif (isset($income) and isset($income->category))
-                <!-- VIEW INCOME -->
-                <option value="{{ $income->category->id }}" selected>{{ $income->category->name }}</option>
+                    <!-- VIEW INCOME -->
+                    <option value="{{ $income->category->id }}" selected>{{ $income->category->name }}</option>
                 @endif
             </select>
         </div>
