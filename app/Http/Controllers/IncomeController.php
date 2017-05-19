@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\BaseControllers\BudgetResourceController;
-use App\Http\Requests\StoreIncome;
-use App\Http\Requests\UpdateIncome;
-use App\Http\Requests\DeleteIncome;
 use App\Models\Income;
 
 class IncomeController extends BudgetResourceController
@@ -22,6 +19,8 @@ class IncomeController extends BudgetResourceController
     }
 
     /**
+     * The resource name
+     *
      * @return string
      */
     protected function resourceName()

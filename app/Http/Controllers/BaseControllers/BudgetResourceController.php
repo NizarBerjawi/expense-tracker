@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\BaseControllers;
 
-use Validator;
+use App\Controllers\Traits\ValidatesCategory;
 use Illuminate\Http\Request;
 
 abstract class BudgetResourceController extends Controller
 {
+    use ValidatesCategory;
+
     /**
      * An instance of the model. This can either be
      * an expense, income, or category model.
@@ -164,33 +166,5 @@ abstract class BudgetResourceController extends Controller
         }
         // If a route parameter is provided
         return redirect()->route($this->getFullRouteName($subroute), $routeParameter);
-    }
-
-    /**
-     * Validates the input for any store or update actions
-     * related to the income and expense resources.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return Validator
-     */
-    protected function validateInput(Request $request)
-    {
-        // Validate the input, use the model rules and messages
-        $validator = Validator::make(
-                    $request->all(),
-                    $this->model->rules,
-                    $this->model->messages
-                );
-
-        // Check if the category exists
-        $validator->after(function ($validator) use ($request) {
-            // This method is in the ValidatesCategory Trait
-            if (!$this->categoryExists($request)) {
-              $validator->errors()
-                        ->add('errors', 'Please select a valid category from the list');
-            }
-        });
-
-        return $validator;
     }
 }

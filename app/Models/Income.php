@@ -33,29 +33,35 @@ class Income extends Model
      *
      * @var array
      */
-    public $rules = [
-      'name'          => 'required|max:255',
-      'date'          => 'required|date',
-      'amount'        => 'required|numeric',
-      'category_id'   => 'required|integer|exists:income,category_id',
-      'description'   => 'nullable|max:255',
-    ];
+    public function rules()
+    {
+        return [
+            'name'        => 'required|max:255',
+            'date'        => 'required|date',
+            'amount'      => 'required|numeric',
+            'category_id' => 'required|integer|exists:income,category_id',
+            'description' => 'nullable|max:255',
+        ];
+    }
 
     /**
      * The validation messages.
      *
      * @var array
      */
-    public $messages = [
-      'name.required'       => 'Please provide a name for the income item',
-      'name.max'            => 'The income name should not exceed 255 characters',
-      'date.required'       => 'Please provide a date for your income item',
-      'date.date'           => 'Please provide a valid date for your income item',
-      'amount.required'     => 'Please provide an amount for your income item',
-      'amount.numeric'      => 'Please provide a valid numeric amount for your income item',
-      'category_id.integer' => 'Please select a valid category for your income from the list',
-      'description.max'     => 'The income description should not exceed 255 characters'
-    ];
+    public function messages()
+    {
+        return [
+            'name.required'       => 'Please provide a name for the income item',
+            'name.max'            => 'The income name should not exceed 255 characters',
+            'date.required'       => 'Please provide a date for your income item',
+            'date.date'           => 'Please provide a valid date for your income item',
+            'amount.required'     => 'Please provide an amount for your income item',
+            'amount.numeric'      => 'Please provide a valid numeric amount for your income item',
+            'category_id.integer' => 'Please select a valid category for your income from the list',
+            'description.max'     => 'The income description should not exceed 255 characters'
+        ];
+    }
 
     /***********************************************************************/
     /*************************ELOQUENT RELATIONSHIPS************************/
