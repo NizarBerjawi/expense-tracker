@@ -8,13 +8,15 @@ use Illuminate\Http\Request;
 abstract class BudgetResourceController extends Controller
 {
     /**
+     * An instance of the model. This can either be
+     * an expense, income, or category model.
      *
-     * @var
+     * @var Illuminate\Database\Eloquent\Model
      */
     protected $model;
 
     /**
-     * Show the resource main page
+     * Show the resource main index page.
      *
      * @return \Illuminate\Http\Response
      */
@@ -24,17 +26,19 @@ abstract class BudgetResourceController extends Controller
     }
 
     /**
-     * Show the page to create a new resource
+     * Show the page to create a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         return view($this->getFullRouteName('new'));
     }
 
    /**
     * Store a new instance of the resource.
     *
+    * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
     public function store(Request $request)
@@ -58,26 +62,30 @@ abstract class BudgetResourceController extends Controller
     }
 
     /**
-     * Show a specified resource page
+     * Show a specific resource details.
      *
      * @return \Illuminate\Http\Response
      */
-    public function show() {
+    public function show()
+    {
         return view($this->getFullRouteName('view'));
     }
 
     /**
-     * Show the edit page of a specified resource
+     * Show the edit page of a specific resource
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit() {
+    public function edit()
+    {
         return view($this->getFullRouteName('edit'));
     }
 
     /**
-     * Update the details of a specified resource.
+     * Update the details of a specific resource.
      *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -102,16 +110,17 @@ abstract class BudgetResourceController extends Controller
     }
 
     /**
-     * Delete a specified resource
+     * Delete a specific resource.
      *
-     * @param  App\Models\Income
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $id = null)
     {
-        // Get the income ids to be deleted
+        // Get the ids of the resource(s) to be deleted
         $ids = $request->input('ids', $id);
-        // Delete the selected income
+        // Delete the selected resources
         $this->model->discard((array) $ids);
         // Flash the success message
         $request->session()->flash('success', 'Deleted '.$this->resourceName());
@@ -120,17 +129,16 @@ abstract class BudgetResourceController extends Controller
     }
 
     /**
-     * The name of the resource handled by the controller
+     * The name of the resource "controlled" by the controller
      *
      * @return string
      */
     abstract protected function resourceName();
 
     /**
-     * Builds the full route name that will be used
-     * in redirection.
+     * Builds the full route name that will be used in redirection.
      *
-     * @param string  $subroute
+     * @param  string  $subroute
      * @return string
      */
     protected function getFullRouteName($subroute)
@@ -140,35 +148,43 @@ abstract class BudgetResourceController extends Controller
     }
 
     /**
-     * Returns a structured route name based on the user and resource types.
+     * Returns a redirect based on a specified subroute.
      *
      * @param  string  $subroute
      * @param  int  $id
      * @return \Illuminate\Routing\Redirector
      */
-    protected function redirectToSubRoute($subroute = null, $id = null)
+    protected function redirectToSubRoute($subroute = null, $routeParameter = null)
     {
-        if (!$subroute) {
-            return back();
-        } else if (!$id) {
+        // If no subroute is provided
+        if (!$subroute) { return back(); }
+        // If no route parameter is provided
+        if (!$routeParameter) {
             return redirect()->route($this->getFullRouteName($subroute));
         }
-        return redirect()->route($this->getFullRouteName($subroute), $id);
+        // If a route parameter is provided
+        return redirect()->route($this->getFullRouteName($subroute), $routeParameter);
     }
 
     /**
+     * Validates the input for any store or update actions
+     * related to the income and expense resources.
      *
-     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return Validator
      */
     protected function validateInput(Request $request)
     {
+        // Validate the input, use the model rules and messages
         $validator = Validator::make(
                     $request->all(),
                     $this->model->rules,
                     $this->model->messages
                 );
 
+        // Check if the category exists
         $validator->after(function ($validator) use ($request) {
+            // This method is in the ValidatesCategory Trait
             if (!$this->categoryExists($request)) {
               $validator->errors()
                         ->add('errors', 'Please select a valid category from the list');
