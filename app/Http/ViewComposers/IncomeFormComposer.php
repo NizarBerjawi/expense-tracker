@@ -2,46 +2,23 @@
 
 namespace App\Http\ViewComposers;
 
-use Auth;
+use App\Http\ViewComposers\BaseComposers\FormBaseComposer;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
-use Illuminate\Support\Facades\Route;
-use App\Models\Income;
 use App\Models\Category;
+use App\Models\Income;
+use Auth;
 
-class IncomeFormComposer
+class IncomeFormComposer extends FormBaseComposer
 {
-    /**
-     * The expense ID
-     *
-     * @var int
-     */
-    private $incomeId;
-
     /**
      * Create a new view composer instance.
      *
      * @param  Illuminate\Http\Request $request
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request, Income $income)
     {
-        $this->incomeId = $request->incomeId;
-    }
-
-    /**
-     * Bind data to the view
-     *
-     * @param View $view
-     * @return void
-     */
-    public function compose(View $view)
-    {
-        // Get the current route name
-        $currentRoute = Route::currentRouteName();
-        // Get the data to be sent to the views
-        $data = $this->getViewData($currentRoute);
-        // Send the data to the view
-        $view->with($data);
+        $this->id = $request->incomeId;
+        $this->model = $income;
     }
 
     /**
@@ -51,27 +28,27 @@ class IncomeFormComposer
      * @param  string $routeName
      * @return Illuminate\Database\Eloquent\Builder
      */
-    private function getViewData(string $routeName)
+    protected function getViewData(string $routeName)
     {
         // Prepare the data to be sent to the views
         switch($routeName) {
             case 'income.create':
-                $categories = Category::byUser(Auth::id())
+                $categories = Category::where('user_id', Auth::id())
                                       ->byTagName(['income'])
                                       ->get();
                 return compact('categories');
             case 'income.show':
-                $income = Income::byId($this->incomeId)
-                                ->byUser(Auth::id())
+                $income = Income::where('id', $this->id)
+                                ->where('user_id', Auth::id())
                                 ->with('category')
                                 ->first();
                 return compact('income');
             case 'income.edit':
-                $income = Income::byId($this->incomeId)
-                                ->byUser(Auth::id())
+                $income = Income::where('id', $this->id)
+                                ->where('user_id', Auth::id())
                                 ->with('category')
                                 ->first();
-                $categories = Category::byUser(Auth::id())
+                $categories = Category::where('user_id', Auth::id())
                                       ->byTagName(['income'])
                                       ->get();
                 return compact('income', 'categories');

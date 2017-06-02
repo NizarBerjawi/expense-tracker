@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Auth;
-use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
+use App\Models\Expense;
 
-class Expense extends Model
+class Expense extends BudgetItem
 {
     /**
      * The table associated with the model.
@@ -14,35 +12,6 @@ class Expense extends Model
      * @var string
      */
     protected $table = 'expenses';
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-      'name',
-      'description',
-      'category_id',
-      'user_id',
-      'date',
-      'amount'
-    ];
-
-    /**
-     * The validation messages.
-     *
-     * @var array
-     */
-    public function rules() {
-        return  [
-            'name'        => 'required|max:255',
-            'date'        => 'required|date',
-            'amount'      => 'required|numeric',
-            'category_id' => 'integer',
-            'description' => 'nullable|max:255',
-        ];
-    }
 
     /**
      * The validation messages.
@@ -63,103 +32,11 @@ class Expense extends Model
         ];
     }
 
-    /***********************************************************************/
-    /*************************ELOQUENT RELATIONSHIPS************************/
-    /***********************************************************************/
-
     /**
-     * Get the category that owns the expense.
+     * Delete one or more specified expenses.
      *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function category()
-    {
-      return $this->belongsTo('App\Models\Category');
-    }
-
-    /**
-     * Get the user that owns the expense.
-     *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-      return $this->belongsTo('App\Models\User');
-    }
-
-    /***********************************************************************/
-    /*****************************LOCAL SCOPES******************************/
-    /***********************************************************************/
-
-    /**
-     * Scope a query to only include a specific expense by ID.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @param  int $expenseId
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeById($query, int $expenseId)
-    {
-        $query->where('expenses.id', $expenseId);
-    }
-
-    /**
-     * Scope a query to only include a specific user's expenses.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @param  int $userID
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeByUser($query, int $userId)
-    {
-        return $query->where('user_id', $userId);
-    }
-
-    /**
-     * Scope a query to order the expenses by the date field.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @param  string $direction
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeOrderByDate($query, string $direction)
-    {
-        return $query->orderBy('date', $direction);
-    }
-
-    /**
-     * Scope a query to include only expenses before a specified date.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @param  \Carbon\Carbon $date
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeBefore($query, Carbon $date)
-    {
-        return $query->where('date', '<=', $date);
-    }
-
-    /**
-     * Scope a query to include only expenses after a specified date.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @param  \Carbon\Carbon $date
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeAfter($query, Carbon $date)
-    {
-        return $query->where('date', '>=', $date);
-    }
-
-    /***********************************************************************/
-    /****************************STATIC METHODS*****************************/
-    /***********************************************************************/
-
-    /**
-     * Delete one or mor specified expenses.
-     *
-     * @param array $expenseIds
-     * @return int
+     * @param array
+     * @return void
      */
     public static function discard(Array $expenseIds)
     {

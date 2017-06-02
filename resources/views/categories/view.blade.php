@@ -6,14 +6,23 @@
 
 @section('content')
     <div class="be-content">
+        @include('includes.partials.breadcrumbs', [
+            'pageTitle' => 'Categories',
+            'levels'    => [
+                            'Home'       => route('dashboard'),
+                            'Categories' => route('categories.index'),
+                            $category->id => '',
+                            'View'       => '',
+                           ]
+        ])
         <div class="main-content container-fluid">
             <!-- Main Form -->
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     @include('includes.mainForm', [
-                        'page'          => 'categories',
+                        'resource'      => 'categories',
+                        'model'         => $category,
                         'panelHeading'  => 'View Category',
-                        'panelSubtitle' => 'View this category\'s details',
                         'formAction'    => '',
                         'methodField'   => '',
                         'disabled'      => true,
@@ -29,7 +38,6 @@
         </div>
     </div>
 @endsection
-
 
 @section('scripts')
     <script src="{{ asset('lib/select2/js/select2.min.js') }}" type="text/javascript"></script>

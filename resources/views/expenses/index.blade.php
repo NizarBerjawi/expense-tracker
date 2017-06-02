@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="be-content">
+    @include('includes.partials.breadcrumbs', [
+        'pageTitle' => 'Expenses',
+        'levels'    => [
+                        'Home'       => route('dashboard'),
+                        'Expenses'   => '',
+                       ]
+    ])
     <div class="main-content container-fluid">
         <!-- Messages -->
         @include('includes.partials.messages')
@@ -12,22 +19,16 @@
                 <div class="panel panel-default panel-table">
                     <div class="panel-heading">Expenses
                         <div class="tools">
-                            <span class="icon mdi mdi-download"></span>
+                            <a href="{{ route('expenses.create') }}" class="btn btn-space btn-primary pull-right">New</a>
                         </div>
                     </div>
                     <div class="panel-body">
-                        <div class="container-fluid xs-mt-20 xs-mb-30">
-                            @if (!$expenses->isEmpty())
-                                @include('includes.partials.actions')
-                            @endif
-                            <a href="{{ route('expenses.create') }}" class="btn btn-space btn-primary pull-right">New</a>
-                        </div>
-
                         @include('includes.tables.expensesTable', [
-                            'deleteExpensesRoute'   => route('expenses.destroy'),
-                            'showExpenseRouteName'  => 'expenses.show',
-                            'editExpenseRouteName'  => 'expenses.edit',
-                            'emptyTableMessage'     => 'You have not added any expenses yet',
+                            'deleteExpensesRoute'    => route('expenses.destroy'),
+                            'showExpenseRouteName'   => 'expenses.show',
+                            'editExpenseRouteName'   => 'expenses.edit',
+                            'deleteExpenseRouteName' => 'expenses.destroy',
+                            'emptyTableMessage'      => 'You have not added any expenses yet',
                         ])
                     </div>
                 </div>
@@ -40,6 +41,10 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script src="/js/table-actions.js" type="text/javascript"></script>
 @endsection
 
 @section('modals')

@@ -1,3 +1,21 @@
 textarea {
     resize: none;
 }
+
+#line-loader, #cal-loader {
+    display: none;
+    background: url('/img/ajax-loader.gif');
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 300px;
+    background-position: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -150px;
+    margin-top: -150px;
+}
+
+.fc-event {
+    cursor: pointer;
+}

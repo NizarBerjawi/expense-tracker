@@ -2,42 +2,43 @@
 
 namespace App\Http\ViewComposers;
 
-use Auth;
+use App\Http\ViewComposers\BaseComposers\TableBaseComposer;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 use App\Models\Category;
 
-class CategoriesTableComposer
+class CategoriesTableComposer extends TableBaseComposer
 {
-    /**
-     * The current page being displayed to the user.
-     *
-     * @var int
-     */
-    private $currentPage;
-
     /**
      * Create a new view composer instance.
      *
      * @param  Illuminate\Http\Request $request
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request, Category $category)
     {
         $this->currentPage = $request->page;
+        $this->dir = $request->dir;
+        $this->col = $request->col;
+        $this->model = $category;
     }
 
     /**
-     * Bind data to the view
+     * The name of the resource being queried
      *
-     * @param View $view
-     * @return void
+     * @return string
      */
-    public function compose(View $view) {
-        // Get the data to be sent to the views
-        $categories = Category::byUser(Auth::id())
-                              ->with('tag')
-                              ->paginate(10);
-        // Send the data to the view
-        $view->with(compact('categories'));
+    protected function resourceName() : string
+    {
+        return 'categories';
+    }
+
+    /**
+     * The name of the relationship being returned with the
+     * main resource. For example, a tag is queried with category.
+     *
+     * @return string
+     */
+    protected function with() : string
+    {
+        return 'tag';
     }
 }

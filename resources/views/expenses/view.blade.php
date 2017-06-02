@@ -7,14 +7,23 @@
 
 @section('content')
     <div class="be-content">
+        @include('includes.partials.breadcrumbs', [
+            'pageTitle' => 'Expenses',
+            'levels'    => [
+                            'Home'       => route('dashboard'),
+                            'Expenses'   => route('expenses.index'),
+                            $expense->id => '',
+                            'View'       => '',
+                           ]
+        ])
         <div class="main-content container-fluid">
             <!-- Main Form -->
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     @include('includes.mainForm', [
-                        'page'          => 'expenses',
+                        'resource'      => 'expenses',
+                        'model'         => $expense,
                         'panelHeading'  => 'View Expense',
-                        'panelSubtitle' => 'View this expenses\' details',
                         'formAction'    => '',
                         'methodField'   => '',
                         'disabled'      => true,
@@ -30,7 +39,6 @@
         </div>
     </div>
 @endsection
-
 
 @section('scripts')
     <script src="{{ asset('lib/select2/js/select2.min.js') }}" type="text/javascript"></script>

@@ -1,109 +1,73 @@
 var App = (function () {
-  'use strict';
-  
-  App.pageCalendar = function( ){
+    'use strict';
 
+    App.pageCalendar = function( ){
+        // Add a height for the calendar panel before it loads
+        // for aesthetic reasons
+        $('.full-calendar .panel-body').css('height', 300);
+        // Show ajax spinner while the calendar loads
+        $('#cal-loader').show();
 
-    /* initialize the external events
-    -----------------------------------------------------------------*/
+        // Render the default Calendar after getting the data
+        getDailyData(function(response) {
+            createCalendar(response)
+        });
 
-    $('#external-events .fc-event').each(function() {
-
-      // store data so the calendar knows to render an event upon drop
-      $(this).data('event', {
-        title: $.trim($(this).text()), // use the element's text as the event title
-        stick: true // maintain when user navigates (see docs on the renderEvent method)
-      });
-
-      // make the event draggable using jQuery UI
-      $(this).draggable({
-        zIndex: 999,
-        revert: true,      // will cause the event to go back to its
-        revertDuration: 0  //  original position after the drag
-      });
-
-    });
-
-
-    /* initialize the calendar
-    -----------------------------------------------------------------*/
-
-    $('#calendar').fullCalendar({
-      header: {
-        left: 'title',
-        center: '',
-        right: 'month,agendaWeek,agendaDay, today, prev,next',
-      },
-      defaultDate: '2016-06-12',
-      editable: true,
-      eventLimit: true,
-      droppable: true, // this allows things to be dropped onto the calendar
-      drop: function() {
-        // is the "remove after drop" checkbox checked?
-        if ($('#drop-remove').is(':checked')) {
-          // if so, remove the element from the "Draggable Events" list
-          $(this).remove();
+        // Initializes the calendar
+        function createCalendar(events) {
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'title',
+                    center: '',
+                    right: 'prev,next',
+                },
+                defaultDate: moment().format("YYYY-MM-DD"), // Today's date
+                editable: false,
+                eventLimit: true,
+                eventClick: function(event, jsEvent, view) {
+                    // Show the expense details modal
+                    $("#show-expense").modal('toggle');
+                    // Fill in the form with the ajax response
+                    $("#show-expense #name").val(event.title);
+                    $("#show-expense #date").val(event.start.format("YYYY-MM-DD"));
+                    $("#show-expense #amount").val(event.amount);
+                    $("#show-expense #category").html(
+                        '<option value="'+event.category.id+'" selected>'+
+                            event.category.name
+                        +'</option>'
+                    );
+                    $("#show-expense #description").html(event.description);
+                    $("#show-expense #edit-item").attr('href', '/expenses/'+event.id+'/edit');
+                },
+                events: events
+            });
         }
-      },
-      events: [
-        {
-          title: 'All Day Event',
-          start: '2016-06-01'
-        },
-        {
-          title: 'Long Event',
-          start: '2016-06-07',
-          end: '2016-06-10'
-        },
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: '2016-06-09T16:00:00'
-        },
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: '2016-06-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2016-06-11',
-          end: '2016-06-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2016-06-12T10:30:00',
-          end: '2016-06-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2016-06-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2016-06-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2016-06-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2016-06-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2016-06-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2016-06-28'
+
+        // Ajax call to Get calendar events
+        function getDailyData(callback) {
+            $.ajax({
+                type: 'post',
+                url: 'dashboard/dailyExpenses',
+                data: {
+                    _token  : $('meta[name="csrf-token"]').attr('content'),
+                },
+                datatype: 'html',
+                success: function(response) {
+                    console.log('success');
+                },
+                error: function(response) {
+                    console.log(response.responseText);
+                }
+            }).done(function(response) {
+                callback(response);
+                // Hide the ajax spinner after data loads
+                $('#cal-loader').hide();
+                // Remove the added height to allow the default calendar height
+                // to be rendered
+                $('.full-calendar .panel-body').css('height', '');
+            })
         }
-      ]
-    });
+    };
 
-  };
-
-  return App;
+    return App;
 })(App || {});

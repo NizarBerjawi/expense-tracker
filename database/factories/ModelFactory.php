@@ -23,31 +23,58 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Models\Expense::class, function (Faker\Generator $faker) {
-    $randomDays = mt_rand(1, 12);
+$factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
+    $tagId = mt_rand(1, 2);
     $date = new Carbon();
 
     return [
         'name'          => $faker->name,
         'description'   => $faker->sentence($nbWords = 6, $variableNbWords = true),
-        'category_id'   => null,
+        'tag_id'        => $tagId,
         'user_id'       => 1,
-        'date'          => $date->month($randomDays),
-        'amount'        => mt_rand(1, 50000)
+    ];
+});
+
+
+$factory->define(App\Models\Expense::class, function (Faker\Generator $faker) {
+    $randomDays = mt_rand(1, 28);
+    $randomMonths = mt_rand(1, 12);
+    $randomYears = mt_rand(2015, 2017);
+    $categoryId = mt_rand(1, 20);
+    $date = new Carbon();
+
+    $date->day($randomDays);
+    $date->month($randomMonths);
+    $date->year($randomYears);
+
+    return [
+        'name'          => $faker->name,
+        'description'   => $faker->sentence($nbWords = 6, $variableNbWords = true),
+        'category_id'   => $categoryId,
+        'user_id'       => 1,
+        'date'          => $date,
+        'amount'        => mt_rand(1, 5000)
     ];
 });
 
 
 $factory->define(App\Models\Income::class, function (Faker\Generator $faker) {
-    $randomDays = mt_rand(1, 12);
+    $randomDays = mt_rand(1, 28);
+    $randomMonths = mt_rand(1, 12);
+    $randomYears = mt_rand(2015, 2017);
+    $categoryId = mt_rand(1, 20);
     $date = new Carbon();
+
+    $date->day($randomDays);
+    $date->month($randomMonths);
+    $date->year($randomYears);
 
     return [
         'name'          => $faker->name,
         'description'   => $faker->sentence($nbWords = 6, $variableNbWords = true),
-        'category_id'   => null,
+        'category_id'   => $categoryId,
         'user_id'       => 1,
-        'date'          => $date->month($randomDays),
-        'amount'        => mt_rand(1, 50000)
+        'date'          => $date,
+        'amount'        => mt_rand(1, 5000)
     ];
 });

@@ -8,10 +8,14 @@
                 <div class="text-center">
                     <div class="text-danger"><span class="modal-main-icon mdi mdi-close-circle-o"></span></div>
                     <h3>{{ $confirmation_text }}</h3>
-                    <div class="xs-mt-50">
+
+                    <form class="mod-form" action="" method="POST">
+                        {{ csrf_field() }}
+                        {{ method_field("DELETE") }}
+
                         <button type="button" data-dismiss="modal" class="btn btn-space btn-default">Cancel</button>
-                        <label for="delete" type="button" class="btn btn-space btn-danger">Delete</label>
-                    </div>
+                        <button type="submit" class="btn btn-space btn-danger">Delete</button>
+                    </form>
                 </div>
             </div>
             <div class="modal-footer"></div>

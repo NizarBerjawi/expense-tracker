@@ -7,16 +7,25 @@
 
 @section('content')
     <div class="be-content">
+        @include('includes.partials.breadcrumbs', [
+            'pageTitle' => 'Income',
+            'levels'    => [
+                            'Home'      => route('dashboard'),
+                            'Income'    => route('income.index'),
+                            $income->id => '',
+                            'View'      => '',
+                           ]
+        ])
         <div class="main-content container-fluid">
             <!-- Main Form -->
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     @include('includes.mainForm', [
+                        'resource'      => 'income',
+                        'model'         => $income,
                         'panelHeading'  => 'View Income',
-                        'panelSubtitle' => 'View this income\'s details',
                         'formAction'    => '',
                         'methodField'   => '',
-                        'page'          => 'income',
                         'disabled'      => true,
                     ])
                 </div>

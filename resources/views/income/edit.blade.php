@@ -7,17 +7,26 @@
 
 @section('content')
     <div class="be-content">
+        @include('includes.partials.breadcrumbs', [
+            'pageTitle' => 'Income',
+            'levels'    => [
+                            'Home'       => route('dashboard'),
+                            'Income'   => route('income.index'),
+                            $income->id => '',
+                            'Edit'       => '',
+                           ]
+        ])
         <div class="main-content container-fluid">
             <!-- Messages -->
             @include('includes.partials.messages')
 
             <!-- Main Form -->
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-md-8 col-md-offset-2">
                     @include('includes.mainForm', [
-                        'page'          => 'income',
+                        'resource'      => 'income',
+                        'model'         => $income,
                         'panelHeading'  => 'Edit Income',
-                        'panelSubtitle' => 'Edit this income\'s details',
                         'formAction'    => route('income.update', $income->id),
                         'cancelRoute'   => route('income.index'),
                         'methodField'   => method_field('PUT'),
@@ -30,17 +39,16 @@
     </div>
 @endsection
 
-
 @section('scripts')
-  <script src="{{ asset('lib/select2/js/select2.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('lib/moment.js/min/moment.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('lib/datetimepicker/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('js/app-form-elements.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('lib/select2/js/select2.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('lib/moment.js/min/moment.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('lib/datetimepicker/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/app-form-elements.js') }}" type="text/javascript"></script>
 
-  <script type="text/javascript">
+    <script type="text/javascript">
       $(document).ready(function(){
           //initialize the form
           App.formElements();
       });
-  </script>
+    </script>
 @endsection

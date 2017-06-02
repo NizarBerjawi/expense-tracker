@@ -25,4 +25,15 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    /**
+     * Show the calendar view
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function calendar()
+    {
+        return view('calendar');
+    }
+
 }

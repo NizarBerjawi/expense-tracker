@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Auth;
+use App\Models\Income;
 
-class Income extends Model
+class Income extends BudgetItem
 {
     /**
      * The table associated with the model.
@@ -13,36 +12,6 @@ class Income extends Model
      * @var string
      */
     protected $table = 'income';
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-      'name',
-      'description',
-      'category_id',
-      'user_id',
-      'date',
-      'amount',
-    ];
-
-    /**
-     * The validation messages.
-     *
-     * @var array
-     */
-    public function rules()
-    {
-        return [
-            'name'        => 'required|max:255',
-            'date'        => 'required|date',
-            'amount'      => 'required|numeric',
-            'category_id' => 'required|integer|exists:income,category_id',
-            'description' => 'nullable|max:255',
-        ];
-    }
 
     /**
      * The validation messages.
@@ -63,76 +32,8 @@ class Income extends Model
         ];
     }
 
-    /***********************************************************************/
-    /*************************ELOQUENT RELATIONSHIPS************************/
-    /***********************************************************************/
-
     /**
-     * Get the category that owns the income.
-     *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function category()
-    {
-      return $this->belongsTo('App\Models\Category');
-    }
-
-    /**
-     * Get the user that owns the income.
-     *
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-      return $this->belongsTo('App\Models\User');
-    }
-
-    /***********************************************************************/
-    /*****************************LOCAL SCOPES******************************/
-    /***********************************************************************/
-
-    /**
-     * Scope a query to only include a specific income by ID.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @param  int $incomeId
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeById($query, int $incomeId)
-    {
-        $query->where('income.id', $incomeId);
-    }
-
-    /**
-     * Scope a query to only include a specific user's income.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @param  int $userID
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeByUser($query, int $userId)
-    {
-        return $query->where('user_id', $userId);
-    }
-
-    /**
-     * Scope a query to order the income by the date field.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @param  string $direction
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeOrderByDate($query, string $direction)
-    {
-        return $query->orderBy('date', $direction);
-    }
-
-    /***********************************************************************/
-    /****************************STATIC METHODS*****************************/
-    /***********************************************************************/
-
-    /**
-     * Delete one or mor specified income.
+     * Delete one or more specified income.
      *
      * @param array
      * @return void

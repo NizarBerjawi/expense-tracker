@@ -6,6 +6,14 @@
 
 @section('content')
     <div class="be-content">
+        @include('includes.partials.breadcrumbs', [
+            'pageTitle' => 'Categories',
+            'levels'    => [
+                            'Home'       => route('dashboard'),
+                            'Categories' => route('categories.index'),
+                            'Create'     => ''
+                           ]
+        ])
         <div class="main-content container-fluid">
             <!-- Messages -->
             @include('includes.partials.messages')
@@ -14,9 +22,8 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     @include('includes.mainForm', [
-                        'page'          => 'categories',
+                        'resource'      => 'categories',
                         'panelHeading'  => 'New Category',
-                        'panelSubtitle' => 'Create a new category to group your income and expenses',
                         'formAction'    => route('categories.store'),
                         'cancelRoute'   => route('categories.index'),
                         'methodField'   => method_field('POST'),

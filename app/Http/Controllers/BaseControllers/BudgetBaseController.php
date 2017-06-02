@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\BaseControllers;
 
-use App\Controllers\Traits\ValidatesCategory;
+use Illuminate\Validation\Validator;
 use Illuminate\Http\Request;
 
-abstract class BudgetResourceController extends Controller
+abstract class BudgetBaseController extends Controller
 {
-    use ValidatesCategory;
-
     /**
      * An instance of the model. This can either be
      * an expense, income, or category model.
@@ -18,13 +16,64 @@ abstract class BudgetResourceController extends Controller
     protected $model;
 
     /**
+     * The name of the resource "controlled" by the controller
+     *
+     * @return string
+     */
+    abstract protected function resourceName() : string;
+
+    /**
+     * Validates the input for any store or update actions
+     * related to the resources.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Validation\Validator
+     */
+    abstract protected function validateInput(Request $request) : Validator;
+
+    /**
+     * Builds the full route name that will be used in redirection.
+     *
+     * @param  string $subroute
+     * @return string
+     */
+    private function getFullRouteName($subroute) : string
+    {
+        $resource_name = $this->resourceName();
+        return "{$resource_name}.{$subroute}";
+    }
+
+    /**
+     * Returns a redirect based on a specified subroute.
+     *
+     * @param  string $subroute
+     * @param  int $id
+     * @return \Illuminate\Routing\Redirector
+     */
+    private function redirectToSubRoute($subroute = null, $routeParameter = null)
+    {
+        // If no subroute is provided
+        if (!$subroute) { return back(); }
+        // If no route parameter is provided
+        if (!$routeParameter) {
+            return redirect()->route($this->getFullRouteName($subroute));
+        }
+        // If a route parameter is provided
+        return redirect()->route($this->getFullRouteName($subroute), $routeParameter);
+    }
+
+    /**
      * Show the resource main index page.
      *
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view($this->getFullRouteName('index'));
+        // Send the table sort criteria to the view
+        return view($this->getFullRouteName('index'))
+                    ->with('dir', $request->dir)
+                    ->with('col', $request->col);
     }
 
     /**
@@ -40,14 +89,14 @@ abstract class BudgetResourceController extends Controller
    /**
     * Store a new instance of the resource.
     *
-    * @param  \Illuminate\Http\Request  $request
+    * @param  \Illuminate\Http\Request $request
     * @return \Illuminate\Http\Response
     */
     public function store(Request $request)
     {
-        // Validate input
+        // Validate the user input
         $validator = $this->validateInput($request);
-        // Return any error messages with the old input
+        // Return any error messages and the old input
         if ($validator->fails()) {
             return $this->redirectToSubRoute()
                         ->withErrors($validator)
@@ -58,7 +107,7 @@ abstract class BudgetResourceController extends Controller
         // Store the new model
         $this->model->create($request->all());
         // Flash the success message
-        $request->session()->flash('success', 'Saved '.$this->resourceName());
+        $request->session()->flash('success', 'Successfully saved');
         // Redirect to the correct route
         return $this->redirectToSubRoute('index');
     }
@@ -86,8 +135,8 @@ abstract class BudgetResourceController extends Controller
     /**
      * Update the details of a specific resource.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -106,7 +155,7 @@ abstract class BudgetResourceController extends Controller
         $this->model->where('id', $id)
                     ->update($request->except(['_token', '_method']));
         // Flash the success message
-        $request->session()->flash('success', 'Updated '.$this->resourceName());
+        $request->session()->flash('success', 'Successfully updated');
         // Redirect to the correct route
         return $this->redirectToSubRoute('edit', $id);
     }
@@ -114,57 +163,20 @@ abstract class BudgetResourceController extends Controller
     /**
      * Delete a specific resource.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $id = null)
     {
+        if(!$request->input('ids') and !$id) { return back(); }
         // Get the ids of the resource(s) to be deleted
         $ids = $request->input('ids', $id);
         // Delete the selected resources
         $this->model->discard((array) $ids);
         // Flash the success message
-        $request->session()->flash('success', 'Deleted '.$this->resourceName());
+        $request->session()->flash('success', 'Successfully deleted');
         // Redirect to the correct route
         return $this->redirectToSubRoute('index');
-    }
-
-    /**
-     * The name of the resource "controlled" by the controller
-     *
-     * @return string
-     */
-    abstract protected function resourceName();
-
-    /**
-     * Builds the full route name that will be used in redirection.
-     *
-     * @param  string  $subroute
-     * @return string
-     */
-    protected function getFullRouteName($subroute)
-    {
-        $resource_name = $this->resourceName();
-        return "{$resource_name}.{$subroute}";
-    }
-
-    /**
-     * Returns a redirect based on a specified subroute.
-     *
-     * @param  string  $subroute
-     * @param  int  $id
-     * @return \Illuminate\Routing\Redirector
-     */
-    protected function redirectToSubRoute($subroute = null, $routeParameter = null)
-    {
-        // If no subroute is provided
-        if (!$subroute) { return back(); }
-        // If no route parameter is provided
-        if (!$routeParameter) {
-            return redirect()->route($this->getFullRouteName($subroute));
-        }
-        // If a route parameter is provided
-        return redirect()->route($this->getFullRouteName($subroute), $routeParameter);
     }
 }

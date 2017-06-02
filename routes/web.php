@@ -19,8 +19,11 @@ Auth::routes();
 
 Route::group(['prefix' => 'dashboard'], function () {
     Route::get('/', 'HomeController@index')->name('dashboard');
-    Route::post('/monthly-expenses', 'ChartsAjaxController@monthlyExpenseData')->name('dashboard.charts.monthly.expenses');
+    Route::post('/{year}/data', 'ChartsAjaxController@monthlyExpenseData')->name('dashboard.charts.monthly.expenses');
+    Route::post('/dailyExpenses', 'ChartsAjaxController@dailyExpenses')->name('dashboard.charts.daily.data');
 });
+
+Route::get('/calendar', 'HomeController@calendar')->name('calendar');
 
 /** Category Routes **/
 Route::group(['prefix' => 'categories'], function () {

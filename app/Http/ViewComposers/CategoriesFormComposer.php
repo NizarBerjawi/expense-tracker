@@ -2,46 +2,23 @@
 
 namespace App\Http\ViewComposers;
 
-use Auth;
+use App\Http\ViewComposers\BaseComposers\FormBaseComposer;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
-use Illuminate\Support\Facades\Route;
-use App\Models\Tag;
 use App\Models\Category;
+use App\Models\Tag;
+use Auth;
 
-class CategoriesFormComposer
+class CategoriesFormComposer extends FormBaseComposer
 {
-    /**
-     * The Category ID
-     *
-     * @var int
-     */
-    private $categoryId;
-
     /**
      * Create a new view composer instance.
      *
      * @param  Illuminate\Http\Request $request
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request, Category $category)
     {
-        $this->categoryId = $request->categoryId;
-    }
-
-    /**
-     * Bind data to the view
-     *
-     * @param View $view
-     * @return void
-     */
-    public function compose(View $view)
-    {
-        // Get the current route name
-        $currentRoute = Route::currentRouteName();
-        // Get the data to be sent to the views
-        $data = $this->getViewData($currentRoute);
-        // Send the data to the view
-        $view->with($data);
+        $this->id = $request->categoryId;
+        $this->model = $category;
     }
 
     /**
@@ -51,22 +28,22 @@ class CategoriesFormComposer
      * @param  string $routeName
      * @return Illuminate\Database\Eloquent\Builder
      */
-    private function getViewData($routeName)
+    protected function getViewData(string $routeName)
     {
         // Prepare the data to be sent to the views
         switch($routeName) {
-            case 'categories.create':
+            case "categories.create":
                 $tags = Tag::all();
                 return compact('tags');
-            case 'categories.show':
-                $category = Category::byId($this->categoryId)
-                                    ->byUser(Auth::id())
+            case "categories.show":
+                $category = Category::where('id', $this->id)
+                                    ->where('user_id', Auth::id())
                                     ->with('tag')
                                     ->first();
                 return compact('category');
-            case 'categories.edit':
-                $category = Category::byId($this->categoryId)
-                                    ->byUser(Auth::id())
+            case "categories.edit":
+                $category = Category::where('id', $this->id)
+                                    ->where('user_id', Auth::id())
                                     ->with('tag')
                                     ->first();
                 $tags = Tag::all();

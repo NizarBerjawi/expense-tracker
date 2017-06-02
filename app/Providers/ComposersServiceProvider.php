@@ -76,6 +76,13 @@ class ComposersServiceProvider extends ServiceProvider
             'App\Http\ViewComposers\DashboardComposer'
         );
 
+        /** LEFT NAVIGATION **/
+        View::composer(
+            [
+                'includes.navigation.leftNav',
+            ],
+            'App\Http\ViewComposers\LeftNavComposer'
+        );
     }
 
     /**

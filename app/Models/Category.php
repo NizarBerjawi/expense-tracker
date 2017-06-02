@@ -3,10 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Expense;
 use Illuminate\Support\Facades\DB;
-use Auth;
 use Carbon\Carbon;
+use Auth;
 
 class Category extends Model
 {
@@ -57,6 +56,16 @@ class Category extends Model
         ];
     }
 
+    /**
+     * The name of the schema related to the model
+     *
+     * @return string
+     */
+    public function getSchema()
+    {
+        return $this->table;
+    }
+
     /***********************************************************************/
     /*************************ELOQUENT RELATIONSHIPS************************/
     /***********************************************************************/
@@ -96,30 +105,6 @@ class Category extends Model
     /***********************************************************************/
 
     /**
-     * Scope a query to only include a specific category by ID.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @param  int $categoryId
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeById($query, int $categoryId)
-    {
-        $query->where('categories.id', $categoryId);
-    }
-
-    /**
-     * Scope a query to only include a specific user's categories.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder $query
-     * @param  int $userID
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeByUser($query, int $userId)
-    {
-        $query->where('categories.user_id', $userId);
-    }
-
-    /**
      * Scope a query to only include categories by specified tag names.
      *
      * @param  \Illuminate\Database\Eloquent\Builder $query
@@ -139,14 +124,15 @@ class Category extends Model
      * @param  \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeWithExpenseTotal($query)
+    public function scopeWithTotalAmount($query, $model)
     {
-        return $query->join('expenses', 'categories.id', '=', 'expenses.category_id')
+        $schema = $model->getSchema();
+        return $query->join($schema, 'categories.id', '=', "$schema.category_id")
                      ->select(
                          'categories.id',
                          'categories.name',
                          'categories.description',
-                         DB::raw('SUM(expenses.amount) as amount'),
+                         DB::raw("SUM({$schema}.amount) as amount"),
                          'categories.tag_id',
                          'categories.user_id',
                          'categories.created_at',
@@ -156,8 +142,7 @@ class Category extends Model
     }
 
     /**
-     * Scope a query to include only expense or income amounts before
-     * a specified date.
+     * Scope a query to include only items before a specified date.
      *
      * @param  \Illuminate\Database\Eloquent\Builder $query
      * @param  \Carbon\Carbon $date
@@ -169,8 +154,7 @@ class Category extends Model
     }
 
     /**
-     * Scope a query to include only expense or income amounts after
-     * a specified date.
+     * Scope a query to include only income after a specified date.
      *
      * @param  \Illuminate\Database\Eloquent\Builder $query
      * @param  \Carbon\Carbon $date

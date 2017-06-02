@@ -2,46 +2,23 @@
 
 namespace App\Http\ViewComposers;
 
-use Auth;
+use App\Http\ViewComposers\BaseComposers\FormBaseComposer;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
-use Illuminate\Support\Facades\Route;
-use App\Models\Expense;
 use App\Models\Category;
+use App\Models\Expense;
+use Auth;
 
-class ExpensesFormComposer
+class ExpensesFormComposer extends FormBaseComposer
 {
-    /**
-     * The expense ID
-     *
-     * @var int
-     */
-    private $expenseId;
-
     /**
      * Create a new view composer instance.
      *
      * @param  Illuminate\Http\Request $request
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request, Expense $expense)
     {
-        $this->expenseId = $request->expenseId;
-    }
-
-    /**
-     * Bind data to the view
-     *
-     * @param View $view
-     * @return void
-     */
-    public function compose(View $view)
-    {
-        // Get the current route name
-        $currentRoute = Route::currentRouteName();
-        // Get the data to be sent to the views
-        $data = $this->getViewData($currentRoute);
-        // Send the data to the view
-        $view->with($data);
+        $this->id = $request->expenseId;
+        $this->model = $expense;
     }
 
     /**
@@ -49,29 +26,29 @@ class ExpensesFormComposer
      * current route name.
      *
      * @param  string $routeName
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return Array
      */
-    private function getViewData(string $routeName)
+    protected function getViewData(string $routeName)
     {
         // Prepare the data to be sent to the views
         switch($routeName) {
             case 'expenses.create':
-                $categories = Category::byUser(Auth::id())
+                $categories = Category::where('user_id', Auth::id())
                                       ->byTagName(['expense'])
                                       ->get();
                 return compact('categories');
             case 'expenses.show':
-                $expense = Expense::byId($this->expenseId)
-                                  ->byUser(Auth::id())
+                $expense = Expense::where('id', $this->id)
+                                  ->where('user_id', Auth::id())
                                   ->with('category')
                                   ->first();
                 return compact('expense');
             case 'expenses.edit':
-                $expense = Expense::byId($this->expenseId)
-                                  ->byUser(Auth::id())
+                $expense = Expense::where('id', $this->id)
+                                  ->where('user_id', Auth::id())
                                   ->with('category')
                                   ->first();
-                $categories = Category::byUser(Auth::id())
+                $categories = Category::where('user_id', Auth::id())
                                       ->byTagName(['expense'])
                                       ->get();
                 return compact('expense', 'categories');

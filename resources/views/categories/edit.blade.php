@@ -6,17 +6,26 @@
 
 @section('content')
     <div class="be-content">
+        @include('includes.partials.breadcrumbs', [
+            'pageTitle' => 'Categories',
+            'levels'    => [
+                            'Home'        => route('dashboard'),
+                            'Categories'  => route('categories.index'),
+                            $category->id => '',
+                            'Edit'        => ''
+                           ]
+        ])
         <div class="main-content container-fluid">
             <!-- Messages -->
             @include('includes.partials.messages')
 
             <!-- Main Form -->
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-md-8 col-md-offset-2">
                     @include('includes.mainForm', [
-                        'page'          => 'categories',
+                        'resource'      => 'categories',
+                        'model'         => $category,
                         'panelHeading'  => 'Edit Category',
-                        'panelSubtitle' => 'Edit this category\'s details',
                         'formAction'    => route('categories.update', $category->id),
                         'cancelRoute'   => route('categories.index'),
                         'methodField'   => method_field('PUT'),

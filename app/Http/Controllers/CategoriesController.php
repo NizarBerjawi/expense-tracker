@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\BaseControllers\BudgetResourceController;
+use App\Http\Controllers\BaseControllers\BudgetBaseController;
+use App\Http\Traits\ValidatesInputTrait;
+use Illuminate\Validation\Validator;
 use Illuminate\Http\Request;
 use App\Models\Category;
-use Validator;
 
-class CategoriesController extends BudgetResourceController
+class CategoriesController extends BudgetBaseController
 {
+    use ValidatesInputTrait;
+
     /**
      * Create a new controller instance.
      *
+     * @param  App\Models\Category $category
      * @return void
      */
-    public function __construct(Category $model)
+    public function __construct(Category $category)
     {
-        $this->model = $model;
+        $this->model = $category;
         $this->middleware('auth');
     }
 
@@ -25,33 +29,28 @@ class CategoriesController extends BudgetResourceController
      *
      * @return string
      */
-    protected function resourceName()
+    protected function resourceName() : string
     {
         return 'categories';
     }
 
     /**
-     * Validates the input for any store or update actions
+     * Validates the input for any store or update action
      * related to the categories resources.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return Validator
      */
-    protected function validateInput(Request $request)
-    {    
-        $validator = Validator::make(
-                    $request->all(),
-                    $this->model->rules(),
-                    $this->model->messages()
-                );
-
-        $validator->after(function ($validator) use ($request) {
-            if (!$this->nameAvailable($request)) {
-              $validator->errors()
-                        ->add('errors', 'This category name has already been created');
-            }
-        });
-
+    protected function validateInput(Request $request) : Validator
+    {
+        // Create the validator
+        $validator = $this->makeValidator($request, $this->model);
+        // Add additional category check
+        $validator = $this->addCheck(
+                                $validator,
+                                !$this->nameAvailable($request),
+                                'This category name has already been created'
+                            );
         return $validator;
     }
 }

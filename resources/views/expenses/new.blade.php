@@ -7,17 +7,24 @@
 
 @section('content')
     <div class="be-content">
+        @include('includes.partials.breadcrumbs', [
+            'pageTitle' => 'Expenses',
+            'levels'    => [
+                            'Home'       => route('dashboard'),
+                            'Expenses'   => route('expenses.index'),
+                            'Create'       => '',
+                           ]
+        ])
         <div class="main-content container-fluid">
             <!-- Messages -->
             @include('includes.partials.messages')
 
             <!-- Main Form -->
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-md-8 col-md-offset-2">
                     @include('includes.mainForm', [
-                        'page'          => 'expenses',
+                        'resource'      => 'expenses',
                         'panelHeading'  => 'New Expense',
-                        'panelSubtitle' => 'Create a new expense to add to your budget',
                         'formAction'    => route('expenses.store'),
                         'cancelRoute'   => route('expenses.index'),
                         'methodField'   => method_field('POST'),
