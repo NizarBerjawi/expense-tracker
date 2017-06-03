@@ -2,6 +2,7 @@
 
 @section('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('lib/select2/css/select2.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('lib/jquery.gritter/css/jquery.gritter.css') }}"/>
 @endsection
 
 @section('content')
@@ -39,11 +40,13 @@
 @section('scripts')
   <script src="{{ asset('lib/select2/js/select2.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('js/app-form-elements.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('lib/jquery.gritter/js/jquery.gritter.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('/js/app-ui-notifications.js') }}" type="text/javascript"></script>
 
   <script type="text/javascript">
       $(document).ready(function(){
-          //initialize the form
           App.formElements();
+          App.uiNotifications();
       });
   </script>
 @endsection

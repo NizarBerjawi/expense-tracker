@@ -50,9 +50,7 @@ class ChartsAjaxController extends Controller
     public function monthlyExpenseData(int $year = null)
     {
         // If a year is not provided, use the current year
-        if (!$year) {
-            $year = Carbon::today()->year;
-        }
+        $year = $year ?: Carbon::today()->year;
         // Get the monthly expense totals for a specific year
         $expenseTotals = $this->monthlyTotalsByYear($this->expense, $year);
         // Get the monthly income totals for a specific year
@@ -90,11 +88,11 @@ class ChartsAjaxController extends Controller
     }
 
     /**
+     * Return the daily expenses to be displayed in the calendar
      *
-     *
-     *
+     * @return Response
      */
-    public function dailyExpenses(int $month = null, int $year = null)
+    public function dailyExpenses()
     {
         // Get the daily expenses
         $expenses = $this->getDailydata($this->expense)

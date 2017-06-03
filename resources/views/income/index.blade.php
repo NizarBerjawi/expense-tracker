@@ -1,5 +1,9 @@
 @extends('layouts.dashboard')
 
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="{{ asset('lib/jquery.gritter/css/jquery.gritter.css') }}"/>
+@endsection
+
 @section('content')
     <div class="be-content">
         @include('includes.partials.breadcrumbs', [
@@ -40,6 +44,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="/js/table-actions.js" type="text/javascript"></script>
+    <script src="{{ asset('lib/jquery.gritter/js/jquery.gritter.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/js/app-ui-notifications.js') }}" type="text/javascript"></script>
 @endsection
 
 @section('modals')

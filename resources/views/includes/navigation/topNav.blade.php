@@ -1,9 +1,9 @@
 <nav class="navbar navbar-default navbar-fixed-top be-top-header">
     <div class="container-fluid">
-        <div class="navbar-header"><a href="index.html" class="navbar-brand"></a></div>
+        <div class="navbar-header"><a href="{{ route('dashboard') }}" class="navbar-brand"></a></div>
         <div class="be-right-navbar">
             <ul class="nav navbar-nav navbar-right be-user-nav">
-                <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><img src="{{ asset('img/avatar.png') }}" alt="Avatar"><span class="user-name">Túpac Amaru</span></a>
+                <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><img src="{{ asset('img/avatar.png') }}" alt="Avatar"><span class="user-name">{{ Auth::user()->name }}</span></a>
                     <ul role="menu" class="dropdown-menu">
                         <li>
                             <div class="user-info">

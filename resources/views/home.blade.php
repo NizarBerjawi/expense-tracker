@@ -11,18 +11,23 @@
                 <div class="panel panel-default">
                     <div class="panel-heading panel-heading-divider">
                         <div class="tools">
+                            @if (!$years->isEmpty())
                             <select id="expenses-year" class="form-control">
                                 @foreach($years as $year)
                                     <option {{ $year->year == $today->year ? 'selected' : '' }}> {{ $year->year }}</option>
                                 @endforeach
                             </select>
+                            @endif
                         </div><span class="title">Line Chart</span>
                         <span class="panel-subtitle">Monthly variation of expenses against income</span>
                     </div>
                     <div class="panel-body">
+                    @if ($years->isEmpty())
+                        <div>You have not added any expenses recently!</div>
+                    @else
                         <div id="line-loader"></div>
-                        <div id="line-chart" style="height: 250px;">
-                        </div>
+                        <div id="line-chart" style="height: 250px;"></div>
+                    @endif
                     </div>
                 </div>
             </div>

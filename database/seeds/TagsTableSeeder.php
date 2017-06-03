@@ -18,7 +18,7 @@ class TagsTableSeeder extends Seeder
       ]);
 
       $expenseTag = Tag::create([
-        'name' => 'Expense',
+        'name' => 'Expenses',
       ]);
     }
 }

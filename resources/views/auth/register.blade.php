@@ -6,7 +6,7 @@
             <div class="main-content container-fluid">
                 <div class="splash-container sign-up">
                     <div class="panel panel-default panel-border-color panel-border-color-primary">
-                        <div class="panel-heading"><img src="{{ asset('img/logo-xx.png') }}" alt="logo" width="102" height="27" class="logo-img"><span class="splash-description">Please enter your user information.</span></div>
+                        <div class="panel-heading"><img src="{{ asset('img/logo.png') }}" alt="logo" width="102" height="67" class="logo-img"><span class="splash-description">Please enter your user information.</span></div>
                         <div class="panel-body">
                             <form action="{{ route('register') }}" method="POST"><span class="splash-title xs-pb-20">Sign Up</span>
                                 {{ csrf_field() }}
@@ -31,16 +31,10 @@
                                 <div class="form-group xs-pt-10">
                                     <button type="submit" class="btn btn-block btn-primary btn-xl">Sign Up</button>
                                 </div>
-                                <div class="form-group xs-pt-10">
-                                    <div class="be-checkbox">
-                                        <input type="checkbox" id="remember">
-                                        <label for="remember">By creating an account, you agree the <a href="#">terms and conditions</a>.</label>
-                                    </div>
-                                </div>
                             </form>
                         </div>
                     </div>
-                    <div class="splash-footer">&copy; 2016 Your Company</div>
+                    <div class="splash-footer">&copy; 2017 Nizar El Berjawi</div>
                 </div>
             </div>
         </div>

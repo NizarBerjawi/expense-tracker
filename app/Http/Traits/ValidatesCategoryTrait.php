@@ -60,7 +60,8 @@ trait ValidatesInputTrait
         $category = Category::where('id', $request->input('category_id'))
                           ->where('user_id', Auth::id())
                           ->whereHas('tag', function($query) use ($resource) {
-                              $query->where('tags.name', $resource);
+                              $query->where('tags.name', 'like', $resource);
+
                           })
                           ->first();
         return $category;
@@ -82,7 +83,8 @@ trait ValidatesInputTrait
                             })
                             ->first();
         // The user didn't make any changes
-        if ($request->categoryId == $category->id) { return true; }
+        if (isset($request->categoryId)
+                && ($request->categoryId == $category->id)) { return true; }
         // The user updated the resource
         return !$category;
     }

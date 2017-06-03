@@ -34,7 +34,7 @@ class ExpensesFormComposer extends FormBaseComposer
         switch($routeName) {
             case 'expenses.create':
                 $categories = Category::where('user_id', Auth::id())
-                                      ->byTagName(['expense'])
+                                      ->byTagName(['expenses'])
                                       ->get();
                 return compact('categories');
             case 'expenses.show':
@@ -49,7 +49,7 @@ class ExpensesFormComposer extends FormBaseComposer
                                   ->with('category')
                                   ->first();
                 $categories = Category::where('user_id', Auth::id())
-                                      ->byTagName(['expense'])
+                                      ->byTagName(['expenses'])
                                       ->get();
                 return compact('expense', 'categories');
         }

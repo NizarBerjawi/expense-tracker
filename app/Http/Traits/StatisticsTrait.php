@@ -87,7 +87,6 @@ trait StatisticsTrait
                      ->sum('amount');
     }
 
-
     /**
      * Get the years that the specified model spans.
      *

@@ -6,7 +6,7 @@
             <div class="main-content container-fluid">
                 <div class="splash-container">
                     <div class="panel panel-default panel-border-color panel-border-color-primary">
-                        <div class="panel-heading"><img src="{{ asset('img/logo-xx.png') }}" alt="logo" width="102" height="27" class="logo-img"><span class="splash-description">Please enter your user information.</span></div>
+                        <div class="panel-heading"><img src="{{ asset('img/logo.png') }}" alt="logo" width="102" height="67" class="logo-img"><span class="splash-description">Please enter your user information.</span></div>
                         <div class="panel-body">
                             <form action="{{ route('login') }}" method="POST">
                                 {{ csrf_field() }}

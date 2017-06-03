@@ -10,7 +10,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Expense Tracker') }}</title>
 
         <!-- Styles -->
         <link rel="stylesheet" type="text/css" href="{{ asset('lib/perfect-scrollbar/css/perfect-scrollbar.min.css') }}"/>
@@ -22,8 +22,6 @@
         @yield('styles')
         <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
         <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}"/>
-
-
 
         <!-- Scripts -->
         <script>
@@ -39,8 +37,6 @@
             @include('includes.navigation.leftNav')
 
             @yield('content')
-
-            @include('includes.navigation.rightNav')
 
             <!-- Common Scripts -->
             <script src="{{ asset('lib/jquery/jquery.min.js') }}" type="text/javascript"></script>

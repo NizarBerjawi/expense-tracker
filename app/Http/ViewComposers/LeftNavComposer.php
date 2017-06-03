@@ -55,7 +55,11 @@ class LeftNavComposer
         // Get the total expenses for the month
         $incomeTotal = $this->totalBetween($this->income, $firstDay, $lastDay);
         // Percentage of income spent
-        $percentage = round($expensesTotal/$incomeTotal * 100, 2);
+        if ($incomeTotal) {
+            $percentage = round($expensesTotal/$incomeTotal * 100, 2);
+        } else {
+            $percentage = 0;
+        }
         // Send the data to the view
         $view->with(compact('percentage'));
     }
