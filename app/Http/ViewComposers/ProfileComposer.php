@@ -51,8 +51,9 @@ class ProfileComposer
                 // Get an instance of the authenticated user with profile
                 $user = Auth::user()->load('profile');
                 return compact('user');
-            case "categories.show":
-                return;
+            case "user.profile.edit":
+                $user = Auth::user()->load('profile');
+                return compact('user');
             case "categories.edit":
                 return;
         }

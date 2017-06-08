@@ -6,7 +6,6 @@ use App\Http\Controllers\BaseControllers\Controller;
 use App\Http\Requests\StoreProfile;
 use App\Http\Requests\UpdateProfile;
 use App\Models\Profile;
-use Validator;
 use Auth;
 
 class ProfileController extends Controller
@@ -54,8 +53,7 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        $user = Auth::user()->load('profile');
-        return view('user.profile.edit')->with(compact('user'));
+        return view('user.profile.edit');
     }
 
     /**
@@ -67,10 +65,13 @@ class ProfileController extends Controller
     public function update(UpdateProfile $request)
     {
         // Update the authenticated user's profile
-        Auth::user()->profile()->update($request->all());
+        Auth::user()->profile()
+                    ->update($request->except(['_token', '_method']));
         // Flash the succes message
         $request->session()->flash('success', 'Profile updated successfully');
         // Return to the correct route
         return redirect()->route('user.profile.index');
     }
+
+
 }

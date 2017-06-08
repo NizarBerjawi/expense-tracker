@@ -79,6 +79,7 @@ class ComposersServiceProvider extends ServiceProvider
         View::composer(
             [
                 'user.profile.index',
+                'user.profile.edit'
             ],
             'App\Http\ViewComposers\ProfileComposer'
         );
