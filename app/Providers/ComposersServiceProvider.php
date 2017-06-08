@@ -76,6 +76,13 @@ class ComposersServiceProvider extends ServiceProvider
             'App\Http\ViewComposers\DashboardComposer'
         );
 
+        View::composer(
+            [
+                'user.profile.index',
+            ],
+            'App\Http\ViewComposers\ProfileComposer'
+        );
+
         /** LEFT NAVIGATION **/
         View::composer(
             [

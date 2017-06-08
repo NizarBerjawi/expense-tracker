@@ -29,7 +29,7 @@ class Category extends Model
     ];
 
     /**
-     * The validation messages.
+     * The validation rules.
      *
      * @var array
      */

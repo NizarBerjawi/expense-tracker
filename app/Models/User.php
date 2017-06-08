@@ -59,4 +59,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Income');
     }
+
+    /**
+     * Get the profile that belongs to this user
+     *
+     * @return Illuminate\Database\Eloquent\Relations\HasOne
+     */
+     public function profile()
+     {
+         return $this->hasOne('App\Models\Profile');
+     }
 }

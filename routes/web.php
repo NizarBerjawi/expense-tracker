@@ -25,6 +25,14 @@ Route::group(['prefix' => 'dashboard'], function () {
 
 Route::get('/calendar', 'HomeController@calendar')->name('calendar');
 
+Route::group(['prefix' => 'profile'], function() {
+    Route::get('/', 'ProfileController@index')->name('user.profile.index');
+    Route::get('/create', 'ProfileController@create')->name('user.profile.create');
+    Route::post('/', 'ProfileController@store')->name('user.profile.store');
+    Route::get('/edit', 'ProfileController@edit')->name('user.profile.edit');
+    Route::put('/', 'ProfileController@update')->name('user.profile.update');
+});
+
 /** Category Routes **/
 Route::group(['prefix' => 'categories'], function () {
     Route::get('/', 'CategoriesController@index')->name('categories.index');

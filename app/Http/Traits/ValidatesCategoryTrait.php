@@ -82,9 +82,12 @@ trait ValidatesInputTrait
                                 $query->where('tags.id', $request->input('tag_id'));
                             })
                             ->first();
-        // The user didn't make any changes
-        if (isset($request->categoryId)
-                && ($request->categoryId == $category->id)) { return true; }
+        // If a category with the same name is found, check if it is the
+        // same one being updated. If it is, then the user didn't make any
+        // changes. Otherwise, the name is already taken
+        if (isset($request->categoryId) && $category) {
+            return $request->categoryId == $category->id;
+        }
         // The user updated the resource
         return !$category;
     }
