@@ -28,7 +28,6 @@
                     </div>
                     <div class="panel-body">
                         @include('includes.tables.expensesTable', [
-                            'deleteExpensesRoute'    => route('expenses.destroy'),
                             'showExpenseRouteName'   => 'expenses.show',
                             'editExpenseRouteName'   => 'expenses.edit',
                             'deleteExpenseRouteName' => 'expenses.destroy',

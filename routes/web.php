@@ -27,11 +27,11 @@ Route::get('/calendar', 'HomeController@calendar')->name('calendar');
 
 /** User Profile Routes **/
 Route::group(['prefix' => 'profile'], function() {
-    Route::get('/', 'ProfileController@index')->name('user.profile.index');
-    Route::get('/create', 'ProfileController@create')->name('user.profile.create');
-    Route::post('/', 'ProfileController@store')->name('user.profile.store');
-    Route::get('/edit', 'ProfileController@edit')->name('user.profile.edit');
-    Route::put('/', 'ProfileController@update')->name('user.profile.update');
+    Route::get('/', 'ProfileController@index')->name('user.profiles.index');
+    Route::get('/create', 'ProfileController@create')->name('user.profiles.create');
+    Route::post('/', 'ProfileController@store')->name('user.profiles.store');
+    Route::get('/edit', 'ProfileController@edit')->name('user.profiles.edit');
+    Route::put('/', 'ProfileController@update')->name('user.profiles.update');
 });
 
 /** User Account Routes **/
@@ -39,6 +39,16 @@ Route::group(['prefix' => 'settings'], function() {
     Route::get('/', 'SettingsController@index')->name('user.accounts.index');
     Route::put('/', 'SettingsController@update')->name('user.accounts.update');
     Route::delete('/', 'SettingsController@destroy')->name('user.accounts.destroy');
+});
+
+/** Use Bank Account Routes **/
+Route::group(['prefix' => 'bank'], function() {
+    Route::get('/create', 'BankAccountController@create')->name('user.banks.create');
+    Route::post('/', 'BankAccountController@store')->name('user.banks.store');
+    Route::get('/{account_id}', 'BankAccountController@show')->name('user.banks.show');
+    Route::get('/{account_id}/edit', 'BankAccountController@edit')->name('user.banks.edit');
+    Route::put('/{account_id}', 'BankAccountController@update')->name('user.banks.update');
+    Route::delete('/{account_id}', 'BankAccountController@destroy')->name('user.banks.destroy');
 });
 
 /** Category Routes **/

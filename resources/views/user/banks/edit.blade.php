@@ -7,11 +7,11 @@
 @section('content')
 <div class="be-content">
     @include('includes.partials.breadcrumbs', [
-        'pageTitle' => 'Create Profile',
+        'pageTitle' => 'Bank Accounts',
         'levels'    => [
                         'Home'       => route('dashboard'),
-                        'Profile'    => route('user.profile.index'),
-                        'Create'     => ''
+                        'Profile'    => route('user.banks.create'),
+                        'Edit'     => ''
                        ]
     ])
     <div class="main-content container-fluid">
@@ -21,14 +21,14 @@
         <!-- Main Form -->
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default panel-border-color panel-border-color-primary">
-                <div class="panel-heading panel-heading-divider">Create Profile</div>
+                <div class="panel-heading panel-heading-divider">Edit Bank Accounts</div>
                 <div class="panel-body">
-                    @include('includes.forms.profileForm', [
-                        'formAction'   => route('user.profile.store'),
-                        'method_field' => method_field('POST'),
-                        'csrf_field'   => csrf_field(),
-                        'cancelRoute'  => route('user.profile.index'),
-                        'submit'       => 'Create'
+                    @include('includes.forms.bankAccountsForm', [
+                        'formAction'    => route('user.banks.update', ),
+                        'csrfField'     => csrf_field(),
+                        'methodField'   => method_field('PUT'),
+                        'cancelRoute'   => route('user.profiles.index'),
+                        'submit'        => 'Edit Account'
                     ])
                 </div>
             </div>

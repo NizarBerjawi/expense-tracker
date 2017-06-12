@@ -10,7 +10,7 @@
         'pageTitle' => 'Create Profile',
         'levels'    => [
                         'Home'    => route('dashboard'),
-                        'Profile' => route('user.profile.index'),
+                        'Profile' => route('user.profiles.index'),
                         'Edit'    => ''
                        ]
     ])
@@ -24,10 +24,10 @@
                 <div class="panel-heading panel-heading-divider">Edit Profile</div>
                 <div class="panel-body">
                     @include('includes.forms.profileForm', [
-                        'formAction'   => route('user.profile.update'),
+                        'formAction'   => route('user.profiles.update'),
                         'method_field' => method_field('PUT'),
                         'csrf_field'   => csrf_field(),
-                        'cancelRoute'  => route('user.profile.index'),
+                        'cancelRoute'  => route('user.profiles.index'),
                         'submit'       => 'Update'
                     ])
                 </div>

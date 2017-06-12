@@ -9,9 +9,9 @@
     @include('includes.partials.breadcrumbs', [
         'pageTitle' => 'Create Profile',
         'levels'    => [
-                        'Home'    => route('dashboard'),
-                        'Profile' => route('user.profile.index'),
-                        'Edit'    => ''
+                        'Home'       => route('dashboard'),
+                        'Profile'    => route('user.profiles.index'),
+                        'Create'     => ''
                        ]
     ])
     <div class="main-content container-fluid">
@@ -21,14 +21,14 @@
         <!-- Main Form -->
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default panel-border-color panel-border-color-primary">
-                <div class="panel-heading panel-heading-divider">Edit Profile</div>
+                <div class="panel-heading panel-heading-divider">Create Profile</div>
                 <div class="panel-body">
                     @include('includes.forms.profileForm', [
-                        'formAction'   => route('user.profile.update'),
-                        'method_field' => method_field('PUT'),
+                        'formAction'   => route('user.profiles.store'),
+                        'method_field' => method_field('POST'),
                         'csrf_field'   => csrf_field(),
-                        'cancelRoute'  => route('user.profile.index'),
-                        'submit'       => 'Update'
+                        'cancelRoute'  => route('user.profiles.index'),
+                        'submit'       => 'Create'
                     ])
                 </div>
             </div>

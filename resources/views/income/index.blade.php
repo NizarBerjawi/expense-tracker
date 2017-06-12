@@ -28,7 +28,6 @@
                         </div>
                         <div class="panel-body">
                             @include('includes.tables.incomeTable', [
-                                'deleteIncomeRoute'     => route('income.destroy'),
                                 'showIncomeRouteName'   => 'income.show',
                                 'editIncomeRouteName'   => 'income.edit',
                                 'deleteIncomeRouteName' => 'income.destroy',

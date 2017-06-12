@@ -19,6 +19,7 @@ class CreateIncomeTable extends Migration
             $table->text('description')->nullable();
             $table->integer('category_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned();
+            $table->integer('bank_account_id')->unsigned()->nullable();
             $table->date('date');
             $table->decimal('amount', 12, 2);
             $table->timestamps();

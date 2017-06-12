@@ -69,4 +69,14 @@ class User extends Authenticatable
      {
          return $this->hasOne('App\Models\Profile');
      }
+
+     /**
+      * Get the accounts belonging to this user
+      *
+      * @return Illuminate\Database\Eloquent\Relations\HasMany
+      */
+     public function bankAccounts()
+     {
+         return $this->hasMany('App\Models\BankAccount');
+     }
 }

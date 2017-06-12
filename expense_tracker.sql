@@ -70,7 +70,7 @@ CREATE TABLE `expenses` (
   KEY `expenses_user_id_foreign` (`user_id`),
   CONSTRAINT `expenses_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE SET NULL,
   CONSTRAINT `expenses_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,7 +79,7 @@ CREATE TABLE `expenses` (
 
 LOCK TABLES `expenses` WRITE;
 /*!40000 ALTER TABLE `expenses` DISABLE KEYS */;
-INSERT INTO `expenses` VALUES (1,'Coles Shopping','Coles West End Grocery shopping',11,1,'2017-06-02',29.55,'2017-06-02 15:04:48','2017-06-02 15:04:48'),(2,'Brunch West End','Brunch at West End with Lina after she got her car.',12,1,'2017-06-03',36.50,'2017-06-03 03:38:39','2017-06-03 03:38:39'),(3,'Coles Shopping','Groceries from Coles.',11,1,'2017-06-03',30.39,'2017-06-03 08:06:33','2017-06-03 08:06:33'),(4,'Coles Shopping','Coles Shopping',11,1,'2017-06-04',24.46,'2017-06-04 08:25:40','2017-06-04 08:25:40'),(5,'Shopping','Two pants from Zara',9,1,'2017-06-04',79.90,'2017-06-04 08:27:15','2017-06-04 08:27:15'),(6,'Snap Fitness','Fortnightly membership',28,1,'2017-06-02',31.15,'2017-06-04 08:30:24','2017-06-04 08:30:24'),(7,'Translink','Go Card auto top-up',27,1,'2017-06-05',20.00,'2017-06-05 19:16:12','2017-06-05 19:16:12'),(8,'Guitar','Lina half size guitar',14,1,'2017-06-06',89.00,'2017-06-06 11:24:21','2017-06-06 11:24:21'),(9,'Dinner','Shabu House buffet. New car and job celebration.',12,1,'2017-06-06',65.80,'2017-06-06 11:25:58','2017-06-06 11:25:58'),(10,'Coles Shopping','Coles shopping',11,1,'2017-06-07',24.49,'2017-06-07 08:26:28','2017-06-07 08:26:28');
+INSERT INTO `expenses` VALUES (1,'Coles Shopping','Coles West End Grocery shopping',11,1,'2017-06-02',29.55,'2017-06-02 15:04:48','2017-06-02 15:04:48'),(2,'Brunch West End','Brunch at West End with Lina after she got her car.',12,1,'2017-06-03',36.50,'2017-06-03 03:38:39','2017-06-03 03:38:39'),(3,'Coles Shopping','Groceries from Coles.',11,1,'2017-06-03',30.39,'2017-06-03 08:06:33','2017-06-03 08:06:33'),(4,'Coles Shopping','Coles Shopping',11,1,'2017-06-04',24.46,'2017-06-04 08:25:40','2017-06-04 08:25:40'),(5,'Shopping','Two pants from Zara',9,1,'2017-06-04',79.90,'2017-06-04 08:27:15','2017-06-04 08:27:15'),(6,'Snap Fitness','Fortnightly membership',28,1,'2017-06-02',31.15,'2017-06-04 08:30:24','2017-06-04 08:30:24'),(7,'Translink','Go Card auto top-up',27,1,'2017-06-05',20.00,'2017-06-05 19:16:12','2017-06-05 19:16:12'),(8,'Guitar','Lina half size guitar',14,1,'2017-06-06',89.00,'2017-06-06 11:24:21','2017-06-06 11:24:21'),(9,'Dinner','Shabu House buffet. New car and job celebration.',12,1,'2017-06-06',65.80,'2017-06-06 11:25:58','2017-06-06 11:25:58'),(10,'Coles Shopping','Coles shopping',11,1,'2017-06-07',24.49,'2017-06-07 08:26:28','2017-06-07 08:26:28'),(11,'Debit Interest Charge','ANZ debit interest charge',8,1,'2017-06-08',0.01,'2017-06-09 09:28:31','2017-06-09 09:28:31'),(12,'Coles Shopping','Coles Shopping for Moreton island trip',11,1,'2017-06-09',31.08,'2017-06-09 09:29:22','2017-06-09 09:29:22'),(13,'Origin Energy Gas Bill','Gas Bill to Origin Energy',25,1,'2017-06-08',116.91,'2017-06-09 09:30:07','2017-06-09 09:30:07');
 /*!40000 ALTER TABLE `expenses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -130,7 +130,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=255 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +139,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (248,'2014_10_12_000000_create_users_table',1),(249,'2014_10_12_100000_create_password_resets_table',1),(250,'2017_04_02_043053_create_table_tags',1),(251,'2017_04_02_050001_create_categories_table',1),(252,'2017_04_02_050120_create_expenses_table',1),(253,'2017_04_02_050209_create_income_table',1),(254,'2017_06_07_044406_create_profiles_table',1);
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2017_04_02_043053_create_table_tags',1),(4,'2017_04_02_050001_create_categories_table',1),(5,'2017_04_02_050120_create_expenses_table',1),(6,'2017_04_02_050209_create_income_table',1),(7,'2017_06_07_044406_create_profiles_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,7 +187,7 @@ CREATE TABLE `profiles` (
   PRIMARY KEY (`id`),
   KEY `profiles_user_id_foreign` (`user_id`),
   CONSTRAINT `profiles_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -196,6 +196,7 @@ CREATE TABLE `profiles` (
 
 LOCK TABLES `profiles` WRITE;
 /*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
+INSERT INTO `profiles` VALUES (1,'Nizar','El Berjawi','Web Developer','1987-04-12',424296755,1,'2017-06-09 19:46:11','2017-06-09 19:48:15');
 /*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,7 +222,7 @@ CREATE TABLE `tags` (
 
 LOCK TABLES `tags` WRITE;
 /*!40000 ALTER TABLE `tags` DISABLE KEYS */;
-INSERT INTO `tags` VALUES (1,'Income','2017-06-07 05:07:06','2017-06-07 05:07:06'),(2,'Expenses','2017-06-07 05:07:06','2017-06-07 05:07:06');
+INSERT INTO `tags` VALUES (1,'Income','2017-06-09 09:20:26','2017-06-09 09:20:26'),(2,'Expenses','2017-06-09 09:20:26','2017-06-09 09:20:26');
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,4 +265,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-08  8:45:29
+-- Dump completed on 2017-06-12 17:40:04

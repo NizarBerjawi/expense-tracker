@@ -15,4 +15,17 @@ class SettingsController extends Controller
     {
         return view('user.settings.index');
     }
+
+    /**
+     *
+     *
+     */
+    public function destroy(Request $request)
+    {
+        // Get an instance of the authenticated user
+        $user = Auth::user();
+        // Delete the user
+        $user->delete();
+
+    }
 }

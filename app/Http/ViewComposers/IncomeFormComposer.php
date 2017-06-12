@@ -4,6 +4,7 @@ namespace App\Http\ViewComposers;
 
 use App\Http\ViewComposers\BaseComposers\FormBaseComposer;
 use Illuminate\Http\Request;
+use App\Models\BankAccount;
 use App\Models\Category;
 use App\Models\Income;
 use Auth;
@@ -36,22 +37,26 @@ class IncomeFormComposer extends FormBaseComposer
                 $categories = Category::where('user_id', Auth::id())
                                       ->byTagName(['income'])
                                       ->get();
-                return compact('categories');
+                $bankAccounts = BankAccount::where('user_id', Auth::id())
+                                         ->get();
+                return compact('categories', 'bankAccounts');
             case 'income.show':
                 $income = Income::where('id', $this->id)
                                 ->where('user_id', Auth::id())
-                                ->with('category')
+                                ->with(['category', 'bankAccount'])
                                 ->first();
                 return compact('income');
             case 'income.edit':
                 $income = Income::where('id', $this->id)
                                 ->where('user_id', Auth::id())
-                                ->with('category')
+                                ->with(['category', 'bankAccount'])
                                 ->first();
+                $bankAccounts = BankAccount::where('user_id', Auth::id())
+                                         ->get();
                 $categories = Category::where('user_id', Auth::id())
                                       ->byTagName(['income'])
                                       ->get();
-                return compact('income', 'categories');
+                return compact('income', 'categories', 'bankAccounts');
         }
     }
 }

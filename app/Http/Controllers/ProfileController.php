@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\BaseControllers\Controller;
 use App\Http\Requests\StoreProfile;
 use App\Http\Requests\UpdateProfile;
+use Illuminate\Http\Request;
 use App\Models\Profile;
 use Auth;
 
@@ -15,9 +16,11 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('user.profile.index');
+        return view('user.profiles.index')
+                    ->with('dir', $request->dir)
+                    ->with('col', $request->col);
     }
 
     /**
@@ -27,7 +30,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        return view('user.profile.create');
+        return view('user.profiles.create');
     }
 
     /**
@@ -36,14 +39,14 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRequest $request)
+    public function store(StoreProfile $request)
     {
         // Create a user profile and attach to the authenticated user
         Auth::user()->profile()->create($request->all());
         // Flash the succes message
         $request->session()->flash('success', 'Profile created successfully');
         // Return to the correct route
-        return redirect()->route('user.profile.index');
+        return redirect()->route('user.profiles.index');
     }
 
     /**
@@ -53,7 +56,7 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        return view('user.profile.edit');
+        return view('user.profiles.edit');
     }
 
     /**
@@ -67,10 +70,10 @@ class ProfileController extends Controller
         // Update the authenticated user's profile
         Auth::user()->profile()
                     ->update($request->except(['_token', '_method']));
-        // Flash the succes message
+        // Flash the success message
         $request->session()->flash('success', 'Profile updated successfully');
         // Return to the correct route
-        return redirect()->route('user.profile.index');
+        return redirect()->route('user.profiles.index');
     }
 
 

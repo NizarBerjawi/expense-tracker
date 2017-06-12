@@ -15,13 +15,6 @@ var App = (function () {
             });
         }
 
-        //Select2
-        if ($('.select2').length) {
-            $(".select2").select2({
-                width: '100%'
-            });
-        }
-
         //Select2 tags
         if ($('.tags').length) {
             $(".tags").select2({
@@ -36,8 +29,8 @@ var App = (function () {
         };
 
         //Select2 tags
-        if ($('.categories').length) {
-            $(".categories").select2({
+        if ($('.select2').length) {
+            $(".select2").select2({
                 tags: true,
                 width: '100%',
                 maximumSelectionLength: 1,

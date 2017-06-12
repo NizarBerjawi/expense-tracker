@@ -4,6 +4,7 @@ namespace App\Http\ViewComposers;
 
 use App\Http\ViewComposers\BaseComposers\FormBaseComposer;
 use Illuminate\Http\Request;
+use App\Models\BankAccount;
 use App\Models\Category;
 use App\Models\Expense;
 use Auth;
@@ -36,22 +37,26 @@ class ExpensesFormComposer extends FormBaseComposer
                 $categories = Category::where('user_id', Auth::id())
                                       ->byTagName(['expenses'])
                                       ->get();
-                return compact('categories');
+                $bankAccounts = BankAccount::where('user_id', Auth::id())
+                                           ->get();
+                return compact('categories', 'bankAccounts');
             case 'expenses.show':
                 $expense = Expense::where('id', $this->id)
                                   ->where('user_id', Auth::id())
-                                  ->with('category')
+                                  ->with(['category', 'bankAccount'])
                                   ->first();
                 return compact('expense');
             case 'expenses.edit':
                 $expense = Expense::where('id', $this->id)
                                   ->where('user_id', Auth::id())
-                                  ->with('category')
+                                  ->with(['category', 'bankAccount'])
                                   ->first();
+                $bankAccounts = BankAccount::where('user_id', Auth::id())
+                                         ->get();
                 $categories = Category::where('user_id', Auth::id())
                                       ->byTagName(['expenses'])
                                       ->get();
-                return compact('expense', 'categories');
+                return compact('expense', 'categories', 'bankAccounts');
         }
     }
 }

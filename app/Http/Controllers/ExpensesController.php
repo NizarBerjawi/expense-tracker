@@ -47,10 +47,17 @@ class ExpensesController extends BudgetBaseController
         $validator = $this->makeValidator($request, $this->model);
         // Add additional category check
         $validator = $this->addCheck(
-                            $validator,
-                            !$this->categoryExists($request),
-                            'Please select a valid category for the expense'
-                        );
+            $validator,
+            !$this->categoryExists($request) and !$this->bankAccountExists($request),
+            'Please select a valid category for the expense'
+        );
+        // Add additional bank account check
+        $validator = $this->addCheck(
+            $validator,
+            !$this->bankAccountExists($request),
+            'Please select a valid bank account for the expense'
+        );
+
         return $validator;
     }
 }

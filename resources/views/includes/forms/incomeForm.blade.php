@@ -25,13 +25,35 @@
     </div>
 
     <div class="form-group">
+        <label class="col-md-3 col-lg-3 control-label">Bank Account</label>
+        <div class="col-md-9 col-lg-6">
+            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="select2" name="bank_account_id">
+                @if (!isset($income))
+                    <!-- NEW EXPENSE -->
+                    @foreach($bankAccounts as $account)
+                        <option value="{{ $account->id or old('bank_account_id')}}" {{ $account->id == old('bank_account_id') ? "selected" : "" }}>{{ $account->name }}</option>
+                    @endforeach
+                @elseif (isset($bankAccounts) and isset($income))
+                    <!-- EDIT EXPENSE -->
+                    @foreach($bankAccounts as $account)
+                        <option {{ $income->bank_account_id == $account->id ? "selected" : "" }} value="{{ $account->id }}">{{ $account->name }}</option>
+                    @endforeach
+                @elseif (isset($income) and isset($income->bank_account_id))
+                    <!-- VIEW EXPENSE -->
+                    <option value="{{ $income->bankAccount->id }}" selected>{{ $income->bankAccount->name }}</option>
+                @endif
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
         <label class="col-md-3 col-lg-3 control-label">Category</label>
         <div class="col-md-9 col-lg-6">
-            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="categories" name="category_id">
+            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="select2" name="category_id">
                 @if (isset($categories) and !isset($income))
                     <!-- NEW INCOME -->
                     @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option value="{{ $category->id or old('category_id') }}" {{ $category->id == old('category_id') ? "selected" : "" }}>{{ $category->name }}</option>
                     @endforeach
                 @elseif (isset($categories) and isset($income))
                     <!-- EDIT INCOME -->

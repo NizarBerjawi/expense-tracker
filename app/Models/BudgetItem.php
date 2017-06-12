@@ -19,6 +19,7 @@ class BudgetItem extends Model
       'description',
       'category_id',
       'user_id',
+      'bank_account_id',
       'date',
       'amount',
     ];
@@ -71,6 +72,16 @@ class BudgetItem extends Model
     public function user()
     {
       return $this->belongsTo('App\Models\User');
+    }
+
+    /**
+     * Get the bank account that this budget item belongs to.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function bankAccount()
+    {
+      return $this->belongsTo('App\Models\BankAccount');
     }
 
     /***********************************************************************/

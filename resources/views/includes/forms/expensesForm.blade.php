@@ -25,9 +25,31 @@
     </div>
 
     <div class="form-group">
+        <label class="col-md-3 col-lg-3 control-label">Bank Account</label>
+        <div class="col-md-9 col-lg-6">
+            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="select2" name="bank_account_id">
+                @if (!isset($expense))
+                    <!-- NEW EXPENSE -->
+                    @foreach($bankAccounts as $account)
+                        <option value="{{ $account->id }}">{{ $account->name }}</option>
+                    @endforeach
+                @elseif (isset($bankAccounts) and isset($expense))
+                    <!-- EDIT EXPENSE -->
+                    @foreach($bankAccounts as $account)
+                        <option {{ $expense->bank_account_id == $account->id ? "selected" : "" }} value="{{ $account->id }}">{{ $account->name }}</option>
+                    @endforeach
+                @elseif (isset($expense) and isset($expense->bank_account_id))
+                    <!-- VIEW EXPENSE -->
+                    <option value="{{ $expense->bankAccount->id }}" selected>{{ $expense->bankAccount->name }}</option>
+                @endif
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
         <label class="col-md-3 col-lg-3 control-label">Category</label>
         <div class="col-md-9 col-lg-6">
-            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="categories" name="category_id">
+            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="select2" name="category_id">
                 @if (isset($categories) and !isset($expense))
                     <!-- NEW EXPENSE -->
                     @foreach($categories as $category)

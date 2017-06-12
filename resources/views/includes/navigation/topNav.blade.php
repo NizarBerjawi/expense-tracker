@@ -11,7 +11,7 @@
                                 <div class="user-position online">Available</div>
                             </div>
                         </li>
-                        <li><a href="{{ route('user.profile.index') }}"><span class="icon mdi mdi-face"></span> Profile</a></li>
+                        <li><a href="{{ route('user.profiles.index') }}"><span class="icon mdi mdi-face"></span> Profile</a></li>
                         <li><a href="{{ route('user.accounts.index') }}"><span class="icon mdi mdi-settings"></span> Settings</a></li>
                         <li><a href="{{ url('/logout') }}" class="sc-color-text" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <span class="icon mdi mdi-power"></span> Logout
