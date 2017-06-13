@@ -65,7 +65,7 @@
                                     <li class="{{ $loop->first ? 'latest' : '' }}">
                                         <div class="user-timeline-date">{{ $expense->date }}</div>
                                         <div class="user-timeline-title">
-                                            <a href="{{ route('expenses.show', $expense->id) }}">{{ $expense->name }}</a>
+                                            <a href="{{ route('user.expenses.show', $expense->id) }}">{{ $expense->name }}</a>
                                         </div>
                                         <div class="user-timeline-description">{{ $expense->description }}</div>
                                     </li>

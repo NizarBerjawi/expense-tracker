@@ -75,6 +75,4 @@ class ProfileController extends Controller
         // Return to the correct route
         return redirect()->route('user.profiles.index');
     }
-
-
 }

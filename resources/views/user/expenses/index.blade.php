@@ -23,14 +23,14 @@
                 <div class="panel panel-default panel-table">
                     <div class="panel-heading">Expenses
                         <div class="tools">
-                            <a href="{{ route('expenses.create') }}" type="button" class="btn btn-space btn-primary pull-right" data-target="#create-resource">New</a>
+                            <a href="{{ route('user.expenses.create') }}" type="button" class="btn btn-space btn-primary pull-right" data-target="#create-resource">New</a>
                         </div>
                     </div>
                     <div class="panel-body">
                         @include('includes.tables.expensesTable', [
-                            'showExpenseRouteName'   => 'expenses.show',
-                            'editExpenseRouteName'   => 'expenses.edit',
-                            'deleteExpenseRouteName' => 'expenses.destroy',
+                            'showExpenseRouteName'   => 'user.expenses.show',
+                            'editExpenseRouteName'   => 'user.expenses.edit',
+                            'deleteExpenseRouteName' => 'user.expenses.destroy',
                             'emptyTableMessage'      => 'You have not added any expenses yet',
                         ])
                     </div>

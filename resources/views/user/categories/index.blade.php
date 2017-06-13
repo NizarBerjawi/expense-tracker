@@ -23,15 +23,15 @@
                     <div class="panel panel-default panel-table">
                         <div class="panel-heading">Categories
                             <div class="tools">
-                                <a href="{{ route('categories.create') }}" class="btn btn-space btn-primary pull-right">New</a>
+                                <a href="{{ route('user.categories.create') }}" class="btn btn-space btn-primary pull-right">New</a>
                             </div>
                         </div>
                         <div class="panel-body">
                             @include('includes.tables.categoriesTable', [
-                                'deleteCategoryRoute'     => route('categories.destroy'),
-                                'showCategoryRouteName'   => 'categories.show',
-                                'editCategoryRouteName'   => 'categories.edit',
-                                'deleteCategoryRouteName' => 'categories.destroy',
+                                'deleteCategoryRoute'     => route('user.categories.destroy'),
+                                'showCategoryRouteName'   => 'user.categories.show',
+                                'editCategoryRouteName'   => 'user.categories.edit',
+                                'deleteCategoryRouteName' => 'user.categories.destroy',
                                 'emptyTableMessage'       => 'You have not created any categories yet'
                             ])
                         </div>

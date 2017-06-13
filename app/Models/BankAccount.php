@@ -98,4 +98,16 @@ class BankAccount extends Model
     {
         return $this->hasMany('App\Models\Income');
     }
+
+
+
+    public function updateBalance(BudgetItem $item)
+    {
+        if ($item instanceof Expense) {
+            $this->balance = $this->starting_balance - $item->amount;
+        } else if ($item instanceof Income) {
+            $this->balance = $this->starting_balance + $item->amount;
+        }
+        $this->save();
+    }
 }

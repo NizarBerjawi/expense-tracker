@@ -33,20 +33,20 @@ class IncomeFormComposer extends FormBaseComposer
     {
         // Prepare the data to be sent to the views
         switch($routeName) {
-            case 'income.create':
+            case 'user.income.create':
                 $categories = Category::where('user_id', Auth::id())
                                       ->byTagName(['income'])
                                       ->get();
                 $bankAccounts = BankAccount::where('user_id', Auth::id())
                                          ->get();
                 return compact('categories', 'bankAccounts');
-            case 'income.show':
+            case 'user.income.show':
                 $income = Income::where('id', $this->id)
                                 ->where('user_id', Auth::id())
                                 ->with(['category', 'bankAccount'])
                                 ->first();
                 return compact('income');
-            case 'income.edit':
+            case 'user.income.edit':
                 $income = Income::where('id', $this->id)
                                 ->where('user_id', Auth::id())
                                 ->with(['category', 'bankAccount'])

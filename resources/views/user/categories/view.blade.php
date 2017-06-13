@@ -10,7 +10,7 @@
             'pageTitle' => 'Categories',
             'levels'    => [
                             'Home'       => route('dashboard'),
-                            'Categories' => route('categories.index'),
+                            'Categories' => route('user.categories.index'),
                             $category->id => '',
                             'View'       => '',
                            ]
@@ -31,7 +31,7 @@
             </div>
             <div class="col-md-8 col-md-offset-2">
                 @include('includes.partials.deleteItem', [
-                    'deleteRoute' => route('categories.destroy', $category->id),
+                    'deleteRoute' => route('user.categories.destroy', $category->id),
                     'itemId'      => $category->id
                 ])
             </div>

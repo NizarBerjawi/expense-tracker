@@ -34,16 +34,22 @@ trait ValidatesInputTrait
     * @param  string  $message
     * @return \Illuminate\Validation\Validator
     */
-    protected function addCheck($validator, $check, $message)
+    protected function addChecks($validator, Array $checks)
     {
-        // Check if the category exists
-        $validator->after(function ($validator) use ($check, $message) {
-            // This method is in the ValidatesCategory Trait
-            if ($check) {
-                $validator->errors()
-                          ->add('errors', $message);
-            }
-        });
+        foreach($checks as $check) {
+            // Get the check result from the array
+            $result  = $check['check'];
+            // Get the check message from the array
+            $message = $check['message'];
+            // Check if the category exists
+            $validator->after(function ($validator) use ($result, $message) {
+                // This method is in the ValidatesCategory Trait
+                if ($result) {
+                    $validator->errors()
+                              ->add('errors', $message);
+                }
+            });
+        }
 
         return $validator;
     }

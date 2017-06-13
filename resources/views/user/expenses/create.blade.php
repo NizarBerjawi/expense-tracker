@@ -8,12 +8,11 @@
 @section('content')
     <div class="be-content">
         @include('includes.partials.breadcrumbs', [
-            'pageTitle' => 'Income',
+            'pageTitle' => 'Expenses',
             'levels'    => [
                             'Home'       => route('dashboard'),
-                            'Income'   => route('income.index'),
-                            $income->id => '',
-                            'Edit'       => '',
+                            'Expenses'   => route('user.expenses.index'),
+                            'Create'       => '',
                            ]
         ])
         <div class="main-content container-fluid">
@@ -24,14 +23,13 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     @include('includes.mainForm', [
-                        'resource'      => 'income',
-                        'model'         => $income,
-                        'panelHeading'  => 'Edit Income',
-                        'formAction'    => route('income.update', $income->id),
-                        'cancelRoute'   => route('income.index'),
-                        'methodField'   => method_field('PUT'),
+                        'resource'      => 'expenses',
+                        'panelHeading'  => 'New Expense',
+                        'formAction'    => route('user.expenses.store'),
+                        'cancelRoute'   => route('user.expenses.index'),
+                        'methodField'   => method_field('POST'),
                         'disabled'      => false,
-                        'button'        => 'Update'
+                        'button'        => 'Add'
                     ])
                 </div>
             </div>
@@ -46,9 +44,9 @@
     <script src="{{ asset('js/app-form-elements.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
-      $(document).ready(function(){
-          //initialize the form
-          App.formElements();
-      });
+        $(document).ready(function(){
+            //initialize the form
+            App.formElements();
+        });
     </script>
 @endsection

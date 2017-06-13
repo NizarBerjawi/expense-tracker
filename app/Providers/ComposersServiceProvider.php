@@ -17,7 +17,7 @@ class ComposersServiceProvider extends ServiceProvider
         /** CATEGORIES TABLE **/
         View::composer(
             [
-                'categories.index'
+                'user.categories.index'
             ],
             'App\Http\ViewComposers\CategoriesTableComposer'
         );
@@ -25,9 +25,9 @@ class ComposersServiceProvider extends ServiceProvider
         /** CATEGORIES FORM **/
         View::composer(
             [
-                'categories.new',
-                'categories.view',
-                'categories.edit'
+                'user.categories.create',
+                'user.categories.view',
+                'user.categories.edit'
             ],
             'App\Http\ViewComposers\CategoriesFormComposer'
         );
@@ -35,7 +35,7 @@ class ComposersServiceProvider extends ServiceProvider
         /** EXPENSES TABLE **/
         View::composer(
             [
-                'expenses.index'
+                'user.expenses.index'
             ],
             'App\Http\ViewComposers\ExpensesTableComposer'
         );
@@ -43,9 +43,9 @@ class ComposersServiceProvider extends ServiceProvider
         /** EXPENSES FORM **/
         View::composer(
             [
-                'expenses.new',
-                'expenses.view',
-                'expenses.edit'
+                'user.expenses.create',
+                'user.expenses.view',
+                'user.expenses.edit'
             ],
             'App\Http\ViewComposers\ExpensesFormComposer'
         );
@@ -53,7 +53,7 @@ class ComposersServiceProvider extends ServiceProvider
         /** INCOME TABLE **/
         View::composer(
             [
-                'income.index'
+                'user.income.index'
             ],
             'App\Http\ViewComposers\IncomeTableComposer'
         );
@@ -61,9 +61,9 @@ class ComposersServiceProvider extends ServiceProvider
         /** INCOME FORM **/
         View::composer(
             [
-                'income.new',
-                'income.view',
-                'income.edit'
+                'user.income.create',
+                'user.income.view',
+                'user.income.edit'
             ],
             'App\Http\ViewComposers\IncomeFormComposer'
         );

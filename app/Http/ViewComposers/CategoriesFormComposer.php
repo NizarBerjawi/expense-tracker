@@ -32,16 +32,16 @@ class CategoriesFormComposer extends FormBaseComposer
     {
         // Prepare the data to be sent to the views
         switch($routeName) {
-            case "categories.create":
+            case "user.categories.create":
                 $tags = Tag::all();
                 return compact('tags');
-            case "categories.show":
+            case "user.categories.show":
                 $category = Category::where('id', $this->id)
                                     ->where('user_id', Auth::id())
                                     ->with('tag')
                                     ->first();
                 return compact('category');
-            case "categories.edit":
+            case "user.categories.edit":
                 $category = Category::where('id', $this->id)
                                     ->where('user_id', Auth::id())
                                     ->with('tag')

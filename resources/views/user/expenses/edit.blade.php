@@ -11,30 +11,29 @@
             'pageTitle' => 'Expenses',
             'levels'    => [
                             'Home'       => route('dashboard'),
-                            'Expenses'   => route('expenses.index'),
+                            'Expenses'   => route('user.expenses.index'),
                             $expense->id => '',
-                            'View'       => '',
+                            'Edit'       => '',
                            ]
         ])
         <div class="main-content container-fluid">
+            <!-- Messages -->
+            @include('includes.partials.messages')
+
             <!-- Main Form -->
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     @include('includes.mainForm', [
                         'resource'      => 'expenses',
                         'model'         => $expense,
-                        'panelHeading'  => 'View Expense',
-                        'formAction'    => '',
-                        'methodField'   => '',
-                        'disabled'      => true,
+                        'panelHeading'  => 'Edit Expense',
+                        'formAction'    => route('user.expenses.update', $expense->id),
+                        'cancelRoute'   => route('user.expenses.index'),
+                        'methodField'   => method_field('PUT'),
+                        'disabled'      => false,
+                        'button'        => 'Update'
                     ])
                 </div>
-            </div>
-            <div class="col-md-8 col-md-offset-2">
-                @include('includes.partials.deleteItem', [
-                    'deleteRoute' => route('expenses.destroy', $expense->id),
-                    'itemId'      => $expense->id
-                ])
             </div>
         </div>
     </div>
@@ -47,9 +46,9 @@
     <script src="{{ asset('js/app-form-elements.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
-    $(document).ready(function(){
-        //initialize the form
-        App.formElements();
-    });
+        $(document).ready(function(){
+            //initialize the form
+            App.formElements();
+        });
     </script>
 @endsection

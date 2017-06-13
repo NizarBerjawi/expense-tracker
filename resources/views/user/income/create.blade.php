@@ -8,12 +8,11 @@
 @section('content')
     <div class="be-content">
         @include('includes.partials.breadcrumbs', [
-            'pageTitle' => 'Expenses',
+            'pageTitle' => 'Income',
             'levels'    => [
                             'Home'       => route('dashboard'),
-                            'Expenses'   => route('expenses.index'),
-                            $expense->id => '',
-                            'Edit'       => '',
+                            'Income'   => route('user.income.index'),
+                            'Create'       => '',
                            ]
         ])
         <div class="main-content container-fluid">
@@ -24,14 +23,13 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     @include('includes.mainForm', [
-                        'resource'      => 'expenses',
-                        'model'         => $expense,
-                        'panelHeading'  => 'Edit Expense',
-                        'formAction'    => route('expenses.update', $expense->id),
-                        'cancelRoute'   => route('expenses.index'),
-                        'methodField'   => method_field('PUT'),
+                        'resource'      => 'income',
+                        'panelHeading'  => 'New Income',
+                        'formAction'    => route('user.income.store'),
+                        'cancelRoute'   => route('user.income.index'),
+                        'methodField'   => method_field('POST'),
                         'disabled'      => false,
-                        'button'        => 'Update'
+                        'button'        => 'Add'
                     ])
                 </div>
             </div>

@@ -35,6 +35,16 @@ class IncomeController extends BudgetBaseController
     }
 
     /**
+     * The role of the user
+     *
+     * @return string
+     */
+    protected function userRole() : string
+    {
+        return 'user';
+    }
+
+    /**
      * Validates the input for any store or update actions
      * related to the income resource.
      *
@@ -43,20 +53,19 @@ class IncomeController extends BudgetBaseController
      */
     protected function validateInput(Request $request) : Validator
     {
+        $checks = array([
+                'check'   => !$this->categoryExists($request),
+                'message' => 'Please select a valid category for the income'
+            ],
+            [
+                'check'   => !$this->bankAccountExists($request),
+                'message' => 'Please select a valid bank account for the income'
+            ]
+        );
         // Create the validator
         $validator = $this->makeValidator($request, $this->model);
         // Add additional category check
-        $validator = $this->addCheck(
-            $validator,
-            !$this->categoryExists($request),
-            'Please select a valid category for the income'
-        );
-        // Add additional bank account check
-        $validator = $this->addCheck(
-            $validator,
-            !$this->bankAccountExists($request),
-            'Please select a valid bank account for the income'
-        );
+        $validator = $this->addChecks($validator, $checks);
         return $validator;
     }
 }

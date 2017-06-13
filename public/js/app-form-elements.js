@@ -16,19 +16,6 @@ var App = (function () {
         }
 
         //Select2 tags
-        if ($('.tags').length) {
-            $(".tags").select2({
-                tags: true,
-                width: '100%',
-                maximumSelectionLength: 1,
-                createTag: function () {
-                    // Disable tagging
-                    return null;
-                }
-            });
-        };
-
-        //Select2 tags
         if ($('.select2').length) {
             $(".select2").select2({
                 tags: true,

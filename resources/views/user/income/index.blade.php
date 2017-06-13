@@ -23,14 +23,14 @@
                     <div class="panel panel-default panel-table">
                         <div class="panel-heading">Income
                             <div class="tools">
-                                <a href="{{ route('income.create') }}" class="btn btn-space btn-primary pull-right">New</a>
+                                <a href="{{ route('user.income.create') }}" class="btn btn-space btn-primary pull-right">New</a>
                             </div>
                         </div>
                         <div class="panel-body">
                             @include('includes.tables.incomeTable', [
-                                'showIncomeRouteName'   => 'income.show',
-                                'editIncomeRouteName'   => 'income.edit',
-                                'deleteIncomeRouteName' => 'income.destroy',
+                                'showIncomeRouteName'   => 'user.income.show',
+                                'editIncomeRouteName'   => 'user.income.edit',
+                                'deleteIncomeRouteName' => 'user.income.destroy',
                                 'emptyTableMessage'     => 'You have not added any income yet',
                             ])
                         </div>

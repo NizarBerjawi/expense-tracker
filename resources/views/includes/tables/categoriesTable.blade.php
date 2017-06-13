@@ -29,7 +29,7 @@
             @foreach($categories as $category)
                 <tr>
                     <td>{{ $category->id }}</td>
-                    <td><a href="{{ route('categories.show', $category->id) }}">{{ $category->name }}</a></td>
+                    <td><a href="{{ route('user.categories.show', $category->id) }}">{{ $category->name }}</a></td>
                     <td class="text-center"><span class="label label-default">{{ $category->tag->name }}</span></td>
                     <td class="text-right">
                         <div class="btn-group btn-hspace">

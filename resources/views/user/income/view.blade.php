@@ -8,34 +8,38 @@
 @section('content')
     <div class="be-content">
         @include('includes.partials.breadcrumbs', [
-            'pageTitle' => 'Expenses',
+            'pageTitle' => 'Income',
             'levels'    => [
-                            'Home'       => route('dashboard'),
-                            'Expenses'   => route('expenses.index'),
-                            'Create'       => '',
+                            'Home'      => route('dashboard'),
+                            'Income'    => route('user.income.index'),
+                            $income->id => '',
+                            'View'      => '',
                            ]
         ])
         <div class="main-content container-fluid">
-            <!-- Messages -->
-            @include('includes.partials.messages')
-
             <!-- Main Form -->
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     @include('includes.mainForm', [
-                        'resource'      => 'expenses',
-                        'panelHeading'  => 'New Expense',
-                        'formAction'    => route('expenses.store'),
-                        'cancelRoute'   => route('expenses.index'),
-                        'methodField'   => method_field('POST'),
-                        'disabled'      => false,
-                        'button'        => 'Add'
+                        'resource'      => 'income',
+                        'model'         => $income,
+                        'panelHeading'  => 'View Income',
+                        'formAction'    => '',
+                        'methodField'   => '',
+                        'disabled'      => true,
                     ])
                 </div>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+                @include('includes.partials.deleteItem', [
+                    'deleteRoute' => route('user.income.destroy', $income->id),
+                    'itemId'      => $income->id
+                ])
             </div>
         </div>
     </div>
 @endsection
+
 
 @section('scripts')
     <script src="{{ asset('lib/select2/js/select2.min.js') }}" type="text/javascript"></script>
@@ -44,9 +48,9 @@
     <script src="{{ asset('js/app-form-elements.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
-        $(document).ready(function(){
-            //initialize the form
-            App.formElements();
-        });
+    $(document).ready(function(){
+        //initialize the form
+        App.formElements();
+    });
     </script>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BaseControllers;
 
 use Illuminate\Validation\Validator;
 use Illuminate\Http\Request;
+use App\Models\BankAccount;
 
 abstract class BudgetBaseController extends Controller
 {
@@ -23,8 +24,15 @@ abstract class BudgetBaseController extends Controller
     abstract protected function resourceName() : string;
 
     /**
-     * Validates the input for any store or update actions
-     * related to the resources.
+     * The role of the user using the controller
+     *
+     * @return string
+     */
+    abstract protected function userRole() : string;
+
+    /**
+     * Validates the input for any store or update action
+     * related to the resource.
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Validation\Validator
@@ -39,8 +47,12 @@ abstract class BudgetBaseController extends Controller
      */
     private function getFullRouteName($subroute) : string
     {
-        $resource_name = $this->resourceName();
-        return "{$resource_name}.{$subroute}";
+        // Get the user role
+        $userRole = $this->userRole();
+        // Get the resource name
+        $resourceName = $this->resourceName();
+        // Build the full route name
+        return "{$userRole}.{$resourceName}.{$subroute}";
     }
 
     /**
@@ -83,7 +95,7 @@ abstract class BudgetBaseController extends Controller
      */
     public function create()
     {
-        return view($this->getFullRouteName('new'));
+        return view($this->getFullRouteName('create'));
     }
 
    /**
@@ -105,7 +117,14 @@ abstract class BudgetBaseController extends Controller
         // If all is good, add the user ID to the request
         $request->merge(['user_id' => $request->user()->id]);
         // Store the new model
-        $this->model->create($request->all());
+        $item = $this->model->create($request->all());
+        // Update the bank account
+        if ($request->exists('bank_account_id')) {
+            // Find the bank account
+            $account = BankAccount::find($request->input('bank_account_id'));
+            // Update the bank account balance
+            $account->updateBalance($item);
+        }
         // Flash the success message
         $request->session()->flash('success', 'Successfully saved');
         // Redirect to the correct route
@@ -154,6 +173,13 @@ abstract class BudgetBaseController extends Controller
         // Update the resource
         $this->model->where('id', $id)
                     ->update($request->except(['_token', '_method']));
+
+        if ($request->exists('bank_account_id')) {
+            // Find the bank account
+            $account = BankAccount::find($request->input('bank_account_id'));
+            // Update the bank account balance
+            $account->updateBalance($this->model->where('id', $id)->first());
+        }
         // Flash the success message
         $request->session()->flash('success', 'Successfully updated');
         // Redirect to the correct route

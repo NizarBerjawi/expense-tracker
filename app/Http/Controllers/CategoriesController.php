@@ -35,6 +35,16 @@ class CategoriesController extends BudgetBaseController
     }
 
     /**
+     * The role of the user
+     *
+     * @return string
+     */
+    protected function userRole() : string
+    {
+        return 'user';
+    }
+
+    /**
      * Validates the input for any store or update action
      * related to the categories resources.
      *
@@ -43,14 +53,15 @@ class CategoriesController extends BudgetBaseController
      */
     protected function validateInput(Request $request) : Validator
     {
+        $checks = array([
+                'check'   => !$this->nameAvailable($request),
+                'message' => 'This category name has already been created'
+            ]
+        );
         // Create the validator
         $validator = $this->makeValidator($request, $this->model);
         // Add additional category check
-        $validator = $this->addCheck(
-                                $validator,
-                                !$this->nameAvailable($request),
-                                'This category name has already been created'
-                            );
+        $validator = $this->addChecks($validator, $checks);
         return $validator;
     }
 }

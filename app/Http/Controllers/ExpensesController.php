@@ -35,7 +35,17 @@ class ExpensesController extends BudgetBaseController
     }
 
     /**
-     * Validates the input for any store or update actions
+     * The role of the user
+     *
+     * @return string
+     */
+    protected function userRole() : string
+    {
+        return 'user';
+    }
+
+    /**
+     * Validates the input for any store or update action
      * related to the expense resource.
      *
      * @param  \Illuminate\Http\Request $request
@@ -43,21 +53,19 @@ class ExpensesController extends BudgetBaseController
      */
     protected function validateInput(Request $request) : Validator
     {
+        $checks = array([
+                'check'   => !$this->categoryExists($request),
+                'message' => 'Please select a valid category for the expense'
+            ],
+            [
+                'check'   => !$this->bankAccountExists($request),
+                'message' => 'Please select a valid bank account for the expense'
+            ]
+        );
         // Create the validator
         $validator = $this->makeValidator($request, $this->model);
         // Add additional category check
-        $validator = $this->addCheck(
-            $validator,
-            !$this->categoryExists($request) and !$this->bankAccountExists($request),
-            'Please select a valid category for the expense'
-        );
-        // Add additional bank account check
-        $validator = $this->addCheck(
-            $validator,
-            !$this->bankAccountExists($request),
-            'Please select a valid bank account for the expense'
-        );
-
+        $validator = $this->addChecks($validator, $checks);
         return $validator;
     }
 }

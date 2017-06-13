@@ -8,12 +8,12 @@
 @section('content')
     <div class="be-content">
         @include('includes.partials.breadcrumbs', [
-            'pageTitle' => 'Income',
+            'pageTitle' => 'Expenses',
             'levels'    => [
-                            'Home'      => route('dashboard'),
-                            'Income'    => route('income.index'),
-                            $income->id => '',
-                            'View'      => '',
+                            'Home'       => route('dashboard'),
+                            'Expenses'   => route('user.expenses.index'),
+                            $expense->id => '',
+                            'View'       => '',
                            ]
         ])
         <div class="main-content container-fluid">
@@ -21,9 +21,9 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     @include('includes.mainForm', [
-                        'resource'      => 'income',
-                        'model'         => $income,
-                        'panelHeading'  => 'View Income',
+                        'resource'      => 'expenses',
+                        'model'         => $expense,
+                        'panelHeading'  => 'View Expense',
                         'formAction'    => '',
                         'methodField'   => '',
                         'disabled'      => true,
@@ -32,14 +32,13 @@
             </div>
             <div class="col-md-8 col-md-offset-2">
                 @include('includes.partials.deleteItem', [
-                    'deleteRoute' => route('income.destroy', $income->id),
-                    'itemId'      => $income->id
+                    'deleteRoute' => route('user.expenses.destroy', $expense->id),
+                    'itemId'      => $expense->id
                 ])
             </div>
         </div>
     </div>
 @endsection
-
 
 @section('scripts')
     <script src="{{ asset('lib/select2/js/select2.min.js') }}" type="text/javascript"></script>

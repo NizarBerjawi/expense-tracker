@@ -11,7 +11,7 @@
             'pageTitle' => 'Categories',
             'levels'    => [
                             'Home'       => route('dashboard'),
-                            'Categories' => route('categories.index'),
+                            'Categories' => route('user.categories.index'),
                             'Create'     => ''
                            ]
         ])
@@ -25,8 +25,8 @@
                     @include('includes.mainForm', [
                         'resource'      => 'categories',
                         'panelHeading'  => 'New Category',
-                        'formAction'    => route('categories.store'),
-                        'cancelRoute'   => route('categories.index'),
+                        'formAction'    => route('user.categories.store'),
+                        'cancelRoute'   => route('user.categories.index'),
                         'methodField'   => method_field('POST'),
                         'disabled'      => false,
                         'button'        => 'Add'

@@ -11,15 +11,15 @@ class StoreBankAccount extends FormRequest
      *
      *
      */
-    protected $bank;
+    protected $bankAccount;
 
     /**
      *
      *
      */
-    public function __construct(BankAccount $bank)
+    public function __construct(BankAccount $bankAccount)
     {
-        $this->bank = $bank;
+        $this->bankAccount = $bankAccount;
     }
 
     /**
@@ -39,7 +39,7 @@ class StoreBankAccount extends FormRequest
      */
     public function rules()
     {
-        return $this->bank->rules();
+        return $this->bankAccount->rules();
     }
 
     /**
@@ -49,6 +49,6 @@ class StoreBankAccount extends FormRequest
      */
     public function messages()
     {
-        return $this->bank->messages();
+        return $this->bankAccount->messages();
     }
 }
