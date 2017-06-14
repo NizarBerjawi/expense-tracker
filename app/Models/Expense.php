@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Expense;
+use App\Models\BaseModels\BudgetItem;
 
 class Expense extends BudgetItem
 {

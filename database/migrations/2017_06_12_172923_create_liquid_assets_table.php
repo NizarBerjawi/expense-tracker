@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBankAccountsTable extends Migration
+class CreateLiquidAssetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,16 @@ class CreateBankAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bank_accounts', function (Blueprint $table) {
+        Schema::create('liquid_assets', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('name');
-            $table->string('bank');
             $table->decimal('starting_balance', 12, 2)->default(0);
             $table->decimal('balance', 12, 2)->default(0);
             $table->timestamps();
         });
 
-        Schema::table('bank_accounts', function(Blueprint $table) {
+        Schema::table('liquid_assets', function(Blueprint $table) {
             $table->foreign('user_id')
                   ->references('id')
                   ->on('users')
@@ -31,17 +30,17 @@ class CreateBankAccountsTable extends Migration
         });
 
         Schema::table('expenses', function(Blueprint $table) {
-            $table->foreign('bank_account_id')
+            $table->foreign('asset_id')
                   ->references('id')
-                  ->on('bank_accounts')
-                  ->onDelete('cascade');
+                  ->on('liquid_assets')
+                  ->onDelete('set null');
         });
 
         Schema::table('income', function(Blueprint $table) {
-            $table->foreign('bank_account_id')
+            $table->foreign('asset_id')
                   ->references('id')
-                  ->on('bank_accounts')
-                  ->onDelete('cascade');
+                  ->on('liquid_assets')
+                  ->onDelete('set null');
         });
     }
 
@@ -54,6 +53,6 @@ class CreateBankAccountsTable extends Migration
     {
         Schema::dropIfExists('income');
         Schema::dropIfExists('expenses');
-        Schema::dropIfExists('bank_accounts');
+        Schema::dropIfExists('liquid_assets');
     }
 }

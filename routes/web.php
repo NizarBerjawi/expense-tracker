@@ -43,12 +43,17 @@ Route::group(['prefix' => 'settings'], function() {
 
 /** Use Bank Account Routes **/
 Route::group(['prefix' => 'accounts'], function() {
-    Route::get('/create', 'BankAccountController@create')->name('user.banks.create');
-    Route::post('/', 'BankAccountController@store')->name('user.banks.store');
-    Route::get('/{account_id}', 'BankAccountController@show')->name('user.banks.show');
-    Route::get('/{account_id}/edit', 'BankAccountController@edit')->name('user.banks.edit');
-    Route::put('/{account_id}', 'BankAccountController@update')->name('user.banks.update');
-    Route::delete('/{account_id}', 'BankAccountController@destroy')->name('user.banks.destroy');
+    // Money transfers between assets
+    Route::put('/transfer', 'LiquidAssetsController@transfer')->name('user.assets.doTransfer');
+    Route::get('/transfer', 'LiquidAssetsController@showTransfer')->name('user.assets.transfer');
+    // Liquid assets
+    Route::get('/create', 'LiquidAssetsController@create')->name('user.assets.create');
+    Route::post('/', 'LiquidAssetsController@store')->name('user.assets.store');
+    Route::get('/{accountId}', 'LiquidAssetsController@show')->name('user.assets.show');
+    Route::get('/{accountId}/edit', 'LiquidAssetsController@edit')->name('user.assets.edit');
+    Route::put('/{accountId}', 'LiquidAssetsController@update')->name('user.assets.update');
+    Route::delete('/{accountId}', 'LiquidAssetsController@destroy')->name('user.assets.destroy');
+
 });
 
 /** Category Routes **/

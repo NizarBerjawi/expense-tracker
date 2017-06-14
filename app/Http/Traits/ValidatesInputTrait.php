@@ -3,7 +3,7 @@
 namespace App\Http\Traits;
 
 use Illuminate\Http\Request;
-use App\Models\BankAccount;
+use App\Models\LiquidAsset;
 use App\Models\Category;
 use Validator;
 use Auth;
@@ -105,13 +105,13 @@ trait ValidatesInputTrait
      * @param  \Illuminate\Http\Request  $request
      * @return boolean
      */
-    protected function bankAccountExists(Request $request)
+    protected function assetExists(Request $request)
     {
         $resource = $this->resourceName();
         // Attempt to find the category
-        $bankAccount = BankAccount::where('id', $request->input('bank_account_id'))
+        $asset = LiquidAsset::where('id', $request->input('asset_id'))
                                ->where('user_id', Auth::id())
                                ->first();
-        return $bankAccount;
+        return $asset;
     }
 }

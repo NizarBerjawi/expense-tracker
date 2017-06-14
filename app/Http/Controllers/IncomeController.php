@@ -58,8 +58,8 @@ class IncomeController extends BudgetBaseController
                 'message' => 'Please select a valid category for the income'
             ],
             [
-                'check'   => !$this->bankAccountExists($request),
-                'message' => 'Please select a valid bank account for the income'
+                'check'   => !$this->assetExists($request),
+                'message' => 'Please select a valid asset for the income'
             ]
         );
         // Create the validator

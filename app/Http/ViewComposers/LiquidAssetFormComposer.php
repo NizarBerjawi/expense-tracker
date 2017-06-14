@@ -4,12 +4,12 @@ namespace App\Http\ViewComposers;
 
 use App\Http\ViewComposers\BaseComposers\FormBaseComposer;
 use Illuminate\Http\Request;
-use App\Models\BankAccount;
+use App\Models\LiquidAsset;
 use App\Models\Category;
 use App\Models\Income;
 use Auth;
 
-class BankAccountFormComposer extends FormBaseComposer
+class LiquidAssetFormComposer extends FormBaseComposer
 {
     /**
      * Create a new view composer instance.
@@ -18,7 +18,7 @@ class BankAccountFormComposer extends FormBaseComposer
      */
     public function __construct(Request $request)
     {
-        $this->id = $request->account_id;
+        $this->id = $request->assetId;
     }
 
     /**
@@ -32,18 +32,14 @@ class BankAccountFormComposer extends FormBaseComposer
     {
         // Prepare the data to be sent to the views
         switch($routeName) {
-            case 'user.banks.create':
+            case 'user.assets.create':
+                // No data is required for the create view
                 return null;
-            case 'user.banks.show':
-                $bankAccount = BankAccount::where('id', $this->id)
+            default:
+                $bankAccount = LiquidAsset::where('id', $this->id)
                                      ->where('user_id', Auth::id())
                                      ->first();
-                return compact('bankAccount');
-            case 'user.banks.edit':
-                $bankAccount = BankAccount::where('id', $this->id)
-                                ->where('user_id', Auth::id())
-                                ->first();
-                return compact('bankAccount');
+                return compact('asset');
         }
     }
 }

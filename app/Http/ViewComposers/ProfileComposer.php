@@ -69,16 +69,20 @@ class ProfileComposer
                 // Get an instance of the authenticated user with profile
                 $user = Auth::user()->load(['profile']);
                 // Get the authenticated user's bank accounts
-                $bankAccounts = $user->bankAccounts()
-                                     ->when($col and $dir, function($query) use ($col, $dir) {
-                                         return $query->orderBy($col, $dir);
-                                     }, function($query) {
-                                         return $query->latest();
-                                     })
-                                     ->paginate(3)
-                                     ->appends(['col' => $col, 'dir' => $dir]);
+                $assets = $user->liquidAssets()
+                               ->when($col and $dir, function($query) use ($col, $dir) {
+                                   return $query->orderBy($col, $dir);
+                               }, function($query) {
+                                   return $query->latest();
+                               })
+                               ->paginate(3)
+                               ->appends(['col' => $col, 'dir' => $dir]);
+                // Update account balances before sending them to the view
+                foreach ($assets as $asset) {
+                    $asset->updateBalance();
+                }
                 // Send the data
-                return compact('user', 'bankAccounts');
+                return compact('user', 'assets');
             case "user.profiles.edit":
                 $user = Auth::user()->load('profile');
                 return compact('user');

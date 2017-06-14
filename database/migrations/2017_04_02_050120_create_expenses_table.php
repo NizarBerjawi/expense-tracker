@@ -18,8 +18,8 @@ class CreateExpensesTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->integer('category_id')->unsigned()->nullable();
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->integer('bank_account_id')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned();
+            $table->integer('asset_id')->unsigned()->nullable();
             $table->date('date');
             $table->decimal('amount', 12, 2);
             $table->timestamps();

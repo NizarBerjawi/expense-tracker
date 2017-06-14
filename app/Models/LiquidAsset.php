@@ -3,15 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Income;
+use App\Models\Expense;
+use Auth;
 
-class BankAccount extends Model
+class LiquidAsset extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'bank_accounts';
+    protected $table = 'liquid_assets';
 
     /**
      * The attributes that are mass assignable.
@@ -20,8 +23,8 @@ class BankAccount extends Model
      */
     protected $fillable = [
       'name',
-      'bank',
       'starting_balance',
+      'balance'
     ];
 
     /**
@@ -33,7 +36,6 @@ class BankAccount extends Model
     {
         return [
             'name'              => 'required|max:255',
-            'bank'              => 'required|max:255',
             'starting_balance'  => 'required|numeric',
         ];
     }
@@ -99,15 +101,31 @@ class BankAccount extends Model
         return $this->hasMany('App\Models\Income');
     }
 
-
-
-    public function updateBalance(BudgetItem $item)
+    /**
+     * Update the balance of this bank account
+     *
+     * @return null
+     */
+    public function updateBalance()
     {
-        if ($item instanceof Expense) {
-            $this->balance = $this->starting_balance - $item->amount;
-        } else if ($item instanceof Income) {
-            $this->balance = $this->starting_balance + $item->amount;
-        }
+        // The total expenses of the authenticated user
+        $expenses = $this->expenses->sum('amount');
+        // The total income of the authenticated user
+        $income = $this->income->sum('amount');
+        // Update the balance
+        $this->balance = $this->balance + $income - $expenses;
+        // Save the new balance to the database
         $this->save();
+    }
+
+    /**
+     * Delete one or more specified expenses.
+     *
+     * @param array
+     * @return void
+     */
+    public static function discard(Array $assetIds)
+    {
+        return LiquidAsset::whereIn('id', $assetIds)->delete();
     }
 }

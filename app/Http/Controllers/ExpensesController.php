@@ -58,8 +58,8 @@ class ExpensesController extends BudgetBaseController
                 'message' => 'Please select a valid category for the expense'
             ],
             [
-                'check'   => !$this->bankAccountExists($request),
-                'message' => 'Please select a valid bank account for the expense'
+                'check'   => !$this->assetExists($request),
+                'message' => 'Please select a valid asset for the expense'
             ]
         );
         // Create the validator

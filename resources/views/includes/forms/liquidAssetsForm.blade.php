@@ -3,26 +3,20 @@
     {{ $methodField }}
 
     <div class="form-group">
-        <label class="col-md-3 col-lg-3 control-label">Account Name</label>
+        <label class="col-md-3 col-lg-3 control-label">Name</label>
         <div class="col-md-9 col-lg-6">
-            <input type="text" class="form-control" name="name" value="{{ $user->bank->name or old('name') }}">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-md-3 col-lg-3 control-label">Bank Name</label>
-        <div class="col-md-9 col-lg-6">
-            <input type="text" class="form-control" name="bank" value="{{ $user->bankAccount->bank or old('bank') }}">
+            <input type="text" class="form-control" name="name" value="{{ $asset->name or old('name') }}" {{ $disabled ? 'disabled' : '' }}>
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-md-3 col-lg-3 control-label">Starting Balance</label>
         <div class="col-md-9 col-lg-6">
-            <input type="text" class="form-control" name="starting_balance" value="{{ $user->bankAccount->starting_balance or old('starting_balance') }}">
+            <input type="text" class="form-control" name="starting_balance" value="{{ $asset->starting_balance or old('starting_balance') }}" {{ $disabled ? 'disabled' : '' }}>
         </div>
     </div>
 
+    @if(!$disabled)
     <div class="row xs-pt-12">
         <div class="col-md-12 col-lg-9">
             <p class="text-right">
@@ -31,4 +25,5 @@
             </p>
         </div>
     </div>
+    @endif
 </form>

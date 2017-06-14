@@ -70,9 +70,10 @@ class DashboardComposer
         // Get the available expense years in the database
         // for the authenticated user
         $years =$this->getYears($this->expense);
-
+        // Prepare the data to be sent
+        $data = compact('latestExpenses', 'categories', 'month', 'years', 'today');
         // Send the data to the view
-        $view->with(compact('latestExpenses', 'categories', 'month', 'years', 'today'));
+        $view->with($data);
     }
 
 

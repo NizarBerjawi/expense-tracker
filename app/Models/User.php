@@ -75,8 +75,8 @@ class User extends Authenticatable
       *
       * @return Illuminate\Database\Eloquent\Relations\HasMany
       */
-     public function bankAccounts()
+     public function liquidAssets()
      {
-         return $this->hasMany('App\Models\BankAccount');
+         return $this->hasMany('App\Models\LiquidAsset');
      }
 }

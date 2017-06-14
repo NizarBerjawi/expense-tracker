@@ -95,23 +95,24 @@
 
                 <div class="col-md-7">
                     <div class="panel panel-default panel-table">
-                        <div class="panel-heading">Bank Accounts
+                        <div class="panel-heading">Liquid Assets
                             <div class="tools">
-                                <a href="{{ route('user.banks.create') }}" type="button" class="btn btn-space btn-primary pull-right" data-target="#create-bank-account">New</a>
+                                <a href="{{ route('user.assets.transfer') }}" type="button" class="btn btn-space btn-default">Transfer</a>
+                                <a href="{{ route('user.assets.create') }}" type="button" class="btn btn-space btn-primary">New</a>
                             </div>
                         </div>
                         <div class="panel-body">
                             @include('includes.tables.bankAccountsTable', [
-                                'showBankAccountRouteName'   => 'user.banks.show',
-                                'editBankAccountRouteName'   => 'user.banks.edit',
-                                'deleteBankAccountRouteName' => 'user.banks.destroy',
-                                'emptyTableMessage'          => 'You have not added any bank accounts yet',
+                                'showBankAccountRouteName'   => 'user.assets.show',
+                                'editBankAccountRouteName'   => 'user.assets.edit',
+                                'deleteBankAccountRouteName' => 'user.assets.destroy',
+                                'emptyTableMessage'          => 'You have not added any liquid assets yet',
                             ])
                         </div>
                     </div>
 
                     <div class="col-sm-12 text-center">
-                        {{ $bankAccounts->links() }}
+                        {{ $assets->links() }}
                     </div>
                 </div>
 
@@ -122,8 +123,13 @@
 @endsection
 
 @section('scripts')
-
+    <script src="/js/table-actions.js" type="text/javascript"></script>
 @endsection
 
 @section('modals')
+    @if (!$assets->isEmpty())
+        @include('includes.modals.confirmDelete', [
+            'confirmation_text' => 'Are you sure you want to delete the selected account?'
+        ])
+    @endif
 @endsection

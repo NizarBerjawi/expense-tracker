@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\BaseModels;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
@@ -19,7 +19,7 @@ class BudgetItem extends Model
       'description',
       'category_id',
       'user_id',
-      'bank_account_id',
+      'asset_id',
       'date',
       'amount',
     ];
@@ -79,9 +79,9 @@ class BudgetItem extends Model
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function bankAccount()
+    public function liquidAsset()
     {
-      return $this->belongsTo('App\Models\BankAccount');
+      return $this->belongsTo('App\Models\LiquidAsset');
     }
 
     /***********************************************************************/

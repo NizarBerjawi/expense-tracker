@@ -1,25 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\BaseRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateBankAccount extends FormRequest
+class BaseRequest extends FormRequest
 {
     /**
+     * The model being validated
      *
-     *
+     * @var Illuminate\Database\Eloquent\Model
      */
-    protected $bankAccount;
-
-    /**
-     *
-     *
-     */
-    public function __construct(BankAccount $bankAccount)
-    {
-        $this->bankAccount = $bankAccount;
-    }
+    protected $model;
 
     /**
      * Determine if the user is authorized to make this request.
@@ -38,7 +30,7 @@ class UpdateBankAccount extends FormRequest
      */
     public function rules()
     {
-        return $this->bankAccount->rules();
+        return $this->model->rules();
     }
 
     /**
@@ -48,6 +40,6 @@ class UpdateBankAccount extends FormRequest
      */
     public function messages()
     {
-        return $this->bankAccount->messages();
+        return $this->model->messages();
     }
 }

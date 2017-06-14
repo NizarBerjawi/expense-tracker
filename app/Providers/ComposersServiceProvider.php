@@ -84,6 +84,15 @@ class ComposersServiceProvider extends ServiceProvider
             'App\Http\ViewComposers\ProfileComposer'
         );
 
+        View::composer(
+            [
+                'user.assets.create',
+                'user.assets.edit',
+                'user.assets.view'
+            ],
+            'App\Http\ViewComposers\LiquidAssetFormComposer'
+        );
+
         /** LEFT NAVIGATION **/
         View::composer(
             [

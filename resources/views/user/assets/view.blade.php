@@ -7,10 +7,10 @@
 @section('content')
 <div class="be-content">
     @include('includes.partials.breadcrumbs', [
-        'pageTitle' => 'Bank Accounts',
+        'pageTitle' => 'View Asset',
         'levels'    => [
                         'Home'       => route('dashboard'),
-                        'Profile'    => route('user.banks.create'),
+                        'Profile'    => route('user.profiles.create'),
                         'Edit'     => ''
                        ]
     ])
@@ -21,17 +21,27 @@
         <!-- Main Form -->
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default panel-border-color panel-border-color-primary">
-                <div class="panel-heading panel-heading-divider">Edit Bank Accounts</div>
+                <div class="panel-heading panel-heading-divider">View Asset
+                    <div class="tools">
+                        <a href='{{ route("user.accounts.edit", $account->id) }}' type="submit" class="btn btn-space btn-primary">Edit</a>
+                    </div>
+                </div>
                 <div class="panel-body">
-                    @include('includes.forms.bankAccountsForm', [
-                        'formAction'    => route('user.banks.update', ),
-                        'csrfField'     => csrf_field(),
-                        'methodField'   => method_field('PUT'),
+                    @include('includes.forms.liquidAssetsForm', [
+                        'formAction'    => '',
+                        'csrfField'     => '',
+                        'methodField'   => '',
                         'cancelRoute'   => route('user.profiles.index'),
-                        'submit'        => 'Edit Account'
+                        'submit'        => 'View Asset',
+                        'disabled'      => true
                     ])
                 </div>
             </div>
+
+            @include('includes.partials.deleteItem', [
+                'deleteRoute' => route('user.assets.destroy', $asset->id),
+                'itemId'      => $asset->id
+            ])
         </div>
     </div>
 @endsection

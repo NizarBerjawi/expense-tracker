@@ -34,25 +34,31 @@ class ExpensesFormComposer extends FormBaseComposer
         // Prepare the data to be sent to the views
         switch($routeName) {
             case 'user.expenses.create':
+                // All the user categories to be displayed in select
                 $categories = Category::where('user_id', Auth::id())
                                       ->byTagName(['expenses'])
                                       ->get();
+                // All the user bank accounts to be displayed in select
                 $bankAccounts = BankAccount::where('user_id', Auth::id())
                                            ->get();
                 return compact('categories', 'bankAccounts');
             case 'user.expenses.show':
+                // The expense being edited
                 $expense = Expense::where('id', $this->id)
                                   ->where('user_id', Auth::id())
                                   ->with(['category', 'bankAccount'])
                                   ->first();
                 return compact('expense');
             case 'user.expenses.edit':
+                // The expense being edited
                 $expense = Expense::where('id', $this->id)
                                   ->where('user_id', Auth::id())
                                   ->with(['category', 'bankAccount'])
                                   ->first();
+                // All the user bank accounts to be displayed in select
                 $bankAccounts = BankAccount::where('user_id', Auth::id())
-                                         ->get();
+                                           ->get();
+                // All the user categories to be displayed in select
                 $categories = Category::where('user_id', Auth::id())
                                       ->byTagName(['expenses'])
                                       ->get();

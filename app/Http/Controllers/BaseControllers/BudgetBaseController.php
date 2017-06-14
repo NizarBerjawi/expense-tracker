@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\BaseControllers;
 
 use Illuminate\Validation\Validator;
+use App\Http\Requests\BaseRequests\BaseRequest;
 use Illuminate\Http\Request;
-use App\Models\BankAccount;
 
 abstract class BudgetBaseController extends Controller
 {
@@ -104,7 +104,7 @@ abstract class BudgetBaseController extends Controller
     * @param  \Illuminate\Http\Request $request
     * @return \Illuminate\Http\Response
     */
-    public function store(Request $request)
+    public function store(BaseRequest $request)
     {
         // Validate the user input
         $validator = $this->validateInput($request);
@@ -118,13 +118,6 @@ abstract class BudgetBaseController extends Controller
         $request->merge(['user_id' => $request->user()->id]);
         // Store the new model
         $item = $this->model->create($request->all());
-        // Update the bank account
-        if ($request->exists('bank_account_id')) {
-            // Find the bank account
-            $account = BankAccount::find($request->input('bank_account_id'));
-            // Update the bank account balance
-            $account->updateBalance($item);
-        }
         // Flash the success message
         $request->session()->flash('success', 'Successfully saved');
         // Redirect to the correct route
@@ -173,13 +166,6 @@ abstract class BudgetBaseController extends Controller
         // Update the resource
         $this->model->where('id', $id)
                     ->update($request->except(['_token', '_method']));
-
-        if ($request->exists('bank_account_id')) {
-            // Find the bank account
-            $account = BankAccount::find($request->input('bank_account_id'));
-            // Update the bank account balance
-            $account->updateBalance($this->model->where('id', $id)->first());
-        }
         // Flash the success message
         $request->session()->flash('success', 'Successfully updated');
         // Redirect to the correct route
@@ -195,11 +181,8 @@ abstract class BudgetBaseController extends Controller
      */
     public function destroy(Request $request, $id = null)
     {
-        if(!$request->input('ids') and !$id) { return back(); }
-        // Get the ids of the resource(s) to be deleted
-        $ids = $request->input('ids', $id);
         // Delete the selected resources
-        $this->model->discard((array) $ids);
+        $this->model->discard((array) $id);
         // Flash the success message
         $request->session()->flash('success', 'Successfully deleted');
         // Redirect to the correct route

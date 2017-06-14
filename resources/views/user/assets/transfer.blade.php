@@ -1,17 +1,16 @@
 @extends('layouts.dashboard')
 
 @section('styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('lib/datetimepicker/css/bootstrap-datetimepicker.min.css') }}"/>
 @endsection
 
 @section('content')
 <div class="be-content">
     @include('includes.partials.breadcrumbs', [
-        'pageTitle' => 'Bank Accounts',
+        'pageTitle' => 'Transfer Asset',
         'levels'    => [
                         'Home'       => route('dashboard'),
-                        'Profile'    => route('user.banks.create'),
-                        'Create'     => ''
+                        'Profile'    => route('user.profiles.index'),
+                        'Edit'     => ''
                        ]
     ])
     <div class="main-content container-fluid">
@@ -21,14 +20,15 @@
         <!-- Main Form -->
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default panel-border-color panel-border-color-primary">
-                <div class="panel-heading panel-heading-divider">Create Bank Accounts</div>
+                <div class="panel-heading panel-heading-divider">Transfer Asset</div>
                 <div class="panel-body">
-                    @include('includes.forms.bankAccountsForm', [
-                        'formAction'    => route('user.banks.store'),
+                    @include('includes.forms.transferAmountForm', [
+                        'formAction'    => route('user.asstes.doTransfer'),
                         'csrfField'     => csrf_field(),
-                        'methodField'   => method_field('POST'),
+                        'methodField'   => method_field('PUT'),
                         'cancelRoute'   => route('user.profiles.index'),
-                        'submit'        => 'Add Account'
+                        'submit'        => 'Update Asset',
+                        'disabled'      => false
                     ])
                 </div>
             </div>
@@ -37,8 +37,6 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('lib/moment.js/min/moment.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('lib/datetimepicker/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/app-form-elements.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript">

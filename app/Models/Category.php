@@ -71,6 +71,16 @@ class Category extends Model
     /***********************************************************************/
 
     /**
+     * Get the user that owns the category item.
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+      return $this->belongsTo('App\Models\User');
+    }
+
+    /**
      * Get the expenses belonging to the category
      *
      * @return Illuminate\Database\Eloquent\Relations\HasMany
