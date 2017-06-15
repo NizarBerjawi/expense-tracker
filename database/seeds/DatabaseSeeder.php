@@ -13,20 +13,24 @@ class DatabaseSeeder extends Seeder
     {
       $this->call(TagsTableSeeder::class);
 
-    //   factory(App\Models\User::class, 1)->create()->each(function($expense) {
-    //       $expense->save();
-    //   });
-      //
-    //   factory(App\Models\Category::class, 15)->create()->each(function($expense) {
-    //       $expense->save();
-    //   });
-      //
-    //   factory(App\Models\Expense::class, 500)->create()->each(function($expense) {
-    //       $expense->save();
-    //   });
-      //
-    //   factory(App\Models\Income::class, 500)->create()->each(function($income) {
-    //       $income->save();
-    //   });
+      factory(App\Models\User::class, 5)->create()->each(function($user) {
+          $user->save();
+      });
+
+      factory(App\Models\LiquidAsset::class, 20)->create()->each(function($liquidAsset) {
+          $liquidAsset->save();
+      });
+
+      factory(App\Models\Category::class, 100)->create()->each(function($category) {
+          $category->save();
+      });
+
+      factory(App\Models\Expense::class, 50000)->create()->each(function($expense) {
+          $expense->save();
+      });
+
+      factory(App\Models\Income::class, 50000)->create()->each(function($income) {
+          $income->save();
+      });
     }
 }

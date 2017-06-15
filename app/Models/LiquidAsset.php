@@ -112,7 +112,8 @@ class LiquidAsset extends Model
         $expenses = $this->expenses->sum('amount');
         // The total income of the authenticated user
         $income = $this->income->sum('amount');
-        // Update the balance
+        //
+        // // Update the balance
         $this->balance = $this->balance + $income - $expenses;
         // Save the new balance to the database
         $this->save();

@@ -79,4 +79,16 @@ class User extends Authenticatable
      {
          return $this->hasMany('App\Models\LiquidAsset');
      }
+
+     /**
+      * Update this user's password
+      *
+      * @param  string  $new_password
+      * @return void
+      */
+     public function updatePassword($new_password) {
+         $this->update([
+             'password' => Hash::make($new_password),
+         ]);
+     }
 }

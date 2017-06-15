@@ -23,7 +23,7 @@
             <div class="panel panel-default panel-border-color panel-border-color-primary">
                 <div class="panel-heading panel-heading-divider">View Asset
                     <div class="tools">
-                        <a href='{{ route("user.accounts.edit", $account->id) }}' type="submit" class="btn btn-space btn-primary">Edit</a>
+                        <a href='{{ route("user.assets.edit", $asset->id) }}' type="submit" class="btn btn-space btn-primary">Edit</a>
                     </div>
                 </div>
                 <div class="panel-body">

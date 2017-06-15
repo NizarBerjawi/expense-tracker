@@ -36,7 +36,7 @@ class LiquidAssetFormComposer extends FormBaseComposer
                 // No data is required for the create view
                 return null;
             default:
-                $bankAccount = LiquidAsset::where('id', $this->id)
+                $asset = LiquidAsset::where('id', $this->id)
                                      ->where('user_id', Auth::id())
                                      ->first();
                 return compact('asset');

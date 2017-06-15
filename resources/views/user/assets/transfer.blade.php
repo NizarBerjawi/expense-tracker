@@ -23,7 +23,7 @@
                 <div class="panel-heading panel-heading-divider">Transfer Asset</div>
                 <div class="panel-body">
                     @include('includes.forms.transferAmountForm', [
-                        'formAction'    => route('user.asstes.doTransfer'),
+                        'formAction'    => route('user.assets.doTransfer'),
                         'csrfField'     => csrf_field(),
                         'methodField'   => method_field('PUT'),
                         'cancelRoute'   => route('user.profiles.index'),

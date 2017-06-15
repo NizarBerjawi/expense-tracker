@@ -30,14 +30,14 @@ class CreateLiquidAssetsTable extends Migration
         });
 
         Schema::table('expenses', function(Blueprint $table) {
-            $table->foreign('asset_id')
+            $table->foreign('liquid_asset_id')
                   ->references('id')
                   ->on('liquid_assets')
                   ->onDelete('set null');
         });
 
         Schema::table('income', function(Blueprint $table) {
-            $table->foreign('asset_id')
+            $table->foreign('liquid_asset_id')
                   ->references('id')
                   ->on('liquid_assets')
                   ->onDelete('set null');
