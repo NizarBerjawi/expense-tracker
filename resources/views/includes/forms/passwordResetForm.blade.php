@@ -1,5 +1,6 @@
 <form id="reset-password" class="col-sm-12 form-horizontal" action="{{ $formAction }}" method="POST" role="form">
     {{ $csrfField }}
+    {{ $methodField }}
 
     <div class="form-group">
         <label class="col-sm-3 control-label">Old Password</label>

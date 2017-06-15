@@ -48,11 +48,9 @@ class LiquidAsset extends Model
     public function messages()
     {
         return [
-            'name.required'             => 'Please provide a name for the bank account',
-            'name.max'                  => 'The bank account name should not exceed 255 characters',
-            'bank.required'             => 'Please provide a name for the bank',
-            'bank.max'                  => 'The bank name should not exceed 255 characters',
-            'starting_balance.required' => 'Please provide a starting balance for your bank account',
+            'name.required'             => 'Please provide a name for the asset',
+            'name.max'                  => 'The asset name should not exceed 255 characters',
+            'starting_balance.required' => 'Please provide a starting balance for your liquid asset',
             'starting_balance.numeric'  => 'Please provide a valid numeric starting balance',
         ];
     }
@@ -112,9 +110,8 @@ class LiquidAsset extends Model
         $expenses = $this->expenses->sum('amount');
         // The total income of the authenticated user
         $income = $this->income->sum('amount');
-        //
         // // Update the balance
-        $this->balance = $this->balance + $income - $expenses;
+        $this->balance = $this->starting_balance + $income - $expenses;
         // Save the new balance to the database
         $this->save();
     }

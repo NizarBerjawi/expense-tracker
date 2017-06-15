@@ -19,7 +19,7 @@ class CreateProfilesTable extends Migration
             $table->string('last_name');
             $table->string('occupation');
             $table->date('date_of_birth');
-            $table->integer('phone');
+            $table->string('phone');
             $table->integer('user_id')->unsigned();
             $table->timestamps();
         });

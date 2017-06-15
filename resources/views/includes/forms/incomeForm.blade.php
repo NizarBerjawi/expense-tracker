@@ -25,22 +25,22 @@
     </div>
 
     <div class="form-group">
-        <label class="col-md-3 col-lg-3 control-label">Bank Account</label>
+        <label class="col-md-3 col-lg-3 control-label">Asset</label>
         <div class="col-md-9 col-lg-6">
-            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="select2" name="bank_account_id">
+            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="select2" name="liquid_asset_id">
                 @if (!isset($income))
                     <!-- NEW EXPENSE -->
-                    @foreach($bankAccounts as $account)
-                        <option value="{{ $account->id or old('bank_account_id')}}" {{ $account->id == old('bank_account_id') ? "selected" : "" }}>{{ $account->name }}</option>
+                    @foreach($assets as $asset)
+                        <option value="{{ $asset->id or old('liquid_asset_id')}}" {{ $asset->id == old('liquid_asset_id') ? "selected" : "" }}>{{ $asset->name }}</option>
                     @endforeach
-                @elseif (isset($bankAccounts) and isset($income))
+                @elseif (isset($assets) and isset($income))
                     <!-- EDIT EXPENSE -->
-                    @foreach($bankAccounts as $account)
-                        <option {{ $income->bank_account_id == $account->id ? "selected" : "" }} value="{{ $account->id }}">{{ $account->name }}</option>
+                    @foreach($assets as $asset)
+                        <option {{ $income->liquid_asset_id == $asset->id ? "selected" : "" }} value="{{ $asset->id }}">{{ $asset->name }}</option>
                     @endforeach
-                @elseif (isset($income) and isset($income->bank_account_id))
+                @elseif (isset($income) and isset($income->liquid_asset_id))
                     <!-- VIEW EXPENSE -->
-                    <option value="{{ $income->bankAccount->id }}" selected>{{ $income->bankAccount->name }}</option>
+                    <option value="{{ $income->liquidAsset->id }}" selected>{{ $income->liquidAsset->name }}</option>
                 @endif
             </select>
         </div>

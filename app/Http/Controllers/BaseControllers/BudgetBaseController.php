@@ -104,7 +104,7 @@ abstract class BudgetBaseController extends Controller
     * @param  \Illuminate\Http\Request $request
     * @return \Illuminate\Http\Response
     */
-    public function store(BaseRequest $request)
+    public function store(Request $request)
     {
         // Validate the user input
         $validator = $this->validateInput($request);

@@ -25,22 +25,22 @@
     </div>
 
     <div class="form-group">
-        <label class="col-md-3 col-lg-3 control-label">Bank Account</label>
+        <label class="col-md-3 col-lg-3 control-label">Asset</label>
         <div class="col-md-9 col-lg-6">
-            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="select2" name="bank_account_id">
+            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="select2" name="liquid_asset_id">
                 @if (!isset($expense))
                     <!-- NEW EXPENSE -->
-                    @foreach($bankAccounts as $account)
-                        <option value="{{ $account->id }}">{{ $account->name }}</option>
+                    @foreach($assets as $asset)
+                        <option value="{{ $asset->id }}">{{ $asset->name }}</option>
                     @endforeach
-                @elseif (isset($bankAccounts) and isset($expense))
+                @elseif (isset($assets) and isset($expense))
                     <!-- EDIT EXPENSE -->
-                    @foreach($bankAccounts as $account)
-                        <option {{ $expense->bank_account_id == $account->id ? "selected" : "" }} value="{{ $account->id }}">{{ $account->name }}</option>
+                    @foreach($assets as $asset)
+                        <option {{ $expense->liquid_asset_id == $asset->id ? "selected" : "" }} value="{{ $asset->id }}">{{ $asset->name }}</option>
                     @endforeach
-                @elseif (isset($expense) and isset($expense->bank_account_id))
+                @elseif (isset($expense) and isset($expense->liquid_asset_id))
                     <!-- VIEW EXPENSE -->
-                    <option value="{{ $expense->bankAccount->id }}" selected>{{ $expense->bankAccount->name }}</option>
+                    <option value="{{ $expense->liquidAsset->id }}" selected>{{ $expense->liquidAsset->name }}</option>
                 @endif
             </select>
         </div>

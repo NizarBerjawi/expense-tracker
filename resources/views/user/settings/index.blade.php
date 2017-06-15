@@ -25,7 +25,7 @@
                 <div class="panel-body">
                     @include('includes.forms.passwordResetForm', [
                         'formAction'  => route('user.accounts.update'),
-                        'methodField' => method_field('PATCH'),
+                        'methodField' => method_field('PUT'),
                         'csrfField'   => csrf_field(),
                         'cancelRoute' => route('dashboard'),
                         'submit'      => 'Update Password'

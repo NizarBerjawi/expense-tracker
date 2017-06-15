@@ -4,7 +4,7 @@ namespace App\Http\ViewComposers;
 
 use App\Http\ViewComposers\BaseComposers\FormBaseComposer;
 use Illuminate\Http\Request;
-use App\Models\BankAccount;
+use App\Models\LiquidAsset;
 use App\Models\Category;
 use App\Models\Income;
 use Auth;
@@ -37,26 +37,26 @@ class IncomeFormComposer extends FormBaseComposer
                 $categories = Category::where('user_id', Auth::id())
                                       ->byTagName(['income'])
                                       ->get();
-                $bankAccounts = BankAccount::where('user_id', Auth::id())
+                $assets = LiquidAsset::where('user_id', Auth::id())
                                          ->get();
-                return compact('categories', 'bankAccounts');
+                return compact('categories', 'assets');
             case 'user.income.show':
                 $income = Income::where('id', $this->id)
                                 ->where('user_id', Auth::id())
-                                ->with(['category', 'bankAccount'])
+                                ->with(['category', 'liquidAsset'])
                                 ->first();
                 return compact('income');
             case 'user.income.edit':
                 $income = Income::where('id', $this->id)
                                 ->where('user_id', Auth::id())
-                                ->with(['category', 'bankAccount'])
+                                ->with(['category', 'liquidAsset'])
                                 ->first();
-                $bankAccounts = BankAccount::where('user_id', Auth::id())
+                $assets = LiquidAsset::where('user_id', Auth::id())
                                          ->get();
                 $categories = Category::where('user_id', Auth::id())
                                       ->byTagName(['income'])
                                       ->get();
-                return compact('income', 'categories', 'bankAccounts');
+                return compact('income', 'categories', 'assets');
         }
     }
 }

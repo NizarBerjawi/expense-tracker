@@ -4,7 +4,7 @@ namespace App\Http\ViewComposers;
 
 use App\Http\ViewComposers\BaseComposers\FormBaseComposer;
 use Illuminate\Http\Request;
-use App\Models\BankAccount;
+use App\Models\LiquidAsset;
 use App\Models\Category;
 use App\Models\Expense;
 use Auth;
@@ -39,30 +39,30 @@ class ExpensesFormComposer extends FormBaseComposer
                                       ->byTagName(['expenses'])
                                       ->get();
                 // All the user bank accounts to be displayed in select
-                $bankAccounts = BankAccount::where('user_id', Auth::id())
+                $assets = LiquidAsset::where('user_id', Auth::id())
                                            ->get();
-                return compact('categories', 'bankAccounts');
+                return compact('categories', 'assets');
             case 'user.expenses.show':
                 // The expense being edited
                 $expense = Expense::where('id', $this->id)
                                   ->where('user_id', Auth::id())
-                                  ->with(['category', 'bankAccount'])
+                                  ->with(['category', 'liquidAsset'])
                                   ->first();
                 return compact('expense');
             case 'user.expenses.edit':
                 // The expense being edited
                 $expense = Expense::where('id', $this->id)
                                   ->where('user_id', Auth::id())
-                                  ->with(['category', 'bankAccount'])
+                                  ->with(['category', 'liquidAsset'])
                                   ->first();
                 // All the user bank accounts to be displayed in select
-                $bankAccounts = BankAccount::where('user_id', Auth::id())
+                $assets = LiquidAsset::where('user_id', Auth::id())
                                            ->get();
                 // All the user categories to be displayed in select
                 $categories = Category::where('user_id', Auth::id())
                                       ->byTagName(['expenses'])
                                       ->get();
-                return compact('expense', 'categories', 'bankAccounts');
+                return compact('expense', 'categories', 'assets');
         }
     }
 }

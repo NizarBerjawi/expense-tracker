@@ -7,7 +7,6 @@ use App\Http\Requests\StoreProfile;
 use App\Http\Requests\UpdateProfile;
 use Illuminate\Http\Request;
 use App\Models\Profile;
-use Auth;
 
 class ProfileController extends Controller
 {
@@ -42,7 +41,7 @@ class ProfileController extends Controller
     public function store(StoreProfile $request)
     {
         // Create a user profile and attach to the authenticated user
-        Auth::user()->profile()->create($request->all());
+        $request->user()->profile()->create($request->all());
         // Flash the succes message
         $request->session()->flash('success', 'Profile created successfully');
         // Return to the correct route
@@ -68,7 +67,7 @@ class ProfileController extends Controller
     public function update(UpdateProfile $request)
     {
         // Update the authenticated user's profile
-        Auth::user()->profile()
+        $request->user()->profile()
                     ->update($request->except(['_token', '_method']));
         // Flash the success message
         $request->session()->flash('success', 'Profile updated successfully');

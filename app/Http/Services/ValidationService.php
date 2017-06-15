@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Traits;
+namespace App\Http\Services;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Models\LiquidAsset;
 use App\Models\Category;
 use Validator;
 use Auth;
 
-trait ValidatesInputTrait
+class ValidationService
 {
     /**
      * Creates an instance of the validator using the user
@@ -17,12 +18,12 @@ trait ValidatesInputTrait
      * @param   \Illuminate\Http\Request  $request
      * @return  \Illuminate\Validation\Validator
      */
-    private function makeValidator(Request $request)
+    public function makeValidator(Request $request, Model $model)
     {
         return Validator::make(
             $request->all(),
-            $this->model->rules(),
-            $this->model->messages()
+            $model->rules(),
+            $model->messages()
         );
     }
 
@@ -34,7 +35,7 @@ trait ValidatesInputTrait
     * @param  string  $message
     * @return \Illuminate\Validation\Validator
     */
-    protected function addChecks($validator, Array $checks)
+    public function addChecks($validator, Array $checks)
     {
         foreach($checks as $check) {
             // Get the check result from the array
@@ -55,14 +56,13 @@ trait ValidatesInputTrait
     }
 
     /**
-     * Check if the selected category is valid
+     * Check if the selected category exists for the specified Model
      *
      * @param  \Illuminate\Http\Request  $request
      * @return boolean
      */
-    protected function categoryExists(Request $request)
+    public function categoryExists(Request $request, String $resource)
     {
-        $resource = $this->resourceName();
         // Attempt to find the category
         $category = Category::where('id', $request->input('category_id'))
                           ->where('user_id', Auth::id())
@@ -80,7 +80,7 @@ trait ValidatesInputTrait
      * @param  \Illuminate\Http\Request  $request
      * @return boolean
      */
-    protected function nameAvailable(Request $request)
+    public function nameAvailable(Request $request)
     {
         // Attempt to find a category with the same name and tag
         $category = Category::where('name', $request->input('name'))
@@ -105,9 +105,8 @@ trait ValidatesInputTrait
      * @param  \Illuminate\Http\Request  $request
      * @return boolean
      */
-    protected function assetExists(Request $request)
+    public function assetExists(Request $request)
     {
-        $resource = $this->resourceName();
         // Attempt to find the category
         $asset = LiquidAsset::where('id', $request->input('liquid_asset_id'))
                                ->where('user_id', Auth::id())

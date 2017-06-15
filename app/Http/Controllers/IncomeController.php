@@ -3,24 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\BaseControllers\BudgetBaseController;
-use App\Http\Traits\ValidatesInputTrait;
+use App\Http\Services\ValidationService;
 use Illuminate\Validation\Validator;
 use Illuminate\Http\Request;
 use App\Models\Income;
 
 class IncomeController extends BudgetBaseController
 {
-    use ValidatesInputTrait;
+    /**
+     * An instance of the validation service
+     *
+     * @var App\Http\Services\ValidationService
+     */
+    protected $validate;
 
     /**
      * Create a new controller instance.
      *
      * @param  App\Models\Income $income
+     * @param  App\Http\Services\ValidationService $validation
      * @return void
      */
-    public function __construct(Income $income)
+    public function __construct(Income $income, ValidationService $validation)
     {
         $this->model = $income;
+        $this->validate = $validation;
         $this->middleware('auth');
     }
 
@@ -54,18 +61,18 @@ class IncomeController extends BudgetBaseController
     protected function validateInput(Request $request) : Validator
     {
         $checks = array([
-                'check'   => !$this->categoryExists($request),
+                'check'   => !$this->validate->categoryExists($request, $this->resourceName()),
                 'message' => 'Please select a valid category for the income'
             ],
             [
-                'check'   => !$this->assetExists($request),
+                'check'   => !$this->validate->assetExists($request),
                 'message' => 'Please select a valid asset for the income'
             ]
         );
         // Create the validator
-        $validator = $this->makeValidator($request, $this->model);
+        $validator = $this->validate->makeValidator($request, $this->model);
         // Add additional category check
-        $validator = $this->addChecks($validator, $checks);
+        $validator = $this->validate->addChecks($validator, $checks);
         return $validator;
     }
 }

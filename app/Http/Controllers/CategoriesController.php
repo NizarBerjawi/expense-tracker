@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\BaseControllers\BudgetBaseController;
-use App\Http\Traits\ValidatesInputTrait;
+use App\Http\Services\ValidationService;
 use Illuminate\Validation\Validator;
 use Illuminate\Http\Request;
 use App\Models\Category;
 
 class CategoriesController extends BudgetBaseController
 {
-    use ValidatesInputTrait;
+    /**
+     * An instance of the validation service
+     *
+     * @var App\Http\Services\ValidationService
+     */
+    protected $validate;
 
     /**
      * Create a new controller instance.
@@ -18,9 +23,10 @@ class CategoriesController extends BudgetBaseController
      * @param  App\Models\Category $category
      * @return void
      */
-    public function __construct(Category $category)
+    public function __construct(Category $category, ValidationService $validation)
     {
         $this->model = $category;
+        $this->validate = $validation;
         $this->middleware('auth');
     }
 
@@ -54,14 +60,14 @@ class CategoriesController extends BudgetBaseController
     protected function validateInput(Request $request) : Validator
     {
         $checks = array([
-                'check'   => !$this->nameAvailable($request),
+                'check'   => !$this->validate->nameAvailable($request),
                 'message' => 'This category name has already been created'
             ]
         );
         // Create the validator
-        $validator = $this->makeValidator($request, $this->model);
+        $validator = $this->validate->makeValidator($request, $this->model);
         // Add additional category check
-        $validator = $this->addChecks($validator, $checks);
+        $validator = $this->validate->addChecks($validator, $checks);
         return $validator;
     }
 }

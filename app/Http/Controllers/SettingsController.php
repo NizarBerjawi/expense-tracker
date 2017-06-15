@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\BaseControllers\Controller;
+use App\Http\Requests\UpdatePassword;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use Auth;
 
 class SettingsController extends Controller
 {
@@ -25,17 +25,16 @@ class SettingsController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function update(Request $request)
+    public function update(UpdatePassword $request)
     {
-        // Get the user's old password
-        $oldPassword = $request->user()->password;
-        if (Hash::check('plain-text', $hashedPassword)) {
-            // The passwords match...
-        }
-        // Validate the new password length...
-        $request->user()->fill([
-            'password' => Hash::make($request->newPassword)
-        ])->save();
+        // Update the password
+        $request->user()->update([
+            'password' => Hash::make($request->input('password'))
+        ]);
+        // Flash the success message
+        $request->session()->flash('success', 'Password updated successfully');
+        // Redirect to the dashboard
+        return back();
     }
 
     /**
@@ -47,7 +46,7 @@ class SettingsController extends Controller
     public function destroy(Request $request)
     {
         // Get an instance of the authenticated user
-        $user = Auth::user();
+        $user = $request->user();
         // Delete the user
         $user->delete();
         // Redirect to the login page
