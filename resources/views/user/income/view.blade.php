@@ -46,6 +46,7 @@
     <script src="{{ asset('lib/moment.js/min/moment.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('lib/datetimepicker/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/app-form-elements.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/table-actions.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
     $(document).ready(function(){
@@ -53,4 +54,10 @@
         App.formElements();
     });
     </script>
+@endsection
+
+@section('modals')
+    @include('includes.modals.confirmDelete', [
+        'confirmation_text' => 'Are you sure you want to delete the selected income?'
+    ])
 @endsection

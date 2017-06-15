@@ -4,9 +4,9 @@
     <div class="be-wrapper be-login be-signup">
         <div class="be-content">
             <div class="main-content container-fluid">
-                <div class="splash-container sign-up">
-                    <div class="panel panel-default panel-border-color panel-border-color-primary">
-                        <div class="panel-heading"><img src="{{ asset('img/logo.png') }}" alt="logo" width="102" height="67" class="logo-img"><span class="splash-description">Please enter your user information.</span></div>
+                <div class="splash-container">
+                    <div class="panel panel-default panel-border-color panel-border-color-custom">
+                        <div class="panel-heading"><img src="{{ asset('img/logo.png') }}" alt="logo" class="logo-img"></div>
                         <div class="panel-body">
                             <form action="{{ route('register') }}" method="POST"><span class="splash-title xs-pb-20">Sign Up</span>
                                 {{ csrf_field() }}
@@ -29,12 +29,12 @@
                                 </div>
 
                                 <div class="form-group xs-pt-10">
-                                    <button type="submit" class="btn btn-block btn-primary btn-xl">Sign Up</button>
+                                    <button type="submit" class="btn btn-block btn-custom btn-xl">Sign Up</button>
                                 </div>
                             </form>
                         </div>
                     </div>
-                    <div class="splash-footer">&copy; 2017 Nizar El Berjawi</div>
+                    <div class="splash-footer"><span>Already registered? <a href="{{ route('login') }}">Log in</a></span></div>
                 </div>
             </div>
         </div>

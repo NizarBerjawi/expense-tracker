@@ -42,8 +42,18 @@ class ProfileController extends Controller
     {
         // Create a user profile and attach to the authenticated user
         $request->user()->profile()->create($request->all());
-        // Flash the succes message
+        // Flash the success message
         $request->session()->flash('success', 'Profile created successfully');
+
+
+        if ($request->user()->liquidAssets->isEmpty()) {
+            // Flash message
+            $request->session()->flash('success', 'Now add some assets');
+            return redirect()->route('user.assets.create');
+        }
+
+
+        
         // Return to the correct route
         return redirect()->route('user.profiles.index');
     }

@@ -23,7 +23,7 @@
             <div class="panel panel-default panel-border-color panel-border-color-primary">
                 <div class="panel-heading panel-heading-divider">View Asset
                     <div class="tools">
-                        <a href='{{ route("user.assets.edit", $asset->id) }}' type="submit" class="btn btn-space btn-primary">Edit</a>
+                        <a href='{{ route("user.assets.edit", $asset->id) }}' type="submit" class="icon mdi mdi-edit"></a>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -50,6 +50,7 @@
     <script src="{{ asset('lib/moment.js/min/moment.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('lib/datetimepicker/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/app-form-elements.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/table-actions.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
         $(document).ready(function(){
@@ -60,4 +61,7 @@
 @endsection
 
 @section('modals')
+    @include('includes.modals.confirmDelete', [
+        'confirmation_text' => 'Are you sure you want to delete the selected asset?'
+    ])
 @endsection

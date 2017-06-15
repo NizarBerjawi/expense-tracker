@@ -5,10 +5,10 @@
         <div class="be-content">
             <div class="main-content container-fluid">
                 <div class="splash-container">
-                    <div class="panel panel-default panel-border-color panel-border-color-primary">
-                        <div class="panel-heading"><img src="{{ asset('img/logo.png') }}" alt="logo" width="102" height="67" class="logo-img"><span class="splash-description">Please enter your user information.</span></div>
+                    <div class="panel panel-default panel-border-color panel-border-color-custom">
+                        <div class="panel-heading"><img src="{{ asset('img/logo.png') }}" alt="logo" class="logo-img"></div>
                         <div class="panel-body">
-                            <form action="{{ route('login') }}" method="POST">
+                            <form action="{{ route('login') }}" method="POST"><span class="splash-title xs-pb-20">Log in</span>
                                 {{ csrf_field() }}
 
                                 <div class="form-group">
@@ -29,7 +29,7 @@
                                     <div class="col-xs-6 login-forgot-password"><a href="{{ route('password.request') }}">Forgot Password?</a></div>
                                 </div>
                                 <div class="form-group login-submit">
-                                    <button data-dismiss="modal" type="submit" class="btn btn-primary btn-xl">Sign me in</button>
+                                    <button data-dismiss="modal" type="submit" class="btn btn-custom btn-xl">Sign me in</button>
                                 </div>
                             </form>
                         </div>

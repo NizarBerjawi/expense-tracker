@@ -39,8 +39,8 @@
                             <div class="user-display-bottom">
                                 <div class="user-display-avatar"><img src="{{ asset('img/avatar-150.png') }}" alt="Avatar"></div>
                                 <div class="user-display-info">
-                                    <div class="name">{{ $user->profile->first_name . ' ' . $user->profile->last_name }}</div>
-                                    <div class="nick"><span class="mdi mdi-account"></span> KDonny</div>
+                                    <div class="name">{{ $user->profile->full_name }}</div>
+                                    <div class="nick"><span class="mdi mdi-account"></span> {{ $user->email }}</div>
                                 </div>
                                 <div class="row user-display-details">
                                     <div class="col-xs-4">
@@ -69,7 +69,7 @@
                                         <tr>
                                             <td class="icon"><span class="mdi mdi-case"></span></td>
                                             <td class="item">Full Name<span class="icon s7-portfolio"></span></td>
-                                            <td>{{ $user->profile->first_name . ' ' . $user->profile->last_name }}</td>
+                                            <td>{{ $user->profile->full_name }}</td>
                                         </tr>
                                         <tr>
                                             <td class="icon"><span class="mdi mdi-case"></span></td>
@@ -129,7 +129,7 @@
 @section('modals')
     @if (!$assets->isEmpty())
         @include('includes.modals.confirmDelete', [
-            'confirmation_text' => 'Are you sure you want to delete the selected account?'
+            'confirmation_text' => 'Are you sure you want to delete the selected asset?'
         ])
     @endif
 @endsection

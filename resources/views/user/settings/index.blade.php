@@ -53,7 +53,11 @@
 @endsection
 
 @section('scripts')
+    <script src="/js/table-actions.js" type="text/javascript"></script>
 @endsection
 
 @section('modals')
+    @include('includes.modals.confirmDelete', [
+        'confirmation_text' => 'Are you sure you want to deactivate your account? There is no turning back!'
+    ])
 @endsection

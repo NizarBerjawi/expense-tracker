@@ -1,7 +1,7 @@
 <div class="panel panel-border-color panel-border-color-danger">
     <div class="panel-heading panel-heading-divider">Danger Zone</div>
     <div class="panel-body text-center">
-        <form action="{{ $deleteRoute }}" method="POST" style="border-radius: 0px;" class="form-horizontal group-border-dashed">
+        <form action="{{ $deleteRoute }}" method="POST" style="border-radius: 0px;" class="form-horizontal group-border-dashed actions" data-target="#delete-modal">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
 

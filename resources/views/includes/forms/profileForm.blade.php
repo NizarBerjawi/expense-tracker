@@ -3,16 +3,9 @@
     {{ $method_field }}
 
     <div class="form-group">
-        <label class="col-md-3 col-lg-3 control-label">First Name</label>
+        <label class="col-md-3 col-lg-3 control-label">Full Name</label>
         <div class="col-md-9 col-lg-6">
-            <input type="text" class="form-control" name="first_name" value="{{ $user->profile->first_name or old('first_name') }}">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-md-3 col-lg-3 control-label">Last Name</label>
-        <div class="col-md-9 col-lg-6">
-            <input type="text" class="form-control" name="last_name" value="{{ $user->profile->last_name or old('last_name') }}">
+            <input type="text" class="form-control" name="full_name" value="{{ $user->profile->full_name or old('full_name') }}">
         </div>
     </div>
 

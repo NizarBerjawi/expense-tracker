@@ -9,6 +9,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}"/>
 
         <!-- Styles -->
         <style>
@@ -29,16 +31,6 @@
                 align-items: center;
                 display: flex;
                 justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
             }
 
             .content {
@@ -66,22 +58,27 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/dashboard') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    <img src="/img/logo-xl.png"></img>
+                    <img src="/img/logo-xl.png" class="img-fluid"></img>
+                    @if (Route::has('login'))
+                        <div class="row links">
+                            @if (Auth::check())
+                                <a class="btn btn-primary" href="{{ url('/dashboard') }}">Home</a>
+                            @else
+                                <a class="btn btn-default" href="{{ url('/login') }}">Login</a>
+                                <a class="btn btn-custom" href="{{ url('/register') }}">Register</a>
+                            @endif
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
+
+        <script src="{{ asset('lib/jquery/jquery.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/main.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('lib/bootstrap/dist/js/bootstrap.min.js') }}" type="text/javascript"></script>
     </body>
 </html>

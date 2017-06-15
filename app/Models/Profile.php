@@ -13,8 +13,7 @@ class Profile extends Model
      */
     protected $fillable = [
         'user_id',
-        'first_name',
-        'last_name',
+        'full_name',
         'occupation',
         'date_of_birth',
         'phone'
@@ -28,8 +27,7 @@ class Profile extends Model
     public function rules()
     {
         return [
-            'first_name'    => 'required|max:255',
-            'last_name'     => 'required|max:255',
+            'full_name'    => 'required|max:255',
             'occupation'    => 'required|max:255',
             'date_of_birth' => 'required|date',
             'phone'         => 'required|numeric',
@@ -44,10 +42,8 @@ class Profile extends Model
     public function messages()
     {
         return [
-            'first_name.required'    => 'The first name field is required',
-            'first_name.max'         => 'The first name field should not be more than 255 characters',
-            'last_name.required'     => 'The last name field is required',
-            'last_name.max'          => 'The last name field should not be more than 255 characters',
+            'full_name.required'     => 'The full name field is required',
+            'full_name.max'          => 'The full name field should not be more than 255 characters',
             'occupation.required'    => 'The occupation field is required',
             'occupation.max'         => 'The occupation field should not be more than 255 characters',
             'date_of_birth.required' => 'The date of birth field is required',

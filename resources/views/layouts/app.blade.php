@@ -12,6 +12,8 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}"/>
 
         <!-- Scripts -->
         <script>
@@ -23,5 +25,10 @@
     <body class="be-splash-screen">
         @yield('content')
         @yield('scripts')
+
+        <script src="{{ asset('lib/jquery/jquery.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/main.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('lib/bootstrap/dist/js/bootstrap.min.js') }}" type="text/javascript"></script>
     </body>
 </html>

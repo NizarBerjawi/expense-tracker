@@ -54,7 +54,7 @@
 @section('modals')
     @if (!$categories->isEmpty())
         @include('includes.modals.confirmDelete', [
-            'confirmation_text' => 'Are you sure you want to delete the selected categories?'
+            'confirmation_text' => 'Are you sure you want to delete the selected category?'
         ])
     @endif
 @endsection

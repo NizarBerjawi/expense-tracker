@@ -4,7 +4,7 @@
         <!-- Only show edit button in the view resource page -->
         @if (isset($model) and $disabled)
         <div class="tools">
-            <a href='{{ route("user.$resource.edit", $model->id) }}' type="submit" class="btn btn-space btn-primary">Edit</a>
+            <a href='{{ route("user.$resource.edit", $model->id) }}' type="submit" class="icon mdi mdi-edit"></a>
         </div>
         @endif
     </div>

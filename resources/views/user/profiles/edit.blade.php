@@ -34,7 +34,9 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
+
 
 @section('scripts')
     <script src="{{ asset('lib/moment.js/min/moment.min.js') }}" type="text/javascript"></script>

@@ -14,18 +14,18 @@
         <div class="col-md-9 col-lg-6">
             <select {{ $disabled ? 'disabled' : '' }} multiple="" class="select2" name="tag_id">
                 @if (isset($tags) and !isset($category))
-                <!-- NEW CATEGORY -->
-                @foreach($tags as $tag)
-                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
-                @endforeach
+                    <!-- NEW CATEGORY -->
+                    @foreach($tags as $tag)
+                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                    @endforeach
                 @elseif (isset($tags) and isset($category))
-                <!-- EDIT CATEGORY -->
-                @foreach($tags as $tag)
-                <option {{ $category->tag_id == $tag->id ? "selected" : "" }} value="{{ $tag->id }}">{{ $tag->name }}</option>
-                @endforeach
+                    <!-- EDIT CATEGORY -->
+                    @foreach($tags as $tag)
+                    <option {{ $category->tag_id == $tag->id ? "selected" : "" }} value="{{ $tag->id }}">{{ $tag->name }}</option>
+                    @endforeach
                 @elseif (isset($category))
-                <!-- VIEW CATEGORY -->
-                <option value="{{ $category->tag->id }}" selected>{{ $category->tag->name }}</option>
+                    <!-- VIEW CATEGORY -->
+                    <option value="{{ $category->tag->id }}" selected>{{ $category->tag->name }}</option>
                 @endif
             </select>
         </div>

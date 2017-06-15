@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\BaseControllers\Controller;
+use Illuminate\Http\Request;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -21,8 +23,16 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        
+        if (!Auth::user()->profile) {
+            // Flash the message
+            return redirect()->route('user.profiles.create');
+        }
+
+
         return view('home');
     }
 
