@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\BaseControllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -19,19 +20,23 @@ class SettingsController extends Controller
     }
 
     /**
-     * Update the User password.
+     * Update the password for the user.
      *
-     * @param App\Http\Requests\ChangePasswordRequest  $request
+     * @param  Request  $request
      * @return Response
      */
-     public function update(Request $request)
-     {
-         // Update the user's password
-         Auth::user()->updatePassword($request->input('password'));
-         // Flash the success message
-         $request->session()->flash('success', 'Password updated successfully');
-         return redirect()->route('account.index');
-     }
+    public function update(Request $request)
+    {
+        // Get the user's old password
+        $oldPassword = $request->user()->password;
+        if (Hash::check('plain-text', $hashedPassword)) {
+            // The passwords match...
+        }
+        // Validate the new password length...
+        $request->user()->fill([
+            'password' => Hash::make($request->newPassword)
+        ])->save();
+    }
 
     /**
      * Delete a specific account.
