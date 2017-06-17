@@ -68,11 +68,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', 'us-cdbr-iron-east-03.cleardb.net'),
+            'host' => 'us-cdbr-iron-east-03.cleardb.net',
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'heroku_5def517d625534f'),
-            'username' => env('DB_USERNAME', 'bb678a49663bd5'),
-            'password' => env('DB_PASSWORD', '8ff13304'),
+            'database' => 'heroku_5def517d625534f',
+            'username' => 'bb678a49663bd5',
+            'password' => '8ff13304',
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
