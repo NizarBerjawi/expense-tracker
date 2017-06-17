@@ -1,16 +1,4 @@
 <?php
-// mysql://bb678a49663bd5:8ff13304@us-cdbr-iron-east-03.cleardb.net/heroku_5def517d625534f?reconnect=true
-// user: bb678a49663bd5
-// pass: 8ff13304
-// host : us-cdbr-iron-east-03.cleardb.net
-// database: heroku_5def517d625534f
-
-// $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-//
-// $host = $url["host"];
-// $username = $url["user"];
-// $password = $url["pass"];
-// $database = substr($url["path"], 1);
 
 return [
     /*
@@ -50,29 +38,13 @@ return [
             'prefix' => '',
         ],
 
-        // 'mysql' => [
-        //     'driver' => 'mysql',
-        //     'host' => env('DB_HOST', '127.0.0.1'),
-        //     'port' => env('DB_PORT', '3306'),
-        //     'database' => env('DB_DATABASE', 'forge'),
-        //     'username' => env('DB_USERNAME', 'forge'),
-        //     'password' => env('DB_PASSWORD', ''),
-        //     'unix_socket' => env('DB_SOCKET', ''),
-        //     'charset' => 'utf8mb4',
-        //     'collation' => 'utf8mb4_unicode_ci',
-        //     'prefix' => '',
-        //     'strict' => true,
-        //     'engine' => null,
-        // ],
-
-
         'mysql' => [
             'driver' => 'mysql',
-            'host' => 'us-cdbr-iron-east-03.cleardb.net',
+            'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => 'heroku_5def517d625534f',
-            'username' => 'bb678a49663bd5',
-            'password' => '8ff13304',
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
