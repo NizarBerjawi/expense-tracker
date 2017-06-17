@@ -136,7 +136,7 @@ class Asset extends Model
     public function getBalanceAttribute($value)
     {
         // Add a dollar sign and separators to the balance
-        $balance = sprintf("$ %s", number_format($value));
+        $balance = sprintf("$ %s", number_format($value, 2));
         return $balance;
     }
 }
