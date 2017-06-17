@@ -1,5 +1,9 @@
 <?php
 // mysql://bb678a49663bd5:8ff13304@us-cdbr-iron-east-03.cleardb.net/heroku_5def517d625534f?reconnect=true
+// user: bb678a49663bd5
+// pass: 8ff13304
+// host : us-cdbr-iron-east-03.cleardb.net
+// database: heroku_5def517d625534f
 
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
