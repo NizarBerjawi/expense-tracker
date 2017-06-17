@@ -27,7 +27,7 @@
     <div class="form-group">
         <label class="col-md-3 col-lg-3 control-label">Asset</label>
         <div class="col-md-9 col-lg-6">
-            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="select2" name="liquid_asset_id">
+            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="select2" name="asset_id">
                 @if (!isset($expense))
                     <!-- NEW EXPENSE -->
                     @foreach($assets as $asset)
@@ -36,11 +36,11 @@
                 @elseif (isset($assets) and isset($expense))
                     <!-- EDIT EXPENSE -->
                     @foreach($assets as $asset)
-                        <option {{ $expense->liquid_asset_id == $asset->id ? "selected" : "" }} value="{{ $asset->id }}">{{ $asset->name }}</option>
+                        <option {{ $expense->asset_id == $asset->id ? "selected" : "" }} value="{{ $asset->id }}">{{ $asset->name }}</option>
                     @endforeach
-                @elseif (isset($expense) and isset($expense->liquid_asset_id))
+                @elseif (isset($expense) and isset($expense->asset_id))
                     <!-- VIEW EXPENSE -->
-                    <option value="{{ $expense->liquidAsset->id }}" selected>{{ $expense->liquidAsset->name }}</option>
+                    <option value="{{ $expense->asset->id }}" selected>{{ $expense->asset->name }}</option>
                 @endif
             </select>
         </div>

@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    @include('includes.forms.liquidAssetsForm', [
+                    @include('includes.forms.assetsForm', [
                         'formAction'    => '',
                         'csrfField'     => '',
                         'methodField'   => '',

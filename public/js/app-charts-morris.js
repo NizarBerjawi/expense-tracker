@@ -50,7 +50,7 @@ var App = (function () {
 					console.log('success');
 				},
 				error: function(response) {
-					console.log(response.responseText);
+					console.log('error');
 				}
 			}).done(function(response) {
 				callback(response);

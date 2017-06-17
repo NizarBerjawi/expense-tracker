@@ -6,6 +6,12 @@
 
 @section('content')
     <div class="be-content">
+        @include('includes.partials.breadcrumbs', [
+            'pageTitle' => 'Dashboard',
+            'levels'    => [
+                            'Home'       => route('dashboard'),
+                           ]
+        ])
         <div class="main-content container-fluid">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -36,7 +42,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading panel-heading-divider">Top Expense Categories of {{ $month }}</div>
                     <div class="panel-body">
-                        @if($categories->isEmpty())
+                        @if ($categories->isEmpty())
                             <div>You have not added any expenses recently!</div>
                         @else
                             @foreach($categories as $category)
@@ -84,13 +90,13 @@
     <script src="{{ asset('lib/raphael/raphael-min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('lib/morrisjs/morris.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/app-charts-morris.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('lib/moment.js/min/moment.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/app-form-elements.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
         $(document).ready(function(){
-            App.init();
-            App.chartsMorris();
+            if ($('#expenses-year').length) {
+                App.chartsMorris();
+            }
             App.formElements();
         });
     </script>

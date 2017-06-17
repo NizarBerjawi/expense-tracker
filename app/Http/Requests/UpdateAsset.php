@@ -3,17 +3,17 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\BaseRequests\BaseRequest;
-use App\Models\LiquidAsset;
+use App\Models\Asset;
 
 class UpdateAsset extends BaseRequest
 {
     /**
      * Create a new UpdateAsset request instance.
      *
-     * @param  App\Models\LiquidAsset $asset
+     * @param  App\Models\Asset $asset
      * @return void
      */
-    public function __construct(LiquidAsset $asset)
+    public function __construct(Asset $asset)
     {
         $this->model = $asset;
     }

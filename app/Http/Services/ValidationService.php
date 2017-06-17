@@ -4,7 +4,7 @@ namespace App\Http\Services;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use App\Models\LiquidAsset;
+use App\Models\Asset;
 use App\Models\Category;
 use Validator;
 use Auth;
@@ -37,6 +37,7 @@ class ValidationService
     */
     public function addChecks($validator, Array $checks)
     {
+        // Loop over the checks array and add each to the validator
         foreach($checks as $check) {
             // Get the check result from the array
             $result  = $check['check'];
@@ -100,7 +101,7 @@ class ValidationService
     }
 
     /**
-     * Check if the selected bank account is valid
+     * Check if the selected asset is valid
      *
      * @param  \Illuminate\Http\Request  $request
      * @return boolean
@@ -108,7 +109,7 @@ class ValidationService
     public function assetExists(Request $request)
     {
         // Attempt to find the category
-        $asset = LiquidAsset::where('id', $request->input('liquid_asset_id'))
+        $asset = Asset::where('id', $request->input('asset_id'))
                                ->where('user_id', Auth::id())
                                ->first();
         return $asset;

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default navbar-fixed-top be-top-header">
     <div class="container-fluid">
-        <div class="navbar-header"><a href="{{ route('dashboard') }}" class="navbar-brand"></a></div>
+        <div class="navbar-header"><a href="{{ route('welcome') }}" class="navbar-brand"></a></div>
         <div class="be-right-navbar">
             <ul class="nav navbar-nav navbar-right be-user-nav">
                 <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><img src="{{ asset('img/avatar.png') }}" alt="Avatar"><span class="user-name">{{ Auth::user()->name }}</span></a>
@@ -11,7 +11,9 @@
                                 <div class="user-position online">Available</div>
                             </div>
                         </li>
+                        @if(!Auth::user()->isFirstLogin())
                         <li><a href="{{ route('user.profiles.index') }}"><span class="icon mdi mdi-face"></span> Profile</a></li>
+                        @endif
                         <li><a href="{{ route('user.accounts.index') }}"><span class="icon mdi mdi-settings"></span> Settings</a></li>
                         <li><a href="{{ url('/logout') }}" class="sc-color-text" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <span class="icon mdi mdi-power"></span> Logout

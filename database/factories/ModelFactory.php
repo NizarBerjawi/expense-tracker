@@ -23,101 +23,64 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Models\LiquidAsset::class, function (Faker\Generator $faker) {
-    $userId = mt_rand(1, 2);
-    $startingBalance = mt_rand(1, 100000);
+$factory->define(App\Models\Profile::class, function (Faker\Generator $faker) {
+    return [
+        'full_name'     => $faker->name,
+        'occupation'    => $faker->jobTitle,
+        'date_of_birth' => $faker->dateTimeThisCentury(
+            $max = 'now',
+            $timezone = date_default_timezone_get()
+        ),
+        'phone'         => $faker->phoneNumber,
+        'user_id'       => 1,
+    ];
+});
 
+$factory->define(App\Models\Asset::class, function (Faker\Generator $faker) {
+    $startingBalance = mt_rand(1, 100000);
     return [
         'name'              => $faker->name,
-        'user_id'           => $userId,
+        'user_id'           => 1,
         'starting_balance'  => $startingBalance,
         'balance'           => $startingBalance,
     ];
 });
 
 $factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
-    $tagId = mt_rand(1, 2);
-    $userId = mt_rand(1, 2);
-    $date = new Carbon();
-
     return [
         'name'          => $faker->name,
         'description'   => $faker->sentence($nbWords = 6, $variableNbWords = true),
-        'tag_id'        => $tagId,
-        'user_id'       => $userId,
+        'tag_id'        => mt_rand(1, 2),
+        'user_id'       => 1,
     ];
 });
 
 $factory->define(App\Models\Expense::class, function (Faker\Generator $faker) {
-    $randomDays = mt_rand(1, 28);
-    $randomMonths = mt_rand(1, 12);
-    $randomYears = mt_rand(2000, 2017);
-    $categoryId = mt_rand(1, 50);
-    $userId = mt_rand(1, 2);
-    $assetId = mt_rand(1, 20);
-    $date = new Carbon();
-
-    $date->day($randomDays);
-    $date->month($randomMonths);
-    $date->year($randomYears);
-
     return [
-        'name'            => $faker->name,
-        'description'     => $faker->sentence($nbWords = 6, $variableNbWords = true),
-        'category_id'     => $categoryId,
-        'user_id'         => $userId,
-        'liquid_asset_id' => $assetId,
-        'date'            => $date,
-        'amount'          => mt_rand(1, 5000)
+        'name'        => $faker->name,
+        'description' => $faker->sentence($nbWords = 6, $variableNbWords = true),
+        'category_id' => mt_rand(1, 50),
+        'user_id'     => 1,
+        'asset_id'    => mt_rand(1, 5),
+        'date'        => $faker->dateTimeThisDecade(
+            $max = 'now',
+            $timezone = date_default_timezone_get()
+        ),
+        'amount'      => mt_rand(1, 5000)
     ];
 });
-
 
 $factory->define(App\Models\Income::class, function (Faker\Generator $faker) {
-    $randomDays = mt_rand(1, 28);
-    $randomMonths = mt_rand(1, 12);
-    $randomYears = mt_rand(2000, 2017);
-    $categoryId = mt_rand(1, 50);
-    $userId = mt_rand(1, 2);
-    $assetId = mt_rand(1, 20);
-    $date = new Carbon();
-
-    $date->day($randomDays);
-    $date->month($randomMonths);
-    $date->year($randomYears);
-
     return [
-        'name'            => $faker->name,
-        'description'     => $faker->sentence($nbWords = 6, $variableNbWords = true),
-        'category_id'     => $categoryId,
-        'user_id'         => $userId,
-        'liquid_asset_id' => $assetId,
-        'date'            => $date,
-        'amount'          => mt_rand(5000, 7000)
+        'name'        => $faker->name,
+        'description' => $faker->sentence($nbWords = 6, $variableNbWords = true),
+        'category_id' => mt_rand(1, 50),
+        'user_id'     => 1,
+        'asset_id'    => mt_rand(1, 5),
+        'date'        => $faker->dateTimeThisDecade(
+            $max = 'now',
+            $timezone = date_default_timezone_get()
+        ),
+        'amount'      => mt_rand(5000, 10000)
     ];
 });
-
-
-// $factory->define(App\Models\Income::class, function (Faker\Generator $faker) {
-//     $randomDays = mt_rand(1, 28);
-//     $randomMonths = mt_rand(1, 12);
-//     $randomYears = mt_rand(2000, 2017);
-//     $categoryId = mt_rand(1, 50);
-//     $userId = mt_rand(1, 2);
-//     $assetId = mt_rand(1, 20);
-//     $date = new Carbon();
-//
-//     $date->day($randomDays);
-//     $date->month($randomMonths);
-//     $date->year($randomYears);
-//
-//     return [
-//         'name'            => $faker->name,
-//         'description'     => $faker->sentence($nbWords = 6, $variableNbWords = true),
-//         'category_id'     => $categoryId,
-//         'user_id'         => $userId,
-//         'liquid_asset_id' => $assetId,
-//         'date'            => $date,
-//         'amount'          => mt_rand(1, 2000)
-//     ];
-// });

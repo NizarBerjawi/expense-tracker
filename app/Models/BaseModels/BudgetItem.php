@@ -75,13 +75,13 @@ class BudgetItem extends Model
     }
 
     /**
-     * Get the bank account that this budget item belongs to.
+     * Get the asset that this budget item belongs to.
      *
      * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function liquidAsset()
+    public function asset()
     {
-      return $this->belongsTo('App\Models\LiquidAsset');
+      return $this->belongsTo('App\Models\Asset');
     }
 
     /***********************************************************************/

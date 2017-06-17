@@ -4,7 +4,7 @@ namespace App\Http\ViewComposers;
 
 use App\Http\ViewComposers\BaseComposers\FormBaseComposer;
 use Illuminate\Http\Request;
-use App\Models\LiquidAsset;
+use App\Models\Asset;
 use App\Models\Category;
 use App\Models\Expense;
 use Auth;
@@ -39,24 +39,24 @@ class ExpensesFormComposer extends FormBaseComposer
                                       ->byTagName(['expenses'])
                                       ->get();
                 // All the user bank accounts to be displayed in select
-                $assets = LiquidAsset::where('user_id', Auth::id())
+                $assets = Asset::where('user_id', Auth::id())
                                            ->get();
                 return compact('categories', 'assets');
             case 'user.expenses.show':
                 // The expense being edited
                 $expense = Expense::where('id', $this->id)
                                   ->where('user_id', Auth::id())
-                                  ->with(['category', 'liquidAsset'])
+                                  ->with(['category', 'asset'])
                                   ->first();
                 return compact('expense');
             case 'user.expenses.edit':
                 // The expense being edited
                 $expense = Expense::where('id', $this->id)
                                   ->where('user_id', Auth::id())
-                                  ->with(['category', 'liquidAsset'])
+                                  ->with(['category', 'asset'])
                                   ->first();
                 // All the user bank accounts to be displayed in select
-                $assets = LiquidAsset::where('user_id', Auth::id())
+                $assets = Asset::where('user_id', Auth::id())
                                            ->get();
                 // All the user categories to be displayed in select
                 $categories = Category::where('user_id', Auth::id())

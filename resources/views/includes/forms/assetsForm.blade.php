@@ -5,14 +5,14 @@
     <div class="form-group">
         <label class="col-md-3 col-lg-3 control-label">Name</label>
         <div class="col-md-9 col-lg-6">
-            <input type="text" class="form-control" name="name" value="{{ $asset->name or old('name') }}" {{ $disabled ? 'disabled' : '' }}>
+            <input type="text" class="form-control" name="name" value="{{ $asset->name or old('name') }}" {{ $disabled ? 'disabled' : '' }} placeholder="e.g. Bank Account ABC">
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-md-3 col-lg-3 control-label">Starting Balance</label>
         <div class="col-md-9 col-lg-6">
-            <input type="text" class="form-control" name="starting_balance" value="{{ $asset->starting_balance or old('starting_balance') }}" {{ $disabled ? 'disabled' : '' }}>
+            <input type="text" class="form-control" name="starting_balance" value="{{ $asset->starting_balance or old('starting_balance') }}" {{ $disabled ? 'disabled' : '' }} placeholder="1000000">
         </div>
     </div>
 

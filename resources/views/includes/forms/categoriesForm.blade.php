@@ -5,7 +5,7 @@
     <div class="form-group">
         <label class="col-md-3 col-lg-3 control-label">Name</label>
         <div class="col-md-9 col-lg-6">
-            <input type="text" class="form-control" {{ $disabled ? 'readonly=readonly' : '' }} name="name" value="{{ $category->name or old('name') }}">
+            <input type="text" class="form-control" {{ $disabled ? 'readonly=readonly' : '' }} name="name" value="{{ $category->name or old('name') }}" placeholder="e.g. Groceries">
         </div>
     </div>
 

@@ -68,8 +68,8 @@ class ProfileComposer
             case "user.profiles.index":
                 // Get an instance of the authenticated user with profile
                 $user = Auth::user()->load(['profile']);
-                // Get the authenticated user's bank accounts
-                $assets = $user->liquidAssets()
+                // Get the authenticated user's assets
+                $assets = $user->assets()
                                ->when($col and $dir, function($query) use ($col, $dir) {
                                    return $query->orderBy($col, $dir);
                                }, function($query) {

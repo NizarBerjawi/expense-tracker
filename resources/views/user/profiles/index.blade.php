@@ -95,18 +95,20 @@
 
                 <div class="col-md-7">
                     <div class="panel panel-default panel-table">
-                        <div class="panel-heading">Liquid Assets
+                        <div class="panel-heading">Assets
                             <div class="tools">
+                                @if ($assets->count() > 1)
                                 <a href="{{ route('user.assets.transfer') }}" type="button" class="btn btn-space btn-default">Transfer</a>
+                                @endif
                                 <a href="{{ route('user.assets.create') }}" type="button" class="btn btn-space btn-primary">New</a>
                             </div>
                         </div>
                         <div class="panel-body">
-                            @include('includes.tables.bankAccountsTable', [
-                                'showBankAccountRouteName'   => 'user.assets.show',
-                                'editBankAccountRouteName'   => 'user.assets.edit',
-                                'deleteBankAccountRouteName' => 'user.assets.destroy',
-                                'emptyTableMessage'          => 'You have not added any liquid assets yet',
+                            @include('includes.tables.assetsTable', [
+                                'showAssetRouteName'   => 'user.assets.show',
+                                'editAssetRouteName'   => 'user.assets.edit',
+                                'deleteAssetRouteName' => 'user.assets.destroy',
+                                'emptyTableMessage'          => 'You have not added any assets yet',
                             ])
                         </div>
                     </div>

@@ -75,9 +75,9 @@ class User extends Authenticatable
       *
       * @return Illuminate\Database\Eloquent\Relations\HasMany
       */
-     public function liquidAssets()
+     public function assets()
      {
-         return $this->hasMany('App\Models\LiquidAsset');
+         return $this->hasMany('App\Models\Asset');
      }
 
      /**
@@ -91,4 +91,18 @@ class User extends Authenticatable
              'password' => Hash::make($new_password),
          ]);
      }
+
+     /**
+      * Check if this is the user's first login
+      *
+      * @return boolean
+      */
+     public function isFirstLogin()
+     {
+         if (!$this->profile || $this->assets->isEmpty()) {
+             return true;
+         }
+         return false;
+     }
+
 }

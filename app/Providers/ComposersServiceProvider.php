@@ -76,6 +76,7 @@ class ComposersServiceProvider extends ServiceProvider
             'App\Http\ViewComposers\DashboardComposer'
         );
 
+        /** Profile Index **/
         View::composer(
             [
                 'user.profiles.index',
@@ -84,13 +85,14 @@ class ComposersServiceProvider extends ServiceProvider
             'App\Http\ViewComposers\ProfileComposer'
         );
 
+        /** Assets Form **/
         View::composer(
             [
                 'user.assets.create',
                 'user.assets.edit',
                 'user.assets.view'
             ],
-            'App\Http\ViewComposers\LiquidAssetFormComposer'
+            'App\Http\ViewComposers\AssetFormComposer'
         );
 
         /** LEFT NAVIGATION **/

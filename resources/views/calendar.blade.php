@@ -40,7 +40,6 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
-            App.init();
             App.pageCalendar();
             App.formElements();
         });

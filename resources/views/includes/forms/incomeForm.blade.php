@@ -27,20 +27,20 @@
     <div class="form-group">
         <label class="col-md-3 col-lg-3 control-label">Asset</label>
         <div class="col-md-9 col-lg-6">
-            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="select2" name="liquid_asset_id">
+            <select {{ $disabled ? 'disabled' : '' }} multiple="" class="select2" name="asset_id">
                 @if (!isset($income))
                     <!-- NEW EXPENSE -->
                     @foreach($assets as $asset)
-                        <option value="{{ $asset->id or old('liquid_asset_id')}}" {{ $asset->id == old('liquid_asset_id') ? "selected" : "" }}>{{ $asset->name }}</option>
+                        <option value="{{ $asset->id or old('asset_id')}}" {{ $asset->id == old('asset_id') ? "selected" : "" }}>{{ $asset->name }}</option>
                     @endforeach
                 @elseif (isset($assets) and isset($income))
                     <!-- EDIT EXPENSE -->
                     @foreach($assets as $asset)
-                        <option {{ $income->liquid_asset_id == $asset->id ? "selected" : "" }} value="{{ $asset->id }}">{{ $asset->name }}</option>
+                        <option {{ $income->asset_id == $asset->id ? "selected" : "" }} value="{{ $asset->id }}">{{ $asset->name }}</option>
                     @endforeach
-                @elseif (isset($income) and isset($income->liquid_asset_id))
+                @elseif (isset($income) and isset($income->asset_id))
                     <!-- VIEW EXPENSE -->
-                    <option value="{{ $income->liquidAsset->id }}" selected>{{ $income->liquidAsset->name }}</option>
+                    <option value="{{ $income->asset->id }}" selected>{{ $income->asset->name }}</option>
                 @endif
             </select>
         </div>

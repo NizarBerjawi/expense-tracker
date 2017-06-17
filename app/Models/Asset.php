@@ -7,14 +7,14 @@ use App\Models\Income;
 use App\Models\Expense;
 use Auth;
 
-class LiquidAsset extends Model
+class Asset extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'liquid_assets';
+    protected $table = 'assets';
 
     /**
      * The attributes that are mass assignable.
@@ -50,7 +50,7 @@ class LiquidAsset extends Model
         return [
             'name.required'             => 'Please provide a name for the asset',
             'name.max'                  => 'The asset name should not exceed 255 characters',
-            'starting_balance.required' => 'Please provide a starting balance for your liquid asset',
+            'starting_balance.required' => 'Please provide a starting balance for your asset',
             'starting_balance.numeric'  => 'Please provide a valid numeric starting balance',
         ];
     }
@@ -124,6 +124,19 @@ class LiquidAsset extends Model
      */
     public static function discard(Array $assetIds)
     {
-        return LiquidAsset::whereIn('id', $assetIds)->delete();
+        return Asset::whereIn('id', $assetIds)->delete();
+    }
+
+    /**
+     * Get the asset's balance.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getBalanceAttribute($value)
+    {
+        // Add a dollar sign and separators to the balance
+        $balance = sprintf("$ %s", number_format($value));
+        return $balance;
     }
 }

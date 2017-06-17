@@ -20,13 +20,6 @@ textarea {
     cursor: pointer;
 }
 
-.btn-custom {
-    border-color: #db4437;
+.btn-primary {
     color: #fff!important;
-    background-color: #db4437;
-    border-color: #db4437;
-}
-
-.panel-border-color-custom {
-    border-top-color: #db4437;
 }

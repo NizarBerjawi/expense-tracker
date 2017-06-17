@@ -29,6 +29,8 @@ class IncomeController extends BudgetBaseController
         $this->model = $income;
         $this->validate = $validation;
         $this->middleware('auth');
+        $this->middleware('profile');
+        $this->middleware('assets');
     }
 
     /**

@@ -28,6 +28,7 @@ class CategoriesController extends BudgetBaseController
         $this->model = $category;
         $this->validate = $validation;
         $this->middleware('auth');
+        $this->middleware('profile');
     }
 
     /**

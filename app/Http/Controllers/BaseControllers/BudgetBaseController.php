@@ -181,7 +181,6 @@ abstract class BudgetBaseController extends Controller
      */
     public function destroy(Request $request, $id = null)
     {
-        return 'deleted';
         // Delete the selected resources
         $this->model->discard((array) $id);
         // Flash the success message

@@ -3,17 +3,17 @@
         <tr>
             <th style="width:15%;">ID
                 @include('includes.partials.tableSort', [
-                    'columnName' => 'liquid_assets.id'
+                    'columnName' => 'assets.id'
                 ])
             </th>
             <th style="width:25%;">Name
                 @include('includes.partials.tableSort', [
-                    'columnName' => 'liquid_assets.name'
+                    'columnName' => 'assets.name'
                 ])
             </th>
             <th style="width:30%;">Balance
                 @include('includes.partials.tableSort', [
-                    'columnName' => 'liquid_assets.balance'
+                    'columnName' => 'assets.balance'
                 ])
             </th>
             <th style="width:10%;"></th>
@@ -28,17 +28,17 @@
             @foreach($assets as $asset)
                 <tr>
                     <td>{{ $asset->id }}</td>
-                    <td><a href="{{ route($showBankAccountRouteName, $asset->id) }}">{{ $asset->name }}</td>
+                    <td><a href="{{ route($showAssetRouteName, $asset->id) }}">{{ $asset->name }}</td>
                     <td><span class="label label-default">{{ $asset->balance }}</span></td>
 
                     <td class="text-right">
                         <div class="btn-group btn-hspace">
                             <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Action <span class="icon-dropdown mdi mdi-chevron-down"></span></button>
                             <ul role="menu" class="dropdown-menu pull-right">
-                                <li><a href="{{ route($showBankAccountRouteName, $asset->id) }}">View</a></li>
-                                <li><a href="{{ route($editBankAccountRouteName, $asset->id) }}">Edit</a></li>
+                                <li><a href="{{ route($showAssetRouteName, $asset->id) }}">View</a></li>
+                                <li><a href="{{ route($editAssetRouteName, $asset->id) }}">Edit</a></li>
                                 <li class="divider"></li>
-                                <li><a class="actions" data-target="#delete-modal" type="button" href="{{ route($deleteBankAccountRouteName, $asset->id) }}">Delete</a></li>
+                                <li><a class="actions" data-target="#delete-modal" type="button" href="{{ route($deleteAssetRouteName, $asset->id) }}">Delete</a></li>
                             </ul>
                         </div>
                     </td>

@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
 
@@ -41,18 +41,18 @@ Route::group(['prefix' => 'settings'], function() {
     Route::delete('/', 'SettingsController@destroy')->name('user.accounts.destroy');
 });
 
-/** User Liquid Assets Routes **/
-Route::group(['prefix' => 'accounts'], function() {
+/** User Assets Routes **/
+Route::group(['prefix' => 'assets'], function() {
     // Money transfers between assets
-    Route::put('/transfer', 'LiquidAssetsController@transfer')->name('user.assets.doTransfer');
-    Route::get('/transfer', 'LiquidAssetsController@showTransfer')->name('user.assets.transfer');
-    // Liquid assets
-    Route::get('/create', 'LiquidAssetsController@create')->name('user.assets.create');
-    Route::post('/', 'LiquidAssetsController@store')->name('user.assets.store');
-    Route::get('/{assetId}', 'LiquidAssetsController@show')->name('user.assets.show');
-    Route::get('/{assetId}/edit', 'LiquidAssetsController@edit')->name('user.assets.edit');
-    Route::put('/{assetId}', 'LiquidAssetsController@update')->name('user.assets.update');
-    Route::delete('/{assetId}', 'LiquidAssetsController@destroy')->name('user.assets.destroy');
+    Route::put('/transfer', 'AssetsController@transfer')->name('user.assets.doTransfer');
+    Route::get('/transfer', 'AssetsController@showTransfer')->name('user.assets.transfer');
+    // Assets
+    Route::get('/create', 'AssetsController@create')->name('user.assets.create');
+    Route::post('/', 'AssetsController@store')->name('user.assets.store');
+    Route::get('/{assetId}', 'AssetsController@show')->name('user.assets.show');
+    Route::get('/{assetId}/edit', 'AssetsController@edit')->name('user.assets.edit');
+    Route::put('/{assetId}', 'AssetsController@update')->name('user.assets.update');
+    Route::delete('/{assetId}', 'AssetsController@destroy')->name('user.assets.destroy');
 
 });
 

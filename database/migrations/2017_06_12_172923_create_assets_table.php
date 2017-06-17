@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLiquidAssetsTable extends Migration
+class CreateAssetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateLiquidAssetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('liquid_assets', function (Blueprint $table) {
+        Schema::create('assets', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('name');
@@ -22,7 +22,7 @@ class CreateLiquidAssetsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('liquid_assets', function(Blueprint $table) {
+        Schema::table('assets', function(Blueprint $table) {
             $table->foreign('user_id')
                   ->references('id')
                   ->on('users')
@@ -30,16 +30,16 @@ class CreateLiquidAssetsTable extends Migration
         });
 
         Schema::table('expenses', function(Blueprint $table) {
-            $table->foreign('liquid_asset_id')
+            $table->foreign('asset_id')
                   ->references('id')
-                  ->on('liquid_assets')
+                  ->on('assets')
                   ->onDelete('set null');
         });
 
         Schema::table('income', function(Blueprint $table) {
-            $table->foreign('liquid_asset_id')
+            $table->foreign('asset_id')
                   ->references('id')
-                  ->on('liquid_assets')
+                  ->on('assets')
                   ->onDelete('set null');
         });
     }
@@ -53,6 +53,6 @@ class CreateLiquidAssetsTable extends Migration
     {
         Schema::dropIfExists('income');
         Schema::dropIfExists('expenses');
-        Schema::dropIfExists('liquid_assets');
+        Schema::dropIfExists('assets');
     }
 }

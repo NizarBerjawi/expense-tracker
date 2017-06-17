@@ -16,6 +16,9 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('web');
+        $this->middleware('profile');
+        $this->middleware('assets');
     }
 
     /**
@@ -25,14 +28,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-
-        
-        if (!Auth::user()->profile) {
-            // Flash the message
-            return redirect()->route('user.profiles.create');
-        }
-
-
         return view('home');
     }
 

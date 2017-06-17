@@ -23,7 +23,7 @@
             <div class="panel panel-default panel-border-color panel-border-color-primary">
                 <div class="panel-heading panel-heading-divider">Create Asset</div>
                 <div class="panel-body">
-                    @include('includes.forms.liquidAssetsForm', [
+                    @include('includes.forms.assetsForm', [
                         'formAction'    => route('user.assets.store'),
                         'csrfField'     => csrf_field(),
                         'methodField'   => method_field('POST'),

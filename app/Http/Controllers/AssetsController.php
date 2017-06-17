@@ -6,13 +6,24 @@ use App\Http\Controllers\BaseControllers\Controller;
 use App\Http\Requests\StoreAsset;
 use App\Http\Requests\UpdateAsset;
 use Illuminate\Http\Request;
-use App\Models\LiquidAsset;
+use App\Models\Asset;
 use Auth;
 
-class LiquidAssetsController extends Controller
+class AssetsController extends Controller
 {
     /**
-     * Show the page to create a new bank account
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('profile');
+    }
+
+    /**
+     * Show the page to create a new asset
      *
      * @return \Illuminate\Http\Response
      */
@@ -22,17 +33,17 @@ class LiquidAssetsController extends Controller
     }
 
     /**
-     * Store a new instance of the bank account
+     * Store a new instance of the asset
      *
-     * @param  App\Http\Requests\StoreBankAccount $request
+     * @param  App\Http\Requests\StoreAsset $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreAsset $request)
     {
         // Add the initial balance to the request
         $request->merge(['balance' => $request->input('starting_balance')]);
-        // Create the user's bank account
-        $account = Auth::user()->liquidAssets()->create($request->all());
+        // Create the user's asset
+        $account = Auth::user()->assets()->create($request->all());
         // Flash the success message
         $request->session()->flash('success', 'Asset created successfully');
         // Redirect to the correct route
@@ -40,7 +51,7 @@ class LiquidAssetsController extends Controller
     }
 
     /**
-     * Show a specific bank account details
+     * Show a specific asset details
      *
      * @return \Illuminate\Http\Response
      */
@@ -50,7 +61,7 @@ class LiquidAssetsController extends Controller
     }
 
     /**
-     * Show the edit page of a specific bank account
+     * Show the edit page of a specific asset
      *
      * @return \Illuminate\Http\Response
      */
@@ -60,16 +71,16 @@ class LiquidAssetsController extends Controller
     }
 
     /**
-     * Update a specific bank account
+     * Update a specific asset
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  App\Http\Requests\UpdateAsset $request
      * @param  int $accountId
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateAsset $request, $assetId)
     {
-        // Find the bank account and update
-        LiquidAsset::where('id', $assetId)
+        // Find the asset and update
+        Asset::where('id', $assetId)
                    ->update($request->except(['_token', '_method']));
         // Flash the success message
         $request->session()->flash('success', 'Asset successfully deleted');
@@ -78,7 +89,7 @@ class LiquidAssetsController extends Controller
     }
 
     /**
-     * Delete a specific bank account
+     * Delete a specific asset
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $accountId
@@ -86,8 +97,8 @@ class LiquidAssetsController extends Controller
      */
     public function destroy(Request $request, $assetId)
     {
-        // Delete the bank account
-        LiquidAsset::discard((array) $assetId);
+        // Delete the asset
+        Asset::discard((array) $assetId);
         // Flash the success message
         $request->session()->flash('success', 'Asset successfully deleted');
         // Redirect to the correct route
@@ -101,24 +112,24 @@ class LiquidAssetsController extends Controller
      */
     public function showTransfer()
     {
-        $assets = LiquidAsset::where('user_id', Auth::id())->get();
+        $assets = Asset::where('user_id', Auth::id())->get();
         return view('user.assets.transfer')->with(compact('assets'));
     }
 
     /**
-     * Transfer a specific amount from one account to another
+     * Transfer a specific amount from one asset to another
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function transfer(Request $request)
     {
-        // Find the From account
-        $transferFrom =  LiquidAsset::where('id', $request->input('transfer_from'))
+        // Find the From asset
+        $transferFrom =  Asset::where('id', $request->input('transfer_from'))
                                     ->where('user_id', Auth::id())
                                     ->first();
-        // Find the To account
-        $transferTo =  LiquidAsset::where('id', $request->input('transfer_to'))
+        // Find the To asset
+        $transferTo =  Asset::where('id', $request->input('transfer_to'))
                                     ->where('user_id', Auth::id())
                                     ->first();
         // Calculate new balances

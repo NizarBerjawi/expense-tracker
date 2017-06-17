@@ -65,10 +65,10 @@
                     @if (Route::has('login'))
                         <div class="row links">
                             @if (Auth::check())
-                                <a class="btn btn-primary" href="{{ url('/dashboard') }}">Home</a>
+                                <a class="btn btn-primary" href="{{ url('/dashboard') }}">Dashboard</a>
                             @else
                                 <a class="btn btn-default" href="{{ url('/login') }}">Login</a>
-                                <a class="btn btn-custom" href="{{ url('/register') }}">Register</a>
+                                <a class="btn btn-primary" href="{{ url('/register') }}">Register</a>
                             @endif
                         </div>
                     @endif

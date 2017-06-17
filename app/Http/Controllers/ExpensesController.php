@@ -29,6 +29,8 @@ class ExpensesController extends BudgetBaseController
         $this->model = $expense;
         $this->validate = $validation;
         $this->middleware('auth');
+        $this->middleware('profile');
+        $this->middleware('assets');
     }
 
     /**

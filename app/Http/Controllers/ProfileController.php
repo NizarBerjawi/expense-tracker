@@ -11,6 +11,18 @@ use App\Models\Profile;
 class ProfileController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('profile')->except('create', 'store');
+        $this->middleware('assets')->only('index', 'edit', 'update', 'destroy');
+    }
+
+    /**
      * Show the profile main index page.
      *
      * @return \Illuminate\Http\Response
@@ -44,16 +56,6 @@ class ProfileController extends Controller
         $request->user()->profile()->create($request->all());
         // Flash the success message
         $request->session()->flash('success', 'Profile created successfully');
-
-
-        if ($request->user()->liquidAssets->isEmpty()) {
-            // Flash message
-            $request->session()->flash('success', 'Now add some assets');
-            return redirect()->route('user.assets.create');
-        }
-
-
-        
         // Return to the correct route
         return redirect()->route('user.profiles.index');
     }
