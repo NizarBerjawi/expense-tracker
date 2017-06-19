@@ -32,7 +32,7 @@ $factory->define(App\Models\Profile::class, function (Faker\Generator $faker) {
             $timezone = date_default_timezone_get()
         ),
         'phone'         => $faker->phoneNumber,
-        'user_id'       => 1,
+        'user_id'       => 2,
     ];
 });
 
@@ -40,7 +40,7 @@ $factory->define(App\Models\Asset::class, function (Faker\Generator $faker) {
     $startingBalance = mt_rand(1, 100000);
     return [
         'name'              => $faker->name,
-        'user_id'           => 1,
+        'user_id'           => 2,
         'starting_balance'  => $startingBalance,
         'balance'           => $startingBalance,
     ];
@@ -51,7 +51,7 @@ $factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
         'name'          => $faker->name,
         'description'   => $faker->sentence($nbWords = 6, $variableNbWords = true),
         'tag_id'        => mt_rand(1, 2),
-        'user_id'       => 1,
+        'user_id'       => 2,
     ];
 });
 
@@ -60,7 +60,7 @@ $factory->define(App\Models\Expense::class, function (Faker\Generator $faker) {
         'name'        => $faker->name,
         'description' => $faker->sentence($nbWords = 6, $variableNbWords = true),
         'category_id' => mt_rand(1, 50),
-        'user_id'     => 1,
+        'user_id'     => 2,
         'asset_id'    => mt_rand(1, 5),
         'date'        => $faker->dateTimeThisDecade(
             $max = 'now',
@@ -75,7 +75,7 @@ $factory->define(App\Models\Income::class, function (Faker\Generator $faker) {
         'name'        => $faker->name,
         'description' => $faker->sentence($nbWords = 6, $variableNbWords = true),
         'category_id' => mt_rand(1, 50),
-        'user_id'     => 1,
+        'user_id'     => 2,
         'asset_id'    => mt_rand(1, 5),
         'date'        => $faker->dateTimeThisDecade(
             $max = 'now',

@@ -100,7 +100,7 @@ class Asset extends Model
     }
 
     /**
-     * Update the balance of this bank account
+     * Set the balance of this bank account
      *
      * @return null
      */

@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use App\Models\BaseModels\BudgetItem;
+use Illuminate\Notifications\Notifiable;
 
 class Income extends BudgetItem
 {
+    use Notifiable;
+    
     /**
      * The table associated with the model.
      *

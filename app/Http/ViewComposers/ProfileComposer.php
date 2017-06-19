@@ -77,10 +77,6 @@ class ProfileComposer
                                })
                                ->paginate(3)
                                ->appends(['col' => $col, 'dir' => $dir]);
-                // Update account balances before sending them to the view
-                foreach ($assets as $asset) {
-                    $asset->updateBalance();
-                }
                 // Send the data
                 return compact('user', 'assets');
             case "user.profiles.edit":

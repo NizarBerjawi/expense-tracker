@@ -5,6 +5,8 @@ namespace App\Http\Controllers\BaseControllers;
 use Illuminate\Validation\Validator;
 use App\Http\Requests\BaseRequests\BaseRequest;
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Asset;
 
 abstract class BudgetBaseController extends Controller
 {
@@ -118,6 +120,10 @@ abstract class BudgetBaseController extends Controller
         $request->merge(['user_id' => $request->user()->id]);
         // Store the new model
         $item = $this->model->create($request->all());
+        // Update the assets
+        if (!($this->model instanceof Category)) {
+            $item->asset->updateBalance();
+        }
         // Flash the success message
         $request->session()->flash('success', 'Successfully saved');
         // Redirect to the correct route
@@ -166,6 +172,10 @@ abstract class BudgetBaseController extends Controller
         // Update the resource
         $this->model->where('id', $id)
                     ->update($request->except(['_token', '_method']));
+        // Update the asset of the model
+        if (!($this->model instanceof Category)) {
+            $this->model->where('id', $id)->first()->asset->updateBalance();
+        }
         // Flash the success message
         $request->session()->flash('success', 'Successfully updated');
         // Redirect to the correct route
@@ -183,6 +193,10 @@ abstract class BudgetBaseController extends Controller
     {
         // Delete the selected resources
         $this->model->discard((array) $id);
+        // Update the assets
+        if (!($this->model instanceof Category)) {
+            $this->model->where('id', $id)->first()->asset->updateBalance();
+        }
         // Flash the success message
         $request->session()->flash('success', 'Successfully deleted');
         // Redirect to the correct route

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\BaseControllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreAsset;
 use App\Http\Requests\UpdateAsset;
 use Illuminate\Http\Request;
@@ -124,20 +125,26 @@ class AssetsController extends Controller
      */
     public function transfer(Request $request)
     {
-        // Find the From asset
+        // UPDATE click_table SET clicks = clicks + 1 WHERE team = <team>;
+
+        // Find the "From" asset
         $transferFrom =  Asset::where('id', $request->input('transfer_from'))
                                     ->where('user_id', Auth::id())
-                                    ->first();
-        // Find the To asset
+                                    ->update([
+                                        'balance' => DB::raw('balance - '.$request->input('amount'))
+                                    ]);
+        // Find the "To" asset
         $transferTo =  Asset::where('id', $request->input('transfer_to'))
                                     ->where('user_id', Auth::id())
-                                    ->first();
+                                    ->update([
+                                        'balance' => DB::raw('balance + '.$request->input('amount'))
+                                    ]);
         // Calculate new balances
-        $transferFrom->balance = $transferFrom->balance - $request->input('amount');
-        $transferTo->balance = $transferTo->balance + $request->input('amount');
-        // Store new balances in the database
-        $transferFrom->save();
-        $transferTo->save();
+        // $transferFrom->balance = $transferFrom->balance - $request->input('amount');
+        // $transferTo->balance = $transferTo->balance + $request->input('amount');
+        // // Store new balances in the database
+        // $transferFrom->save();
+        // $transferTo->save();
         // Redirect to the correct route
         return redirect()->route('user.profiles.index');
     }
