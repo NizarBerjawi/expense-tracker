@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
                           $asset->save();
                       });
 
-      $categories = factory(App\Models\Category::class, 50)
+      $categories = factory(App\Models\Category::class, 25)
                       ->create()
                       ->each(function($category) {
                           $category->save();

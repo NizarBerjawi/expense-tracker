@@ -27,11 +27,6 @@ var App = (function () {
                 }
             });
         };
-
-        //Bootstrap Slider
-        if ($('.bslider').length) {
-            $('.bslider').bootstrapSlider();
-        }
     };
 
     return App;

@@ -3,13 +3,8 @@ $( document ).ready(function() {
     $('.actions').on('click submit', function(event) {
         // Stop link from redirecting
         event.preventDefault();
-        if ( $(this).is( "a" ) ) {
-            // Get the route from the href attribute
-            var route = $(this).attr('href');
-        } else {
-            var route = $(this).attr('action');
-        }
-
+        // Get the route based on the clicked element 
+        var route = $(this).attr('href') || $(this).attr('action');
         // Change the action attribute of the form in the modal
         $('.mod-form').attr('action', route);
         // Get the target modal ID
